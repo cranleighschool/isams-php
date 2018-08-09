@@ -29,7 +29,7 @@ class Authentication
     private $cacheKey;
 
     /**
-     * @param \spkm\Isams\Contracts\Institution $institution
+     * @param \spkm\isams\Contracts\Institution $institution
      * @throws \Exception
      */
     public function __construct(Institution $institution)
@@ -97,7 +97,7 @@ class Authentication
     /**
      * Set the client settings.
      *
-     * @param \spkm\Isams\Contracts\Institution $institution
+     * @param \spkm\isams\Contracts\Institution $institution
      * @return void
      * @throws \Exception
      */
