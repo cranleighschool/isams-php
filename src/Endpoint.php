@@ -98,7 +98,7 @@ abstract class Endpoint
      * @param  array $errors
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function response($expectedStatusCode, $response, $data, $errors = [])
+    protected function response(int $expectedStatusCode, $response, $data, array $errors = [])
     {
         $status = $response->getStatusCode() === $expectedStatusCode ? 'success' : 'error';
         $errors = empty($errors) === true ? null : $errors;
@@ -131,7 +131,7 @@ abstract class Endpoint
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function pageRequest($url, int $page)
+    public function pageRequest(string $url, int $page)
     {
         $response = $this->guzzle->request('GET', $url, [
             'query' => ['page' => $page],
