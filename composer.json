@@ -1,0 +1,33 @@
+{
+    "name": "spkm/isams",
+    "description": "A PHP wrapper for using iSAMS public REST API",
+    "license": "MIT",
+    "keywords": ["isams","api","rest","laravel"],
+    "authors": [
+        {
+            "name": "Simon Mitchell",
+            "email": "spkm@cranleigh.org"
+        }
+    ],
+    "require": {
+    	"php": "7.2.*",
+        "guzzlehttp/guzzle": "^6.3",
+        "symfony/psr-http-message-bridge": "^1.0",
+        "ext-json": "^1.6",
+        "symfony/http-foundation": "^4.1",
+        "illuminate/support": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "spkm\\isams\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spkm\\isams\\tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0"
+    }
+}
