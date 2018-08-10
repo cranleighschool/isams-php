@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-    	"php": "7.2.*",
+    	"php": ">=7.0",
         "guzzlehttp/guzzle": "^6.3",
         "symfony/psr-http-message-bridge": "^1.0",
         "ext-json": "^1.6",
@@ -21,6 +21,16 @@
         "psr-4": {
             "spkm\\isams\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "spkm\\isams\\IsamsServiceProvider"
+            ]
+        }
+    },
+    "suggest": {
+        "laravel/laravel": "The Laravel Framework."
     },
     "autoload-dev": {
         "psr-4": {
