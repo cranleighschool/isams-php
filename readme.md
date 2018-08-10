@@ -16,7 +16,7 @@ The package will automatically register its service provider
 
 To publish the config file to `config/isams.php` run:
 ```
-php artisan vendor:publish --provider="spkm/isams/IsamsServiceProvider"
+php artisan vendor:publish --provider="spkm\isams\IsamsServiceProvider"
 ```
 
 Update the config file & add the REST API secret(s) to your .env file
