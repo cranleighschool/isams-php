@@ -4,7 +4,7 @@ namespace spkm\isams;
 
 use Illuminate\Support\ServiceProvider;
 
-class IsamsServerProvider extends ServiceProvider
+class IsamsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
