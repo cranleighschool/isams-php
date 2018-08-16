@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace spkm\isams\Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 

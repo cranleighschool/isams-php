@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace spkm\isams\Tests\Unit;
 
 use Tests\TestCase;
 use spkm\isams\School;

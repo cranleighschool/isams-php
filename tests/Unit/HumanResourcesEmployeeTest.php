@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace spkm\isams\Tests\Unit;
 
 use spkm\isams\Controllers\HumanResourcesEmployeeController;
 use spkm\isams\Wrappers\Employee;
