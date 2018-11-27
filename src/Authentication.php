@@ -61,6 +61,7 @@ class Authentication
     private function requestNewToken()
     {
         $guzzle = new Guzzle();
+
         $response = $guzzle->request('POST', $this->authenticationUrl, [
             'headers' => [
                 'cache-control' => 'no-cache',
@@ -73,6 +74,10 @@ class Authentication
                 'scope' => 'api',
             ],
         ]);
+
+        if($response->getStatusCode() !== 200){
+            throw new \Exception('Unable to request new authentication token, invalid response (Error 500)');
+        }
 
         $data = json_decode($response->getBody()->getContents());
 
@@ -109,7 +114,7 @@ class Authentication
         endif;
 
         $this->clientId = config("isams.schools.$configName.client_id");
-        $this->authenticationUrl = config("isams.schools.$configName.domain").'/main/sso/idp/connect/token/';
+        $this->authenticationUrl = config("isams.schools.$configName.domain").'/main/sso/idp/connect/token';
         $this->clientSecret = config("isams.schools.$configName.client_secret");
         $this->cacheKey = $configName.'RestApiAccessToken';
     }
