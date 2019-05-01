@@ -45,4 +45,14 @@ abstract class Wrapper
             endif;
         endforeach;
     }
+
+    /**
+     * Get the item array
+     *
+     * @return array
+     */
+    public function toArray() : array
+    {
+        return $this->item;
+    }
 }
