@@ -2,6 +2,7 @@
 
 namespace spkm\isams;
 
+use Faker\Provider\Payment;
 use spkm\isams\Contracts\Institution;
 
 abstract class Wrapper
@@ -14,7 +15,7 @@ abstract class Wrapper
     protected $hidden = [];
 
     /**
-     * @var array
+     * @var mixed
      */
     protected $item;
 
@@ -51,8 +52,12 @@ abstract class Wrapper
      *
      * @return array
      */
-    public function toArray() : array
+    public function toArray(): array
     {
+        if (is_object($this->item)) {
+            return get_object_vars($this->item);
+        }
+
         return $this->item;
     }
 }
