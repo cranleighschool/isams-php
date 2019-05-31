@@ -12,7 +12,7 @@ use spkm\isams\Wrappers\PupilContact;
  * As of July 2018, iSAMS have notified us that the contacts API endpoints are temporary & will be changed with the rollout of
  * the upgraded pupil contact module in 2019/2020
  */
-class PupilContactController extends Endpoint
+class AdmissionApplicantContactController extends Endpoint
 {
     /**
      * @var \spkm\isams\Contracts\Institution
@@ -49,7 +49,7 @@ class PupilContactController extends Endpoint
      */
     private function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/students';
+        $this->endpoint = $this->getDomain().'/api/admissions/applicants';
     }
 
     /**
@@ -86,7 +86,7 @@ class PupilContactController extends Endpoint
 
     /**
      * Show the specified resource
-     * Note: Gets all contacts for the specified pupil
+     * Note: Gets all contacts for the specified applicant pupil
      *
      * @param string $schoolId
      * @return \Illuminate\Support\Collection
@@ -111,7 +111,7 @@ class PupilContactController extends Endpoint
      * !! DEPRECATED ENDPOINT !!
      *
      * Show the specified resource
-     * Note: Gets a specific pupil contact.
+     * Note: Gets a specific applicant contact.
      *
      * @param string $schoolId
      * @param int $contactId

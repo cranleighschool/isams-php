@@ -5,9 +5,9 @@ namespace spkm\isams\Tests\Unit;
 use Tests\TestCase;
 use spkm\isams\School;
 use spkm\isams\Wrappers\PupilContact;
-use spkm\isams\Controllers\PupilContactController;
+use spkm\isams\Controllers\AdmissionApplicantContactController;
 
-class PupilContactTest extends TestCase
+class AdmissionsApplicantContactTest extends TestCase
 {
     /**
      * @var School
@@ -46,10 +46,10 @@ class PupilContactTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_the_specified_pupils_contacts_as_a_collection()
+    public function it_returns_the_specified_applicants_contacts_as_a_collection()
     {
         $schoolId = '2450423956';
-        $contacts = (new PupilContactController($this->school))->show($schoolId);
+        $contacts = (new AdmissionApplicantContactController($this->school))->show($schoolId);
 
         foreach ($contacts as $contact):
             $this->assertTrue(is_a($contact, PupilContact::class));
@@ -61,12 +61,12 @@ class PupilContactTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_the_specified_pupil_contact()
+    public function it_returns_the_specified_applicant_contact()
     {
         $schoolId = '2450423956';
         $contactId = 3941;
 
-        $contact = (new PupilContactController($this->school))->showContact($schoolId, $contactId);
+        $contact = (new AdmissionApplicantContactController($this->school))->showContact($schoolId, $contactId);
 
         $this->assertTrue(is_a($contact, PupilContact::class));
 
@@ -76,10 +76,10 @@ class PupilContactTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_a_new_pupil_contact_and_returns_its_id()
+    public function it_creates_a_new_applicant_contact_and_returns_its_id()
     {
         $schoolId = '2450423956';
-        $response = (new PupilContactController($this->school))->store($schoolId,[
+        $response = (new AdmissionApplicantContactController($this->school))->store($schoolId,[
             'relationship' => 'Father',
             'contactType' => 'Legal Guardian',
             'title' => 'Mr',
@@ -97,10 +97,10 @@ class PupilContactTest extends TestCase
 
 
     /** @test */
-    public function it_updates_the_specified_pupil_contact()
+    public function it_updates_the_specified_applicant_contact()
     {
         $schoolId = '2450423956';
-        $response = (new PupilContactController($this->school))->store($schoolId,[
+        $response = (new AdmissionApplicantContactController($this->school))->store($schoolId,[
             'relationship' => 'Father',
             'contactType' => 'Legal Guardian',
             'title' => 'Mr',
@@ -123,9 +123,9 @@ class PupilContactTest extends TestCase
             'country' => 'Cloud2',
         ];
 
-        (new PupilContactController($this->school))->update($schoolId,$contactId, $changedAttributes);
+        (new AdmissionApplicantContactController($this->school))->update($schoolId,$contactId, $changedAttributes);
 
-        $contact = (new PupilContactController($this->school))->showContact($schoolId,$contactId);
+        $contact = (new AdmissionApplicantContactController($this->school))->showContact($schoolId,$contactId);
 
         $this->assertTrue(is_a($contact, PupilContact::class));
         foreach ($this->properties as $property):
