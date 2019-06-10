@@ -2,7 +2,6 @@
 
 namespace spkm\isams;
 
-use Faker\Provider\Payment;
 use spkm\isams\Contracts\Institution;
 
 abstract class Wrapper
@@ -40,11 +39,13 @@ abstract class Wrapper
      */
     protected function setPublicProperties()
     {
-        foreach ($this->item as $key => $value):
-            if (in_array($key, $this->hidden) === false && property_exists($this, $key) === false):
-                $this->{$key} = $value;
-            endif;
-        endforeach;
+        if (is_array($this->item)) {
+            foreach ($this->item as $key => $value) {
+                if (in_array($key, $this->hidden) === false && property_exists($this, $key) === false) {
+                    $this->{$key} = $value;
+                }
+            }
+        }
     }
 
     /**
