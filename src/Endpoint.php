@@ -109,9 +109,9 @@ abstract class Endpoint
     protected function validate(array $requiredAttributes, array $attributes)
     {
         foreach ($requiredAttributes as $requiredAttribute):
-            if (array_key_exists($requiredAttribute, $attributes) === false):
+            if (array_key_exists($requiredAttribute, $attributes) === false) {
                 throw new ValidationException("'$requiredAttribute' is required by this endpoint.");
-            endif;
+            }
         endforeach;
 
         return true;
@@ -138,15 +138,15 @@ abstract class Endpoint
             'errors' => $errors,
         ];
 
-        if (isset($response->getHeaders()['Location'])):
+        if (isset($response->getHeaders()['Location'])) {
             $location = $response->getHeaders()['Location'][0];
-            $id = ltrim(str_replace($this->endpoint, '', $location),'\//');
+            $id = ltrim(str_replace($this->endpoint, '', $location), '\//');
 
             $json['location'] = $location;
-            if (!empty($id)):
+            if (! empty($id)) {
                 $json['id'] = $id;
-            endif;
-        endif;
+            }
+        }
 
         return response()->json($json, $response->getStatusCode());
     }

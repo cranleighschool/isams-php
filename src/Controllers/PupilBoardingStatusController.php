@@ -33,7 +33,7 @@ class PupilBoardingStatusController extends Endpoint
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
-        return Cache::remember($key, 10080, function () use ($response) {
+        return Cache::remember($key, config('isams.cacheDuration'), function () use ($response) {
             return $this->wrapJson($response->getBody()->getContents(), 'items', PupilBoardingStatus::class);
         });
     }

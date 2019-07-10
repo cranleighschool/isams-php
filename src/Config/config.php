@@ -36,4 +36,6 @@ return [
             'client_secret' => env('DEV_REST_API_SECRET'),
         ],
     ],
+
+    'cacheDuration' => now()->addHours(12),
 ];

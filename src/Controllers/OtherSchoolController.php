@@ -52,7 +52,7 @@ class OtherSchoolController extends Endpoint
             throw new \Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
         endif;
 
-        return Cache::remember($key, 10080, function () use ($items) {
+        return Cache::remember($key, config('isams.cacheDuration'), function () use ($items) {
             return $items;
         });
     }

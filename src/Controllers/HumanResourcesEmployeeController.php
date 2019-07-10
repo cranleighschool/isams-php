@@ -54,7 +54,7 @@ class HumanResourcesEmployeeController extends Endpoint
 
         $items = $this->sortBySurname($items);
 
-        return Cache::remember($key, 10080, function () use ($items) {
+        return Cache::remember($key, config('isams.cacheDuration'), function () use ($items) {
             return $items;
         });
     }
