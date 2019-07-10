@@ -33,7 +33,7 @@ class OtherSchoolController extends Endpoint
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->otherSchools)->map(function ($item) {
-            return new School($item, $this->institution);
+            return new School($item);
         });
 
         $totalCount = $decoded->totalCount;
@@ -42,7 +42,7 @@ class OtherSchoolController extends Endpoint
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
             collect($decoded->otherSchools)->map(function ($item) use ($items) {
-                $items->push(new School($item, $this->institution));
+                $items->push(new School($item));
             });
 
             $pageNumber++;
@@ -94,7 +94,7 @@ class OtherSchoolController extends Endpoint
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return new School($decoded, $this->institution);
+        return new School($decoded);
     }
 
     /**

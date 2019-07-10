@@ -33,7 +33,7 @@ class CurrentPupilController extends Endpoint
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->students)->map(function ($item) {
-            return new Pupil($item, $this->institution);
+            return new Pupil($item);
         });
 
         $totalCount = $decoded->totalCount;
@@ -42,7 +42,7 @@ class CurrentPupilController extends Endpoint
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
             collect($decoded->students)->map(function ($item) use ($items) {
-                $items->push(new Pupil($item, $this->institution));
+                $items->push(new Pupil($item));
             });
 
             $pageNumber++;
@@ -94,7 +94,7 @@ class CurrentPupilController extends Endpoint
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return new Pupil($decoded, $this->institution);
+        return new Pupil($decoded);
     }
 
     /**

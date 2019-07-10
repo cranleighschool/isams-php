@@ -33,7 +33,7 @@ class HumanResourcesEmployeeController extends Endpoint
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->employees)->map(function ($item) {
-            return new Employee($item, $this->institution);
+            return new Employee($item);
         });
 
         $totalCount = $decoded->totalCount;
@@ -42,7 +42,7 @@ class HumanResourcesEmployeeController extends Endpoint
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
             collect($decoded->employees)->map(function ($item) use ($items) {
-                $items->push(new Employee($item, $this->institution));
+                $items->push(new Employee($item));
             });
 
             $pageNumber++;
@@ -111,7 +111,7 @@ class HumanResourcesEmployeeController extends Endpoint
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return new Employee($decoded, $this->institution);
+        return new Employee($decoded);
     }
 
     /**

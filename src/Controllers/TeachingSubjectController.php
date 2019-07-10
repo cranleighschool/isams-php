@@ -66,6 +66,6 @@ class TeachingSubjectController extends Endpoint
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return new TeachingSubject($decoded, $this->institution);
+        return new TeachingSubject($decoded);
     }
 }

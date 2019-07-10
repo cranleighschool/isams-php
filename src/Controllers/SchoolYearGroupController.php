@@ -50,6 +50,6 @@ class SchoolYearGroupController extends Endpoint
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return new YearGroup($decoded, $this->institution);
+        return new YearGroup($decoded);
     }
 }

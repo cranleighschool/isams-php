@@ -182,7 +182,7 @@ abstract class Endpoint
         $decoded = json_decode($json);
 
         return collect($decoded->$property)->map(function ($item) use ($wrapper) {
-            return new $wrapper($item, $this->institution);
+            return new $wrapper($item);
         });
     }
 }

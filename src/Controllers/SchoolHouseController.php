@@ -50,6 +50,6 @@ class SchoolHouseController extends Endpoint
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return new House($decoded, $this->institution);
+        return new House($decoded);
     }
 }

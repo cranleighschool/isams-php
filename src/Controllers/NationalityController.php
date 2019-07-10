@@ -2,6 +2,7 @@
 
 namespace spkm\isams\Controllers;
 
+use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
 use Illuminate\Http\JsonResponse;
 use spkm\isams\Wrappers\Nationality;
@@ -23,10 +24,10 @@ class NationalityController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function index(): JsonResponse
+    public function index(): Collection
     {
         $key = $this->institution->getConfigName().'nationalities.index';
 

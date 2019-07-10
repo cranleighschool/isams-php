@@ -74,7 +74,7 @@ class PupilContactController extends Endpoint
         $decoded = json_decode($response->getBody()->getContents());
 
         $contacts = collect($decoded->contacts)->map(function ($item) {
-            return new PupilContact($item, $this->institution);
+            return new PupilContact($item);
         });
 
         return $contacts;
@@ -97,7 +97,7 @@ class PupilContactController extends Endpoint
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return new PupilContact($decoded, $this->institution);
+        return new PupilContact($decoded);
     }
 
     /**

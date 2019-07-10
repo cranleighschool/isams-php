@@ -33,7 +33,7 @@ class AdmissionApplicantController extends Endpoint
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->applicants)->map(function ($item) {
-            return new Applicant($item, $this->institution);
+            return new Applicant($item);
         });
 
         $totalCount = $decoded->totalCount;
@@ -42,7 +42,7 @@ class AdmissionApplicantController extends Endpoint
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
             collect($decoded->applicants)->map(function ($item) use ($items) {
-                $items->push(new Applicant($item, $this->institution));
+                $items->push(new Applicant($item));
             });
 
             $pageNumber++;
@@ -96,7 +96,7 @@ class AdmissionApplicantController extends Endpoint
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return new Applicant($decoded, $this->institution);
+        return new Applicant($decoded);
     }
 
     /**

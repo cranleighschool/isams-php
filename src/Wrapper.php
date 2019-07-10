@@ -2,8 +2,6 @@
 
 namespace spkm\isams;
 
-use spkm\isams\Contracts\Institution;
-
 abstract class Wrapper
 {
     /**
@@ -18,7 +16,7 @@ abstract class Wrapper
      */
     protected $item;
 
-    public function __construct($item, Institution $school)
+    public function __construct($item)
     {
         $this->item = $item;
         $this->setPublicProperties();
