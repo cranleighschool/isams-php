@@ -35,7 +35,7 @@ abstract class Endpoint
      *
      * @return void
      */
-    abstract protected function ();
+    abstract protected function setEndpoint();
 
     /**
      * Get the School to be queried
