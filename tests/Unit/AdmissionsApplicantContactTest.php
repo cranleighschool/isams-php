@@ -48,7 +48,7 @@ class AdmissionsApplicantContactTest extends TestCase
     /** @test */
     public function it_returns_the_specified_applicants_contacts_as_a_collection()
     {
-        $schoolId = '2450423956';
+        $schoolId = '2443384966';
         $contacts = (new AdmissionApplicantContactController($this->school))->show($schoolId);
 
         foreach ($contacts as $contact):
@@ -63,8 +63,8 @@ class AdmissionsApplicantContactTest extends TestCase
     /** @test */
     public function it_returns_the_specified_applicant_contact()
     {
-        $schoolId = '2450423956';
-        $contactId = 3941;
+        $schoolId = '2443384966';
+        $contactId = 2486;
 
         $contact = (new AdmissionApplicantContactController($this->school))->showContact($schoolId, $contactId);
 
@@ -78,7 +78,7 @@ class AdmissionsApplicantContactTest extends TestCase
     /** @test */
     public function it_creates_a_new_applicant_contact_and_returns_its_id()
     {
-        $schoolId = '2450423956';
+        $schoolId = '2443384966';
         $response = (new AdmissionApplicantContactController($this->school))->store($schoolId,[
             'relationship' => 'Father',
             'contactType' => 'Legal Guardian',
@@ -99,7 +99,7 @@ class AdmissionsApplicantContactTest extends TestCase
     /** @test */
     public function it_updates_the_specified_applicant_contact()
     {
-        $schoolId = '2450423956';
+        $schoolId = '2443384966';
         $response = (new AdmissionApplicantContactController($this->school))->store($schoolId,[
             'relationship' => 'Father',
             'contactType' => 'Legal Guardian',

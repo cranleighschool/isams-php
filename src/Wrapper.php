@@ -39,7 +39,7 @@ abstract class Wrapper
      */
     protected function setPublicProperties()
     {
-        if (is_array($this->item)) {
+        if (is_array($this->item) || is_object($this->item)) {
             foreach ($this->item as $key => $value) {
                 if (in_array($key, $this->hidden) === false && property_exists($this, $key) === false) {
                     $this->{$key} = $value;

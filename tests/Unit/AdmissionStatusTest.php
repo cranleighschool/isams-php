@@ -4,7 +4,6 @@ namespace spkm\isams\Tests\Unit;
 
 use Tests\TestCase;
 use spkm\isams\School;
-use Illuminate\Support\Facades\Cache;
 use spkm\isams\Wrappers\AdmissionStatus;
 use spkm\isams\Controllers\AdmissionStatusController;
 
@@ -64,6 +63,7 @@ class AdmissionStatusTest extends TestCase
 
         //Delete it
         foreach ($toDelete as $idToDelete):
+
             $response = (new AdmissionStatusController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
         endforeach;

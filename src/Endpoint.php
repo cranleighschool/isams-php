@@ -3,6 +3,7 @@
 namespace spkm\isams;
 
 use GuzzleHttp\Client as Guzzle;
+use spkm\isams\Contracts\Institution;
 use spkm\isams\Exceptions\ValidationException;
 
 abstract class Endpoint
@@ -13,11 +14,38 @@ abstract class Endpoint
     protected $guzzle;
 
     /**
+     * @var \spkm\isams\Contracts\Institution
+     */
+    protected $institution;
+
+    /**
+     * @var string
+     */
+    protected $endpoint;
+
+    public function __construct(Institution $institution)
+    {
+        $this->institution = $institution;
+        $this->setGuzzle();
+        $this->setEndpoint();
+    }
+
+    /**
+     * Set the URL the request is made to
+     *
+     * @return void
+     */
+    abstract protected function setEndpoint(): void;
+
+    /**
      * Get the School to be queried
      *
-     * @return \spkm\isams\Contracts\Institution
+     * @return \spkm\Isams\Contracts\Institution
      */
-    abstract protected function getInstitution();
+    protected function getInstitution(): Institution
+    {
+        return $this->institution;
+    }
 
     /**
      * Get an access token for the specified Institution
@@ -53,9 +81,9 @@ abstract class Endpoint
     {
         $configName = $this->getInstitution()->getConfigName();
 
-        if (array_key_exists($configName, config('isams.schools')) === false):
+        if (array_key_exists($configName, config('isams.schools')) === false) {
             throw new \Exception("Configuration key '$configName' does not exist in 'isams.schools'");
-        endif;
+        }
 
         return config("isams.schools.$configName.domain");
     }

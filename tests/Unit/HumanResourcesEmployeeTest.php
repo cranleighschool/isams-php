@@ -42,6 +42,7 @@ class HumanResourcesEmployeeTest extends TestCase
         'personalPostcode',
         'personalTelephoneNumber',
         'personalTown',
+        'personGuid',
         'preferredName',
         'previousFamilyNames',
         'schoolEmailAddress',

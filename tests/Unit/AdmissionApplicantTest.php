@@ -5,7 +5,6 @@ namespace spkm\isams\Tests\Unit;
 use Tests\TestCase;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Applicant;
-use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\AdmissionApplicantController;
 
 class AdmissionApplicantTest extends TestCase
@@ -20,15 +19,21 @@ class AdmissionApplicantTest extends TestCase
      */
     protected $properties = [
         'admissionStatus',
+        'birthCounty',
+        'birthplace',
         'boardingStatus',
         'currentSchoolId',
         'dateOfBirth',
+        'enquiryDate',
+        'enquiryReason',
+        'enquiryType',
         'enrolmentAcademicHouseId',
         'enrolmentBoardingHouseId',
         'enrolmentSchoolForm',
         'enrolmentSchoolTerm',
         'enrolmentSchoolYear',
         'enrolmentSchoolYearGroup',
+        'ethnicity',
         'familyId',
         'forename',
         'fullName',
@@ -39,8 +44,10 @@ class AdmissionApplicantTest extends TestCase
         'lastUpdated',
         'middleNames',
         'nationalities',
+        'personGuid',
         'preferredName',
         'registeredDate',
+        'religion',
         'residentCountry',
         'schoolCode',
         'schoolId',
@@ -78,7 +85,7 @@ class AdmissionApplicantTest extends TestCase
             'forename' => 'John',
             'surname' => 'Doe',
             'preferredName' => 'Lil Johnny',
-            'admissionStatus' => '2. Registered',
+            'admissionStatus' => 'Registered',
             'boardingStatus' => 'Day',
             'gender' => 'M',
         ]);
@@ -95,7 +102,7 @@ class AdmissionApplicantTest extends TestCase
             'forename' => 'Jane',
             'surname' => 'Doe',
             'preferredName' => 'Queeny Jane',
-            'admissionStatus' => '2. Registered',
+            'admissionStatus' => 'Registered',
             'boardingStatus' => 'Day',
             'gender' => 'F',
         ];
@@ -122,7 +129,7 @@ class AdmissionApplicantTest extends TestCase
             'forename' => 'Jane',
             'surname' => 'Doe',
             'preferredName' => 'Queeny Jane',
-            'admissionStatus' => '2. Registered',
+            'admissionStatus' => 'Registered',
             'boardingStatus' => 'Day',
             'gender' => 'F',
         ];
@@ -134,7 +141,7 @@ class AdmissionApplicantTest extends TestCase
             'forename' => 'Jane',
             'surname' => 'Dolly',
             'preferredName' => 'Queen Jane',
-            'admissionStatus' => '2. Registered',
+            'admissionStatus' => 'Registered',
             'boardingStatus' => 'Boarder',
             'gender' => 'F',
         ];

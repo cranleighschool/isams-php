@@ -4,45 +4,19 @@ namespace spkm\isams\Controllers;
 
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\School;
-use spkm\isams\Contracts\Institution;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 class OtherSchoolController extends Endpoint
 {
-    /**
-     * @var \spkm\isams\Contracts\Institution
-     */
-    private $institution;
-
-    /**
-     * @var string
-     */
-    protected $endpoint;
-
-    public function __construct(Institution $institution)
-    {
-        $this->institution = $institution;
-        $this->setGuzzle();
-        $this->setEndpoint();
-    }
-
-    /**
-     * Get the School to be queried
-     *
-     * @return \spkm\Isams\Contracts\Institution
-     */
-    protected function getInstitution()
-    {
-        return $this->institution;
-    }
-
     /**
      * Set the URL the request is made to
      *
      * @return void
      * @throws \Exception
      */
-    private function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain().'/api/otherschools';
     }
@@ -53,7 +27,7 @@ class OtherSchoolController extends Endpoint
      * @return \Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function index()
+    public function index(): Collection
     {
         $key = $this->institution->getConfigName().'otherSchools.index';
 
@@ -90,7 +64,7 @@ class OtherSchoolController extends Endpoint
      * @return \Illuminate\Http\JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function store(array $attributes)
+    public function store(array $attributes): JsonResponse
     {
         $this->validate([
             'schoolName',
@@ -114,7 +88,7 @@ class OtherSchoolController extends Endpoint
      * @return \spkm\isams\Wrappers\School
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function show(int $id)
+    public function show(int $id): School
     {
         $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
 
@@ -131,7 +105,7 @@ class OtherSchoolController extends Endpoint
      * @return \Illuminate\Http\JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function update(int $id, array $attributes)
+    public function update(int $id, array $attributes): JsonResponse
     {
         $this->validate([
             'schoolName',

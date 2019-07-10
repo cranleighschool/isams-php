@@ -3,46 +3,20 @@
 namespace spkm\isams\Controllers;
 
 use spkm\isams\Endpoint;
+use Illuminate\Http\JsonResponse;
 use spkm\isams\Wrappers\Employee;
-use spkm\isams\Contracts\Institution;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 class HumanResourcesEmployeeController extends Endpoint
 {
-    /**
-     * @var \spkm\isams\Contracts\Institution
-     */
-    private $institution;
-
-    /**
-     * @var string
-     */
-    protected $endpoint;
-
-    public function __construct(Institution $institution)
-    {
-        $this->institution = $institution;
-        $this->setGuzzle();
-        $this->setEndpoint();
-    }
-
-    /**
-     * Get the School to be queried
-     *
-     * @return \spkm\Isams\Contracts\Institution
-     */
-    protected function getInstitution()
-    {
-        return $this->institution;
-    }
-
     /**
      * Set the URL the request is made to
      *
      * @return void
      * @throws \Exception
      */
-    private function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain().'/api/humanresources/employees';
     }
@@ -53,7 +27,7 @@ class HumanResourcesEmployeeController extends Endpoint
      * @return \Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function index()
+    public function index(): Collection
     {
         $key = $this->institution->getConfigName().'hrEmployees.index';
 
@@ -74,13 +48,32 @@ class HumanResourcesEmployeeController extends Endpoint
             $pageNumber++;
         endwhile;
 
-        if ($totalCount !== $items->count()):
+        if ($totalCount !== $items->count()) {
             throw new \Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
-        endif;
+        }
+
+        $items = $this->sortBySurname($items);
 
         return Cache::remember($key, 10080, function () use ($items) {
             return $items;
         });
+    }
+
+    /**
+     * Sort by collection of Employee objects by surname
+     *
+     * @param \Illuminate\Support\Collection $collection
+     * @return \Illuminate\Support\Collection
+     */
+    private function sortBySurname(Collection $collection): Collection
+    {
+        $itemsArray = $collection->toArray();
+        usort($itemsArray, function($a, $b)
+        {
+            return strcmp($a->surname, $b->surname);
+        });
+
+        return Collect($itemsArray);
     }
 
     /**
@@ -90,7 +83,7 @@ class HumanResourcesEmployeeController extends Endpoint
      * @return \Illuminate\Http\JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function store(array $attributes)
+    public function store(array $attributes): JsonResponse
     {
         $this->validate([
             'forename',
@@ -112,7 +105,7 @@ class HumanResourcesEmployeeController extends Endpoint
      * @return \spkm\isams\Wrappers\Employee
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function show(int $id)
+    public function show(int $id): Employee
     {
         $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
 
@@ -129,7 +122,7 @@ class HumanResourcesEmployeeController extends Endpoint
      * @return \Illuminate\Http\JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function update(int $id, array $attributes)
+    public function update(int $id, array $attributes): JsonResponse
     {
         $this->validate([
             'forename',

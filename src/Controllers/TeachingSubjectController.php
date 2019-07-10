@@ -3,46 +3,19 @@
 namespace spkm\isams\Controllers;
 
 use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\TeachingSubject;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use spkm\isams\Contracts\Institution;
+use spkm\isams\Wrappers\TeachingSubject;
 
 class TeachingSubjectController extends Endpoint
 {
-    /**
-     * @var \spkm\isams\Contracts\Institution
-     */
-    protected $institution;
-
-    /**
-     * @var string
-     */
-    protected $endpoint;
-
-    public function __construct(Institution $institution)
-    {
-        $this->institution = $institution;
-        $this->setGuzzle();
-        $this->setEndpoint();
-    }
-
-    /**
-     * Get the School to be queried
-     *
-     * @return \spkm\Isams\Contracts\Institution
-     */
-    protected function getInstitution()
-    {
-        return $this->institution;
-    }
-
     /**
      * Set the URL the request is made to
      *
      * @return void
      * @throws \Exception
      */
-    private function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain().'/api/teaching/subjects';
     }
@@ -53,7 +26,7 @@ class TeachingSubjectController extends Endpoint
      * @return \Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function index()
+    public function index(): Collection
     {
         $key = $this->institution->getConfigName().'teachingSubjects.index';
 

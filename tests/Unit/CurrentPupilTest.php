@@ -5,7 +5,6 @@ namespace spkm\isams\Tests\Unit;
 use Tests\TestCase;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Pupil;
-use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\CurrentPupilController;
 
 class CurrentPupilTest extends TestCase
@@ -20,28 +19,40 @@ class CurrentPupilTest extends TestCase
      */
     protected $properties = [
         'academicHouse',
+        'birthCounty',
+        'birthplace',
         'boardingHouse',
         'dob',
         'enrolmentDate',
         'enrolmentTerm',
         'enrolmentYear',
+        'ethnicity',
+        'familyId',
         'forename',
         'formGroup',
+        'fullName',
         'gender',
+        'homeAddresses',
         'languages',
+        'lastUpdated',
+        'latestPhotoId',
         'leavingDate',
         'middlenames',
         'mobileNumber',
         'nationalities',
         'officialName',
         'personalEmailAddress',
+        'personGuid',
         'preferredName',
         'previousName',
+        'religion',
+        'residentCountry',
         'schoolCode',
         'schoolEmailAddress',
         'schoolId',
         'surname',
         'title',
+        'tutorEmployeeId',
         'uniquePupilNumber',
         'yearGroup',
     ];
@@ -62,7 +73,7 @@ class CurrentPupilTest extends TestCase
             $this->assertTrue(is_a($pupil, Pupil::class));
 
             foreach ($this->properties as $property):
-                $this->assertTrue(array_key_exists($property, $pupil));
+                $this->assertTrue(array_key_exists($property, $pupil->toArray()));
             endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'currentPupils.index'));

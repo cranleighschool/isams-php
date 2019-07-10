@@ -4,45 +4,19 @@ namespace spkm\isams\Controllers;
 
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\Country;
-use spkm\isams\Contracts\Institution;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 class CountryController extends Endpoint
 {
-    /**
-     * @var \spkm\isams\Contracts\Institution
-     */
-    protected $institution;
-
-    /**
-     * @var string
-     */
-    protected $endpoint;
-
-    public function __construct(Institution $institution)
-    {
-        $this->institution = $institution;
-        $this->setGuzzle();
-        $this->setEndpoint();
-    }
-
-    /**
-     * Get the School to be queried
-     *
-     * @return \spkm\Isams\Contracts\Institution
-     */
-    protected function getInstitution()
-    {
-        return $this->institution;
-    }
-
     /**
      * Set the URL the request is made to
      *
      * @return void
      * @throws \Exception
      */
-    private function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain().'/api/systemconfiguration/list/countries';
     }
@@ -53,7 +27,7 @@ class CountryController extends Endpoint
      * @return \Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function index()
+    public function index(): Collection
     {
         $key = $this->institution->getConfigName().'countries.index';
 
@@ -71,7 +45,7 @@ class CountryController extends Endpoint
      * @return \Illuminate\Http\JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function store(array $attributes)
+    public function store(array $attributes): JsonResponse
     {
         $this->validate(['name'], $attributes);
 
@@ -91,7 +65,7 @@ class CountryController extends Endpoint
      * @return \Illuminate\Http\JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function update(int $id, array $attributes)
+    public function update(int $id, array $attributes): JsonResponse
     {
         $this->validate(['name'], $attributes);
 
@@ -110,7 +84,7 @@ class CountryController extends Endpoint
      * @return \Illuminate\Http\JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function destroy(int $id)
+    public function destroy(int $id): JsonResponse
     {
         $response = $this->guzzle->request('DELETE', $this->endpoint.'/'.$id, [
             'headers' => $this->getHeaders(),

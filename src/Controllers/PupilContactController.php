@@ -3,7 +3,8 @@
 namespace spkm\isams\Controllers;
 
 use spkm\isams\Endpoint;
-use spkm\isams\Contracts\Institution;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use spkm\isams\Wrappers\PupilContact;
 
 /**
@@ -15,54 +16,26 @@ use spkm\isams\Wrappers\PupilContact;
 class PupilContactController extends Endpoint
 {
     /**
-     * @var \spkm\isams\Contracts\Institution
-     */
-    private $institution;
-
-    /**
-     * @var string
-     */
-    protected $endpoint;
-
-    public function __construct(Institution $institution)
-    {
-        $this->institution = $institution;
-        $this->setGuzzle();
-        $this->setEndpoint();
-    }
-
-    /**
-     * Get the School to be queried
-     *
-     * @return \spkm\Isams\Contracts\Institution
-     */
-    protected function getInstitution()
-    {
-        return $this->institution;
-    }
-
-    /**
      * Set the URL the request is made to
      *
      * @return void
      * @throws \Exception
      */
-    private function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain().'/api/students';
     }
 
     /**
-     * !! DEPRECATED ENDPOINT !!
-     *
      * Create a new resource.
      *
      * @param string $schoolId
      * @param array $attributes
      * @return \Illuminate\Http\JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @deprecated
      */
-    public function store(string $schoolId, array $attributes)
+    public function store(string $schoolId, array $attributes): JsonResponse
     {
         $this->validate([
             'relationship',
@@ -85,16 +58,16 @@ class PupilContactController extends Endpoint
     }
 
     /**
-     * Show the specified resource
-     * Note: Gets all contacts for the specified pupil
+     * Get all contacts for the specified pupil
      *
      * @param string $schoolId
      * @return \Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @deprecated
      */
-    public function show(string $schoolId)
+    public function show(string $schoolId): Collection
     {
-        $this->endpoint = $this->endpoint.'/'.$schoolId.'/contacts';
+        $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -108,17 +81,15 @@ class PupilContactController extends Endpoint
     }
 
     /**
-     * !! DEPRECATED ENDPOINT !!
-     *
-     * Show the specified resource
-     * Note: Gets a specific pupil contact.
+     * Get a specific pupil contact.
      *
      * @param string $schoolId
      * @param int $contactId
      * @return \spkm\isams\Wrappers\PupilContact
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @deprecated
      */
-    public function showContact(string $schoolId, int $contactId)
+    public function showContact(string $schoolId, int $contactId): PupilContact
     {
         $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts/'.$contactId;
 
@@ -130,8 +101,6 @@ class PupilContactController extends Endpoint
     }
 
     /**
-     * !! DEPRECATED ENDPOINT !!
-     *
      * Update the specified resource.
      *
      * @param string $schoolId
@@ -139,8 +108,9 @@ class PupilContactController extends Endpoint
      * @param array $attributes
      * @return \Illuminate\Http\JsonResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @deprecated
      */
-    public function update(string $schoolId, int $contactId, array $attributes)
+    public function update(string $schoolId, int $contactId, array $attributes): JsonResponse
     {
         $this->validate([
             'relationship',
