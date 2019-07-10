@@ -15,7 +15,7 @@ class TeachingSubjectController extends Endpoint
      * @return void
      * @throws \Exception
      */
-    protected function setEndpoint(): void
+    protected function setEndpoint()
     {
         $this->endpoint = $this->getDomain().'/api/teaching/subjects';
     }
