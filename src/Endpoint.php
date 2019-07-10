@@ -42,7 +42,7 @@ abstract class Endpoint
      *
      * @return \spkm\Isams\Contracts\Institution
      */
-    protected function getInstitution(): Institution
+    protected function getInstitution()
     {
         return $this->institution;
     }
