@@ -36,4 +36,27 @@ class StorageFileController extends Endpoint
 
         return $response->getBody()->getContents();
     }
+    
+    /**
+     * Show the specified resource
+     *
+     * @author Fred Bradley <frb@cranleigh.org> 
+     * @param string $path
+     * @param string $name
+     * @return binary|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function download(string $path, string $name)
+    {
+        $url = $this->endpoint.'?path='.$path.'&fileName='.$name;
+        
+        $response = $this->guzzle->request('GET', $url, ['headers' => $this->getHeaders()]);
+        
+        header('Cache-Control: '.$response->getHeader('Cache-Control')[0]);
+        header('Content-type: '.$response->getHeader('Content-Type')[0]);
+        header('Content-Disposition: '.$response->getHeader('Content-Disposition')[0]);
+        header('Content-Length: '.$response->getHeader('Content-Length')[0]);
+        echo $response->getBody()->getContents();
+        exit();
+    }
 }
