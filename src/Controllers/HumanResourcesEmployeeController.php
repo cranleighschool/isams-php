@@ -2,6 +2,7 @@
 
 namespace spkm\isams\Controllers;
 
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManagerStatic;
@@ -10,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use spkm\isams\Wrappers\Employee;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Wrappers\EmployeePhoto;
 
 class HumanResourcesEmployeeController extends Endpoint
 {
@@ -122,10 +124,10 @@ class HumanResourcesEmployeeController extends Endpoint
      *
      * @param int $id
      * @param int $quality
-     * @return Image
+     * @return EmployeePhoto
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getCurrentPhoto(int $id, int $quality=75): Image
+    public function getCurrentPhoto(int $id, int $quality=75): EmployeePhoto
     {
         /**
          * At the moment this package doesn't auto-include Intervention, so we need to check for its existance first.
@@ -134,30 +136,34 @@ class HumanResourcesEmployeeController extends Endpoint
             throw new \Exception("This method requires Intervention/Image package.", 500);
         }
 
-        /**
-         * Hello ISAMS!
-         */
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id.'/photos/current', ['headers' => $this->getHeaders()]);
+        try {
+            /**
+             * Hello ISAMS!
+             */
+            $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/photos/current', ['headers' => $this->getHeaders()]);
+
+            /**
+             * Get the Image and Save it to Storage
+             */
+            $image = ImageManagerStatic::make($response->getBody()->getContents());
+            $data = $image->encode('jpg', $quality);
+            $save = Storage::put($id . '.jpg', $data);
+
+            /**
+             * Grab the image out of storage and encode it as a Data URL
+             * Then Delete the image from Storage. (Like we'd never know it was there!)
+             */
+            $image = storage_path('app/' . $id . ".jpg");
+            $image = ImageManagerStatic::make($image)->encode('data-url');
+            Storage::delete($id . ".jpg");
+        } catch (RequestException $exception) {
+            $image = ['error' => json_decode($exception->getResponse()->getBody()->getContents())];
+        }
 
         /**
-         * Get the Image and Save it to Storage
+         * Return an instance of the EmployeePhoto class
          */
-        $image = ImageManagerStatic::make($response->getBody()->getContents());
-        $data = $image->encode('jpg', $quality);
-        $save = Storage::put($id.'.jpg', $data);
-
-        /**
-         * Grab the image out of storage and encode it as a Data URL
-         * Then Delete the image from Storage. (Like we'd never know it was there!)
-         */
-        $image = storage_path('app/'.$id.".jpg");
-        $image = ImageManagerStatic::make($image)->encode('data-url');
-        Storage::delete($id.".jpg");
-
-        /**
-         * Return the Intervention Object
-         */
-        return $image;
+        return new EmployeePhoto($image);
     }
 
     /**
