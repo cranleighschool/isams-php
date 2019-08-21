@@ -2,11 +2,16 @@
 
 namespace spkm\isams\Controllers;
 
+use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Image;
+use Intervention\Image\ImageManagerStatic;
 use spkm\isams\Endpoint;
 use Illuminate\Http\JsonResponse;
 use spkm\isams\Wrappers\Employee;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Wrappers\EmployeePhoto;
 
 class HumanResourcesEmployeeController extends Endpoint
 {
@@ -112,6 +117,53 @@ class HumanResourcesEmployeeController extends Endpoint
         $decoded = json_decode($response->getBody()->getContents());
 
         return new Employee($decoded);
+    }
+
+    /**
+     * Gets the Current Photo for the Employee
+     *
+     * @param int $id
+     * @param int $quality
+     * @return EmployeePhoto
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getCurrentPhoto(int $id, int $quality=75): EmployeePhoto
+    {
+        /**
+         * At the moment this package doesn't auto-include Intervention, so we need to check for its existance first.
+         */
+        if (!method_exists(ImageManagerStatic::class, 'make')) {
+            throw new \Exception("This method requires Intervention/Image package.", 500);
+        }
+
+        try {
+            /**
+             * Hello ISAMS!
+             */
+            $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/photos/current', ['headers' => $this->getHeaders()]);
+
+            /**
+             * Get the Image and Save it to Storage
+             */
+            $image = ImageManagerStatic::make($response->getBody()->getContents());
+            $data = $image->encode('jpg', $quality);
+            $save = Storage::put($id . '.jpg', $data);
+
+            /**
+             * Grab the image out of storage and encode it as a Data URL
+             * Then Delete the image from Storage. (Like we'd never know it was there!)
+             */
+            $image = storage_path('app/' . $id . ".jpg");
+            $image = ImageManagerStatic::make($image)->encode('data-url');
+            Storage::delete($id . ".jpg");
+        } catch (RequestException $exception) {
+            $image = ['error' => json_decode($exception->getResponse()->getBody()->getContents())];
+        }
+
+        /**
+         * Return an instance of the EmployeePhoto class
+         */
+        return new EmployeePhoto($image);
     }
 
     /**
