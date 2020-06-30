@@ -1,6 +1,5 @@
 <?php
 
-
 namespace spkm\isams\Wrappers;
 
 use spkm\isams\Wrapper;

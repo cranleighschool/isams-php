@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
-use spkm\isams\Wrappers\PupilBoardingStatus;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\PupilBoardingStatusController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\PupilBoardingStatus;
+use Tests\TestCase;
 
 class PupilBoardingStatusesTest extends TestCase
 {
@@ -100,7 +100,7 @@ class PupilBoardingStatusesTest extends TestCase
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $boardingStatuses

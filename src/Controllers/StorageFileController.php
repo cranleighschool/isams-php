@@ -3,12 +3,11 @@
 namespace spkm\isams\Controllers;
 
 use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\File;
 
 class StorageFileController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
@@ -21,7 +20,7 @@ class StorageFileController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @param string $path
      * @param string $name
@@ -38,7 +37,7 @@ class StorageFileController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @author Fred Bradley <frb@cranleigh.org>
      * @param string $path

@@ -2,14 +2,14 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
 use Illuminate\Http\JsonResponse;
+use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\EmployeeQualification;
 
 class HumanResourcesEmployeeQualificationController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
@@ -43,7 +43,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @param int $id
      * @return \spkm\isams\Wrappers\EmployeeQualification

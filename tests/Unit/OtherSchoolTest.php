@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use spkm\isams\Controllers\OtherSchoolController;
-use Tests\TestCase;
-use spkm\isams\School;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Controllers\OtherSchoolController;
+use spkm\isams\School;
+use Tests\TestCase;
 
 class OtherSchoolTest extends TestCase
 {
@@ -31,7 +31,7 @@ class OtherSchoolTest extends TestCase
         'schoolName',
         'schoolTelephone',
         'schoolWebsite',
-        'town'
+        'town',
     ];
 
     public function __construct()
@@ -83,7 +83,6 @@ class OtherSchoolTest extends TestCase
         $response = (new OtherSchoolController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-
         $school = (new OtherSchoolController($this->school))->show($id);
 
         $this->assertTrue(is_a($school, \spkm\isams\Wrappers\School::class));
@@ -107,7 +106,6 @@ class OtherSchoolTest extends TestCase
         ];
         $response = (new OtherSchoolController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
-
 
         $changedAttributes = [
             'schoolName' => 'testAnother_' . str_random(5),

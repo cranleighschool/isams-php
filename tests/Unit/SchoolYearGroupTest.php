@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
+use spkm\isams\Controllers\SchoolYearGroupController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\YearGroup;
-use spkm\isams\Controllers\SchoolYearGroupController;
+use Tests\TestCase;
 
 class SchoolYearGroupTest extends TestCase
 {

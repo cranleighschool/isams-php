@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
-use spkm\isams\Wrappers\Title;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\TitleController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\Title;
+use Tests\TestCase;
 
 class SystemConfigurationTitleTest extends TestCase
 {
@@ -99,7 +99,7 @@ class SystemConfigurationTitleTest extends TestCase
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $titles

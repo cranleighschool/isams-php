@@ -3,20 +3,20 @@
 namespace spkm\isams\Controllers;
 
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManagerStatic;
 use spkm\isams\Endpoint;
-use Illuminate\Http\JsonResponse;
 use spkm\isams\Wrappers\Employee;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 use spkm\isams\Wrappers\EmployeePhoto;
 
 class HumanResourcesEmployeeController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
@@ -65,7 +65,7 @@ class HumanResourcesEmployeeController extends Endpoint
     }
 
     /**
-     * Sort by collection of Employee objects by surname
+     * Sort by collection of Employee objects by surname.
      *
      * @param \Illuminate\Support\Collection $collection
      * @return \Illuminate\Support\Collection
@@ -103,7 +103,7 @@ class HumanResourcesEmployeeController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @param int $id
      * @return \spkm\isams\Wrappers\Employee
@@ -119,20 +119,20 @@ class HumanResourcesEmployeeController extends Endpoint
     }
 
     /**
-     * Gets the Current Photo for the Employee
+     * Gets the Current Photo for the Employee.
      *
      * @param int $id
      * @param int $quality
      * @return EmployeePhoto
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getCurrentPhoto(int $id, int $quality=75): EmployeePhoto
+    public function getCurrentPhoto(int $id, int $quality = 75): EmployeePhoto
     {
         /**
          * At the moment this package doesn't auto-include Intervention, so we need to check for its existance first.
          */
-        if (!method_exists(ImageManagerStatic::class, 'make')) {
-            throw new \Exception("This method requires Intervention/Image package.", 500);
+        if (! method_exists(ImageManagerStatic::class, 'make')) {
+            throw new \Exception('This method requires Intervention/Image package.', 500);
         }
 
         try {
@@ -142,7 +142,7 @@ class HumanResourcesEmployeeController extends Endpoint
             $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/photos/current', ['headers' => $this->getHeaders()]);
 
             /**
-             * Get the Image and Save it to Storage
+             * Get the Image and Save it to Storage.
              */
             $image = ImageManagerStatic::make($response->getBody()->getContents());
             $data = $image->encode('jpg', $quality);
@@ -150,17 +150,17 @@ class HumanResourcesEmployeeController extends Endpoint
 
             /**
              * Grab the image out of storage and encode it as a Data URL
-             * Then Delete the image from Storage. (Like we'd never know it was there!)
+             * Then Delete the image from Storage. (Like we'd never know it was there!).
              */
-            $image = storage_path('app/' . $id . ".jpg");
+            $image = storage_path('app/' . $id . '.jpg');
             $image = ImageManagerStatic::make($image)->encode('data-url');
-            Storage::delete($id . ".jpg");
+            Storage::delete($id . '.jpg');
         } catch (RequestException $exception) {
             $image = ['error' => json_decode($exception->getResponse()->getBody()->getContents())];
         }
 
         /**
-         * Return an instance of the EmployeePhoto class
+         * Return an instance of the EmployeePhoto class.
          */
         return new EmployeePhoto($image);
     }

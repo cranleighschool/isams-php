@@ -2,16 +2,16 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\Title;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\Title;
 
 class TitleController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
