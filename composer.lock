@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fe2706558a5de59d36bea2aee972bc4",
+    "content-hash": "1c4a7a43e82baffbb8ff90e46320a52e",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -288,7 +288,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v7.17.2",
+            "version": "v7.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -332,16 +332,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v7.17.2",
+            "version": "v7.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "68b0f13940bdea9e57b1c5485a1f498934e43a23"
+                "reference": "688f0608687babff00e2b81c170852aaf1e9fc8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/68b0f13940bdea9e57b1c5485a1f498934e43a23",
-                "reference": "68b0f13940bdea9e57b1c5485a1f498934e43a23",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/688f0608687babff00e2b81c170852aaf1e9fc8a",
+                "reference": "688f0608687babff00e2b81c170852aaf1e9fc8a",
                 "shasum": ""
             },
             "require": {
@@ -390,7 +390,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-06-23T15:40:58+00:00"
+            "time": "2020-06-25T13:51:17+00:00"
         },
         {
             "name": "nesbot/carbon",
