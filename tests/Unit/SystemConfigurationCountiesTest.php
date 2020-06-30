@@ -5,8 +5,8 @@ namespace spkm\isams\Tests\Unit;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\CountyController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\County;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\County;
 
 class SystemConfigurationCountiesTest extends TestCase
 {
