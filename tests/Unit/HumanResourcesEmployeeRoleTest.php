@@ -3,13 +3,11 @@
 namespace spkm\isams\Tests\Unit;
 
 use spkm\isams\Controllers\HumanResourcesEmployeeController;
-use spkm\isams\Controllers\HumanResourcesEmployeeQualificationController;
 use spkm\isams\Controllers\HumanResourcesEmployeeRoleController;
+use spkm\isams\School;
 use spkm\isams\Wrappers\Employee;
-use spkm\isams\Wrappers\EmployeeQualification;
 use spkm\isams\Wrappers\EmployeeRole;
 use Tests\TestCase;
-use spkm\isams\School;
 
 class HumanResourcesEmployeeRoleTest extends TestCase
 {
@@ -45,7 +43,7 @@ class HumanResourcesEmployeeRoleTest extends TestCase
         $id = json_decode($response->getContent())->id;
 
         //Create role
-        $roleId=11; //Teacher
+        $roleId = 11; //Teacher
         $response = (new HumanResourcesEmployeeRoleController($this->school))->store($id, $roleId);
 
         $this->assertEquals(201, $response->getStatusCode());
@@ -65,7 +63,7 @@ class HumanResourcesEmployeeRoleTest extends TestCase
         $id = json_decode($response->getContent())->id;
 
         //Create role
-        $roleId=11; //Teacher
+        $roleId = 11; //Teacher
         (new HumanResourcesEmployeeRoleController($this->school))->store($id, $roleId);
 
         $employee = (new HumanResourcesEmployeeRoleController($this->school))->show($id);

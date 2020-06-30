@@ -5,7 +5,7 @@ namespace spkm\isams;
 abstract class Wrapper
 {
     /**
-     * Hide the following properties from being set in $this->>setPublicProperties()
+     * Hide the following properties from being set in $this->>setPublicProperties().
      *
      * @array
      */
@@ -31,7 +31,7 @@ abstract class Wrapper
     abstract protected function handle();
 
     /**
-     * Set the contents of $this->item to public properties. Use $this->handle() to unset/override if required
+     * Set the contents of $this->item to public properties. Use $this->handle() to unset/override if required.
      *
      * @return void
      */
@@ -47,7 +47,7 @@ abstract class Wrapper
     }
 
     /**
-     * Get the item array
+     * Get the item array.
      *
      * @return array
      */

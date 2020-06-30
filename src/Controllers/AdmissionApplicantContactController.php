@@ -2,13 +2,13 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\PupilContact;
 
 /**
- * IMPORTANT NOTE:
+ * IMPORTANT NOTE:.
  *
  * As of July 2018, iSAMS have notified us that the contacts API endpoints are temporary & will be changed with the rollout of
  * the upgraded pupil contact module in 2019/2020
@@ -16,7 +16,7 @@ use spkm\isams\Wrappers\PupilContact;
 class AdmissionApplicantContactController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
@@ -58,7 +58,7 @@ class AdmissionApplicantContactController extends Endpoint
     }
 
     /**
-     * Get all contacts for the specified applicant
+     * Get all contacts for the specified applicant.
      *
      * @param string $schoolId
      * @return \Illuminate\Support\Collection

@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
+use spkm\isams\Controllers\PupilContactController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\PupilContact;
-use spkm\isams\Controllers\PupilContactController;
+use Tests\TestCase;
 
 class PupilContactTest extends TestCase
 {
@@ -94,7 +94,6 @@ class PupilContactTest extends TestCase
         $this->assertNotEmpty(json_decode($response->getContent())->location);
         $this->assertNotEmpty(json_decode($response->getContent())->id);
     }
-
 
     /** @test */
     public function it_updates_the_specified_pupil_contact()

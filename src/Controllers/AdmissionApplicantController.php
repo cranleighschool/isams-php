@@ -2,16 +2,16 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
 use Illuminate\Http\JsonResponse;
-use spkm\isams\Wrappers\Applicant;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\Applicant;
 
 class AdmissionApplicantController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
@@ -84,7 +84,7 @@ class AdmissionApplicantController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @param string $schoolId
      * @return \spkm\isams\Wrappers\Applicant

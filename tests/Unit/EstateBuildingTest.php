@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
 use Illuminate\Support\Facades\Cache;
-use spkm\isams\Wrappers\EstateBuilding;
 use spkm\isams\Controllers\EstateBuildingController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\EstateBuilding;
+use Tests\TestCase;
 
 class EstateBuildingTest extends TestCase
 {
@@ -73,7 +73,7 @@ class EstateBuildingTest extends TestCase
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $buildings

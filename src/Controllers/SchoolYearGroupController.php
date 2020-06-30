@@ -2,15 +2,15 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\YearGroup;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\YearGroup;
 
 class SchoolYearGroupController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
@@ -38,7 +38,7 @@ class SchoolYearGroupController extends Endpoint
     }
 
     /**
-     * Show the resource
+     * Show the resource.
      *
      * @param int $id
      * @return \spkm\isams\Wrappers\YearGroup
