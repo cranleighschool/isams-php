@@ -23,9 +23,9 @@
     "require": {
         "php": ">=7.0",
         "guzzlehttp/guzzle": "^6.5",
-        "symfony/psr-http-message-bridge": "^1.0",
+        "symfony/psr-http-message-bridge": "^1.0 || ^2.0",
         "ext-json": "*",
-        "symfony/http-foundation": "^4.4",
+        "symfony/http-foundation": "^4.4 || ^5.1",
         "illuminate/support": "^5.5 || ^6.0 || ^7.0"
     },
     "autoload": {
