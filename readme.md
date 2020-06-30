@@ -1,7 +1,7 @@
 # spkm/isams
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spkm/isams.svg?style=flat-square)](https://packagist.org/packages/spkm/isams)
 [![Build Status](https://img.shields.io/travis/spkm/isams/master.svg?style=flat-square)](https://travis-ci.org/spkm/isams)
-![StyleCI Status](https://github.styleci.io/repos/274672480/shield)
+![StyleCI Status](https://github.styleci.io/repos/144165171/shield)
 [![Total Downloads](https://img.shields.io/packagist/dt/spkm/isams.svg?style=flat-square)](https://packagist.org/packages/spkm/isams)
 
 
