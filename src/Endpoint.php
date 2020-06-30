@@ -177,7 +177,7 @@ abstract class Endpoint
      * @param string $wrapper
      * @return \Illuminate\Support\Collection
      */
-    public function wrapJson($json, string $property, string $wrapper)
+    public function wrapJson(string $json, string $property, string $wrapper)
     {
         $decoded = json_decode($json);
 
