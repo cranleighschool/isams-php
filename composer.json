@@ -50,7 +50,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "spkm\\isams\\tests\\": "tests/"
+            "spkm\\isams\\Tests\\": "tests/"
         }
     },
     "scripts": {
