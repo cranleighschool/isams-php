@@ -4,8 +4,8 @@ namespace spkm\isams\Tests\Unit;
 
 use spkm\isams\Controllers\SchoolHouseController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\House;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\House;
 
 class SchoolHouseTest extends TestCase
 {
