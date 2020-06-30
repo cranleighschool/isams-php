@@ -4,8 +4,8 @@ namespace spkm\isams\Tests\Unit;
 
 use spkm\isams\Controllers\AdmissionStatusController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\AdmissionStatus;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\AdmissionStatus;
 
 class AdmissionStatusTest extends TestCase
 {

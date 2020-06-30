@@ -5,8 +5,8 @@ namespace spkm\isams\Tests\Unit;
 use spkm\isams\Controllers\HumanResourcesEmployeeController;
 use spkm\isams\Controllers\HumanResourcesEmployeeQualificationController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\EmployeeQualification;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\EmployeeQualification;
 
 class HumanResourcesEmployeeQualificationTest extends TestCase
 {

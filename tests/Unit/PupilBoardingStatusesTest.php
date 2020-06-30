@@ -5,8 +5,8 @@ namespace Tests\Unit;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\PupilBoardingStatusController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\PupilBoardingStatus;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\PupilBoardingStatus;
 
 class PupilBoardingStatusesTest extends TestCase
 {

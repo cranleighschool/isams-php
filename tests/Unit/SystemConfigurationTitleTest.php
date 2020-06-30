@@ -5,8 +5,8 @@ namespace spkm\isams\Tests\Unit;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\TitleController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\Title;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\Title;
 
 class SystemConfigurationTitleTest extends TestCase
 {

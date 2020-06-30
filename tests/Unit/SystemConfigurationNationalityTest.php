@@ -5,8 +5,8 @@ namespace spkm\isams\Tests\Unit;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\NationalityController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\Nationality;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\Nationality;
 
 class SystemConfigurationNationalityTest extends TestCase
 {

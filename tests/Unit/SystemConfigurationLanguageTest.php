@@ -5,8 +5,8 @@ namespace spkm\isams\Tests\Unit;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\LanguageController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\Language;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\Language;
 
 class SystemConfigurationLanguageTest extends TestCase
 {

@@ -4,8 +4,8 @@ namespace spkm\isams\Tests\Unit;
 
 use spkm\isams\Controllers\HumanResourcesEmployeeController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\Employee;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\Employee;
 
 class HumanResourcesEmployeeTest extends TestCase
 {

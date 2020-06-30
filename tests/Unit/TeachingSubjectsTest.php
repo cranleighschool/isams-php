@@ -4,8 +4,8 @@ namespace spkm\isams\Tests\Unit;
 
 use spkm\isams\Controllers\TeachingSubjectController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\TeachingSubject;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\TeachingSubject;
 
 class TeachingSubjectsTest extends TestCase
 {

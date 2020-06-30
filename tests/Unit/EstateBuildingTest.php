@@ -4,8 +4,8 @@ namespace spkm\isams\tests\Unit;
 
 use spkm\isams\Controllers\EstateBuildingController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\EstateBuilding;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\EstateBuilding;
 
 class EstateBuildingTest extends TestCase
 {

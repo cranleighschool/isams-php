@@ -4,8 +4,8 @@ namespace spkm\isams\Tests\Unit;
 
 use spkm\isams\Controllers\AdmissionApplicantContactController;
 use spkm\isams\School;
-use spkm\isams\Wrappers\PupilContact;
 use spkm\isams\Tests\TestCase;
+use spkm\isams\Wrappers\PupilContact;
 
 class AdmissionsApplicantContactTest extends TestCase
 {
