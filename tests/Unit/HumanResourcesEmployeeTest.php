@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
+use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\HumanResourcesEmployeeController;
+use spkm\isams\School;
 use spkm\isams\Wrappers\Employee;
 use Tests\TestCase;
-use spkm\isams\School;
-use Illuminate\Support\Facades\Cache;
 
 class HumanResourcesEmployeeTest extends TestCase
 {
@@ -100,7 +100,6 @@ class HumanResourcesEmployeeTest extends TestCase
         $response = (new HumanResourcesEmployeeController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-
         $employee = (new HumanResourcesEmployeeController($this->school))->show($id);
 
         $this->assertTrue(is_a($employee, Employee::class));
@@ -122,7 +121,6 @@ class HumanResourcesEmployeeTest extends TestCase
         ];
         $response = (new HumanResourcesEmployeeController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
-
 
         $changedAttributes = [
             'forename' => 'Jane',

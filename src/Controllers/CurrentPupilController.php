@@ -2,16 +2,16 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\Pupil;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\Pupil;
 
 class CurrentPupilController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
@@ -70,7 +70,7 @@ class CurrentPupilController extends Endpoint
             'forename',
             'surname',
             'dob',
-            'yearGroup'
+            'yearGroup',
         ], $attributes);
 
         $response = $this->guzzle->request('POST', $this->endpoint, [
@@ -82,7 +82,7 @@ class CurrentPupilController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @param string $schoolId
      * @return \spkm\isams\Wrappers\Pupil
@@ -111,7 +111,7 @@ class CurrentPupilController extends Endpoint
             'forename',
             'surname',
             'dob',
-            'yearGroup'
+            'yearGroup',
         ], $attributes);
 
         $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $schoolId, [

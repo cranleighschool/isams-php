@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
-use spkm\isams\Wrappers\Nationality;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\NationalityController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\Nationality;
+use Tests\TestCase;
 
 class SystemConfigurationNationalityTest extends TestCase
 {
@@ -99,7 +99,7 @@ class SystemConfigurationNationalityTest extends TestCase
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $nationalities

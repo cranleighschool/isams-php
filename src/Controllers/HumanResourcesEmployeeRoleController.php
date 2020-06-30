@@ -9,7 +9,7 @@ use spkm\isams\Wrappers\EmployeeRole;
 class HumanResourcesEmployeeRoleController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
@@ -37,7 +37,7 @@ class HumanResourcesEmployeeRoleController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @param int $id
      * @return \spkm\isams\Wrappers\EmployeeRole

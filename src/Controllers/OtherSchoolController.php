@@ -2,16 +2,16 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\School;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\School;
 
 class OtherSchoolController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
@@ -82,7 +82,7 @@ class OtherSchoolController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @param int $id
      * @return \spkm\isams\Wrappers\School

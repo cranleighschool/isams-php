@@ -2,16 +2,16 @@
 
 namespace spkm\isams\Controllers;
 
-use Illuminate\Support\Collection;
-use spkm\isams\Endpoint;
 use Illuminate\Http\JsonResponse;
-use spkm\isams\Wrappers\Nationality;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\Nationality;
 
 class NationalityController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception

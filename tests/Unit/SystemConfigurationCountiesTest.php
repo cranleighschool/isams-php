@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
-use spkm\isams\Wrappers\County;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\CountyController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\County;
+use Tests\TestCase;
 
 class SystemConfigurationCountiesTest extends TestCase
 {
@@ -99,7 +99,7 @@ class SystemConfigurationCountiesTest extends TestCase
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $counties

@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
+use spkm\isams\Controllers\AdmissionStatusController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\AdmissionStatus;
-use spkm\isams\Controllers\AdmissionStatusController;
+use Tests\TestCase;
 
 class AdmissionStatusTest extends TestCase
 {
@@ -99,7 +99,7 @@ class AdmissionStatusTest extends TestCase
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $admissionStatuses

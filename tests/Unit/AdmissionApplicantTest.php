@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
+use spkm\isams\Controllers\AdmissionApplicantController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Applicant;
-use spkm\isams\Controllers\AdmissionApplicantController;
+use Tests\TestCase;
 
 class AdmissionApplicantTest extends TestCase
 {
@@ -109,7 +109,6 @@ class AdmissionApplicantTest extends TestCase
         $response = (new AdmissionApplicantController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-
         $applicant = (new AdmissionApplicantController($this->school))->show($id);
 
         $this->assertTrue(is_a($applicant, Applicant::class));
@@ -135,7 +134,6 @@ class AdmissionApplicantTest extends TestCase
         ];
         $response = (new AdmissionApplicantController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
-
 
         $changedAttributes = [
             'forename' => 'Jane',

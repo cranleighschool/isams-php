@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
+use spkm\isams\Controllers\CurrentPupilController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Pupil;
-use spkm\isams\Controllers\CurrentPupilController;
+use Tests\TestCase;
 
 class CurrentPupilTest extends TestCase
 {
@@ -86,7 +86,7 @@ class CurrentPupilTest extends TestCase
             'forename' => 'John',
             'surname' => 'Doe',
             'dob' => '2010-12-01',
-            'yearGroup' => 8
+            'yearGroup' => 8,
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
@@ -101,7 +101,7 @@ class CurrentPupilTest extends TestCase
             'forename' => 'Jane',
             'surname' => 'Doe',
             'dob' => '2010-12-01',
-            'yearGroup' => 8
+            'yearGroup' => 8,
         ];
         $response = (new CurrentPupilController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
@@ -125,7 +125,7 @@ class CurrentPupilTest extends TestCase
             'forename' => 'Jane',
             'surname' => 'Doe',
             'dob' => '2010-12-01',
-            'yearGroup' => 8
+            'yearGroup' => 8,
         ];
         $response = (new CurrentPupilController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
@@ -134,7 +134,7 @@ class CurrentPupilTest extends TestCase
             'forename' => 'Jenny',
             'surname' => 'Dolly',
             'dob' => '2012-12-01',
-            'yearGroup' => 8
+            'yearGroup' => 8,
         ];
 
         (new CurrentPupilController($this->school))->update($id, $changedAttributes);
