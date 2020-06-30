@@ -51,4 +51,30 @@ class School extends Model implements \spkm\isams\Contracts\Institution
 ``` 
 Otherwise implement the interface on your custom class (or copy the example `spkm\isams\School`)
 
+### Testing
+
+``` bash
+composer test
+```
+
+### Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+### Security
+
+If you discover any security related issues, please email spkm@cranleigh.org instead of using the issue tracker.
+
+## Credits
+
+- [Simon Mitchell](https://github.com/spkm)
+- [All Contributors](../../contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
   
