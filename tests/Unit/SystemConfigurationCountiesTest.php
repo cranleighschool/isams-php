@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\CountyController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\County;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class SystemConfigurationCountiesTest extends TestCase
 {

@@ -1,12 +1,11 @@
 <?php
 
-namespace spkm\isams\Tests\Unit;
+namespace spkm\isams\tests\Unit;
 
-use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\EstateBuildingController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\EstateBuilding;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class EstateBuildingTest extends TestCase
 {

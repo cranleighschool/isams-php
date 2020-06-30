@@ -5,7 +5,7 @@ namespace spkm\isams\Tests\Unit;
 use spkm\isams\Controllers\AdmissionApplicantContactController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\PupilContact;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class AdmissionsApplicantContactTest extends TestCase
 {

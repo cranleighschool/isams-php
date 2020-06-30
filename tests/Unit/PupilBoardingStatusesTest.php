@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\PupilBoardingStatusController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\PupilBoardingStatus;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class PupilBoardingStatusesTest extends TestCase
 {

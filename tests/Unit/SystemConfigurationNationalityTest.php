@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\NationalityController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Nationality;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class SystemConfigurationNationalityTest extends TestCase
 {

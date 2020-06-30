@@ -5,7 +5,7 @@ namespace spkm\isams\Tests\Unit;
 use spkm\isams\Controllers\TeachingSubjectController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\TeachingSubject;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class TeachingSubjectsTest extends TestCase
 {

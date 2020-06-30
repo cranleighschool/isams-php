@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\LanguageController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Language;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class SystemConfigurationLanguageTest extends TestCase
 {

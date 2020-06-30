@@ -5,7 +5,7 @@ namespace spkm\isams\Tests\Unit;
 use spkm\isams\Controllers\CurrentPupilController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Pupil;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class CurrentPupilTest extends TestCase
 {

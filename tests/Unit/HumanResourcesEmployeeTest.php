@@ -2,11 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\HumanResourcesEmployeeController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Employee;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class HumanResourcesEmployeeTest extends TestCase
 {

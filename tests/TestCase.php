@@ -1,8 +1,8 @@
 <?php
 
-namespace spkm\isams\Tests;
+namespace spkm\isams\tests;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {

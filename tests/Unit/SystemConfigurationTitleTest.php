@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\TitleController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Title;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class SystemConfigurationTitleTest extends TestCase
 {

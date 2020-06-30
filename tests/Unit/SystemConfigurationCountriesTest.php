@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\CountryController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Country;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class SystemConfigurationCountriesTest extends TestCase
 {

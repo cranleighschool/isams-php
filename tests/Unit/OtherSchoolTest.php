@@ -5,7 +5,7 @@ namespace spkm\isams\Tests\Unit;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\OtherSchoolController;
 use spkm\isams\School;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class OtherSchoolTest extends TestCase
 {

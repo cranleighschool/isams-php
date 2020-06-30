@@ -5,7 +5,7 @@ namespace spkm\isams\Tests\Unit;
 use spkm\isams\Controllers\SchoolYearGroupController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\YearGroup;
-use Tests\TestCase;
+use spkm\isams\Tests\TestCase;
 
 class SchoolYearGroupTest extends TestCase
 {
