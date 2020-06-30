@@ -1,10 +1,17 @@
+# spkm/isams
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spkm/isams.svg?style=flat-square)](https://packagist.org/packages/spkm/isams)
+[![Build Status](https://img.shields.io/travis/spkm/isams/master.svg?style=flat-square)](https://travis-ci.org/spkm/isams)
+![StyleCI Status](https://github.styleci.io/repos/274672480/shield)
+[![Total Downloads](https://img.shields.io/packagist/dt/spkm/isams.svg?style=flat-square)](https://packagist.org/packages/spkm/isams)
+
+
 This package is a PHP wrapper for iSAMS (https://isams.com) using their REST API. It transforms the json 
-objects returned from the API into model instances
+objects returned from the API into model instances.
 
 See https://developerdemo.isams.cloud/Main/swagger/ui/index for their API documentation & https://developer.isams.com/display/PRA/Getting+started+-+REST+API 
 
 ## Installation and usage
-This package requires PHP 7 & Laravel 5.5 or higher. See the tests folder for documentation. 
+This package requires PHP 7 & Laravel 5.5 or higher. See the `tests/` folder for documentation. 
 
 ### Basic Installation:
 You can install this package via composer using:
