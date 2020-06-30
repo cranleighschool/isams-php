@@ -42,7 +42,7 @@ class AdmissionsApplicantContactTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -54,9 +54,9 @@ class AdmissionsApplicantContactTest extends TestCase
         foreach ($contacts as $contact):
             $this->assertTrue(is_a($contact, PupilContact::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $contact));
-            endforeach;
+        endforeach;
         endforeach;
     }
 
@@ -79,7 +79,7 @@ class AdmissionsApplicantContactTest extends TestCase
     public function it_creates_a_new_applicant_contact_and_returns_its_id()
     {
         $schoolId = '2443384966';
-        $response = (new AdmissionApplicantContactController($this->school))->store($schoolId,[
+        $response = (new AdmissionApplicantContactController($this->school))->store($schoolId, [
             'relationship' => 'Father',
             'contactType' => 'Legal Guardian',
             'title' => 'Mr',
@@ -100,7 +100,7 @@ class AdmissionsApplicantContactTest extends TestCase
     public function it_updates_the_specified_applicant_contact()
     {
         $schoolId = '2443384966';
-        $response = (new AdmissionApplicantContactController($this->school))->store($schoolId,[
+        $response = (new AdmissionApplicantContactController($this->school))->store($schoolId, [
             'relationship' => 'Father',
             'contactType' => 'Legal Guardian',
             'title' => 'Mr',
@@ -123,9 +123,9 @@ class AdmissionsApplicantContactTest extends TestCase
             'country' => 'Cloud2',
         ];
 
-        (new AdmissionApplicantContactController($this->school))->update($schoolId,$contactId, $changedAttributes);
+        (new AdmissionApplicantContactController($this->school))->update($schoolId, $contactId, $changedAttributes);
 
-        $contact = (new AdmissionApplicantContactController($this->school))->showContact($schoolId,$contactId);
+        $contact = (new AdmissionApplicantContactController($this->school))->showContact($schoolId, $contactId);
 
         $this->assertTrue(is_a($contact, PupilContact::class));
         foreach ($this->properties as $property):

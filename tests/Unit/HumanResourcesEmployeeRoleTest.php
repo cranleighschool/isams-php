@@ -30,7 +30,7 @@ class HumanResourcesEmployeeRoleTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -46,7 +46,7 @@ class HumanResourcesEmployeeRoleTest extends TestCase
 
         //Create role
         $roleId=11; //Teacher
-        $response = (new HumanResourcesEmployeeRoleController($this->school))->store($id,$roleId);
+        $response = (new HumanResourcesEmployeeRoleController($this->school))->store($id, $roleId);
 
         $this->assertEquals(201, $response->getStatusCode());
         $this->assertNotEmpty(json_decode($response->getContent())->location);
@@ -66,7 +66,7 @@ class HumanResourcesEmployeeRoleTest extends TestCase
 
         //Create role
         $roleId=11; //Teacher
-        (new HumanResourcesEmployeeRoleController($this->school))->store($id,$roleId);
+        (new HumanResourcesEmployeeRoleController($this->school))->store($id, $roleId);
 
         $employee = (new HumanResourcesEmployeeRoleController($this->school))->show($id);
 

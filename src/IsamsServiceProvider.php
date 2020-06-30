@@ -14,7 +14,7 @@ class IsamsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/Config/config.php' => config_path('isams.php'),
+            __DIR__ . '/Config/config.php' => config_path('isams.php'),
         ], 'config');
     }
 }

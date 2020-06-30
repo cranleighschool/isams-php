@@ -16,7 +16,7 @@ class HumanResourcesEmployeeRoleController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/humanresources/employees';
+        $this->endpoint = $this->getDomain() . '/api/humanresources/employees';
     }
 
     /**
@@ -29,7 +29,7 @@ class HumanResourcesEmployeeRoleController extends Endpoint
      */
     public function store(int $id, int $roleId): JsonResponse
     {
-        $response = $this->guzzle->request('POST', $this->endpoint.'/'.$id.'/roles/'.$roleId, [
+        $response = $this->guzzle->request('POST', $this->endpoint . '/' . $id . '/roles/' . $roleId, [
             'headers' => $this->getHeaders(),
         ]);
 
@@ -45,7 +45,7 @@ class HumanResourcesEmployeeRoleController extends Endpoint
      */
     public function show(int $id): EmployeeRole
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id.'/roles', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/roles', ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

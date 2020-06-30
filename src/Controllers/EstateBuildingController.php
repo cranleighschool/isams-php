@@ -18,7 +18,7 @@ class EstateBuildingController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/estates/buildings';
+        $this->endpoint = $this->getDomain() . '/api/estates/buildings';
     }
 
     /**
@@ -29,7 +29,7 @@ class EstateBuildingController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'estateBuildings.index';
+        $key = $this->institution->getConfigName() . 'estateBuildings.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -69,7 +69,7 @@ class EstateBuildingController extends Endpoint
     {
         $this->validate(['name'], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

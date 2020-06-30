@@ -60,7 +60,7 @@ class AdmissionApplicantTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -71,9 +71,9 @@ class AdmissionApplicantTest extends TestCase
         foreach ($applicants as $applicant):
             $this->assertTrue(is_a($applicant, Applicant::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $applicant));
-            endforeach;
+        endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionApplicants.index'));
     }
@@ -146,7 +146,7 @@ class AdmissionApplicantTest extends TestCase
             'gender' => 'F',
         ];
 
-        (new AdmissionApplicantController($this->school))->update($id,$changedAttributes);
+        (new AdmissionApplicantController($this->school))->update($id, $changedAttributes);
 
         $applicant = (new AdmissionApplicantController($this->school))->show($id);
 

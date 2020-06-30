@@ -18,7 +18,7 @@ class AdmissionStatusTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -29,10 +29,10 @@ class AdmissionStatusTest extends TestCase
         foreach ($admissionStatuses as $admissionStatus):
             $this->assertTrue(is_a($admissionStatus, AdmissionStatus::class));
 
-            $properties = ['id', 'description', 'listType', 'name'];
-            foreach ($properties as $property):
+        $properties = ['id', 'description', 'listType', 'name'];
+        foreach ($properties as $property):
                 $this->assertTrue(array_key_exists($property, $admissionStatus));
-            endforeach;
+        endforeach;
         endforeach;
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionStatuses.index'));
@@ -65,7 +65,7 @@ class AdmissionStatusTest extends TestCase
         foreach ($toDelete as $idToDelete):
 
             $response = (new AdmissionStatusController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
@@ -94,7 +94,7 @@ class AdmissionStatusTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new AdmissionStatusController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 

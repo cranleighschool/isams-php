@@ -23,7 +23,7 @@ class PupilContactController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/students';
+        $this->endpoint = $this->getDomain() . '/api/students';
     }
 
     /**
@@ -47,7 +47,7 @@ class PupilContactController extends Endpoint
             'country',
         ], $attributes);
 
-        $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts';
+        $this->endpoint = $this->endpoint . '/' . $schoolId . '/tempcontacts';
 
         $response = $this->guzzle->request('POST', $this->endpoint, [
             'headers' => $this->getHeaders(),
@@ -67,7 +67,7 @@ class PupilContactController extends Endpoint
      */
     public function show(string $schoolId): Collection
     {
-        $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts';
+        $this->endpoint = $this->endpoint . '/' . $schoolId . '/tempcontacts';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -91,7 +91,7 @@ class PupilContactController extends Endpoint
      */
     public function showContact(string $schoolId, int $contactId): PupilContact
     {
-        $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts/'.$contactId;
+        $this->endpoint = $this->endpoint . '/' . $schoolId . '/tempcontacts/' . $contactId;
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -122,7 +122,7 @@ class PupilContactController extends Endpoint
             'country',
         ], $attributes);
 
-        $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts/'.$contactId;
+        $this->endpoint = $this->endpoint . '/' . $schoolId . '/tempcontacts/' . $contactId;
 
         $response = $this->guzzle->request('PUT', $this->endpoint, [
             'headers' => $this->getHeaders(),

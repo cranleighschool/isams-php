@@ -17,7 +17,7 @@ class SchoolYearGroupController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/school/yeargroups';
+        $this->endpoint = $this->getDomain() . '/api/school/yeargroups';
     }
 
     /**
@@ -28,7 +28,7 @@ class SchoolYearGroupController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'schoolYeargroups.index';
+        $key = $this->institution->getConfigName() . 'schoolYeargroups.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -46,7 +46,7 @@ class SchoolYearGroupController extends Endpoint
      */
     public function show(int $id): YearGroup
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

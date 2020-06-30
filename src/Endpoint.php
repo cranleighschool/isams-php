@@ -65,7 +65,7 @@ abstract class Endpoint
     protected function getHeaders()
     {
         return [
-            'Authorization' => 'Bearer '.$this->getAccessToken(),
+            'Authorization' => 'Bearer ' . $this->getAccessToken(),
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
@@ -95,7 +95,7 @@ abstract class Endpoint
      */
     protected function setGuzzle()
     {
-        $this->guzzle = new Guzzle;
+        $this->guzzle = new Guzzle();
     }
 
     /**

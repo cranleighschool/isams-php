@@ -18,7 +18,7 @@ class AdmissionStatusController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/admissions/statuses';
+        $this->endpoint = $this->getDomain() . '/api/admissions/statuses';
     }
 
     /**
@@ -29,7 +29,7 @@ class AdmissionStatusController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'admissionsStatuses.index';
+        $key = $this->institution->getConfigName() . 'admissionsStatuses.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -69,7 +69,7 @@ class AdmissionStatusController extends Endpoint
     {
         $this->validate(['name'], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
@@ -86,7 +86,7 @@ class AdmissionStatusController extends Endpoint
      */
     public function destroy(int $id): JsonResponse
     {
-        $response = $this->guzzle->request('DELETE', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('DELETE', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
         ]);
 

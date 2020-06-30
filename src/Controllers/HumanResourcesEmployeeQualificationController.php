@@ -16,7 +16,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/humanresources/employees';
+        $this->endpoint = $this->getDomain() . '/api/humanresources/employees';
     }
 
     /**
@@ -34,7 +34,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
             'name',
         ], $attributes);
 
-        $response = $this->guzzle->request('POST', $this->endpoint.'/'.$id.'/qualifications', [
+        $response = $this->guzzle->request('POST', $this->endpoint . '/' . $id . '/qualifications', [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
@@ -51,7 +51,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
      */
     public function show(int $id): EmployeeQualification
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id.'/qualifications', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/qualifications', ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

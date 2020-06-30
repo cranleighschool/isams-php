@@ -38,7 +38,7 @@ class OtherSchoolTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -49,9 +49,9 @@ class OtherSchoolTest extends TestCase
         foreach ($schools as $school):
             $this->assertTrue(is_a($school, \spkm\isams\Wrappers\School::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $school));
-            endforeach;
+        endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionApplicants.index'));
     }
@@ -60,7 +60,7 @@ class OtherSchoolTest extends TestCase
     public function it_creates_a_new_school_and_returns_its_id()
     {
         $response = (new OtherSchoolController($this->school))->store([
-            'schoolName' => 'test_'.str_random(10),
+            'schoolName' => 'test_' . str_random(10),
             'schoolCode' => 'SB',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -75,7 +75,7 @@ class OtherSchoolTest extends TestCase
     public function it_returns_the_specified_school()
     {
         $attributes = [
-            'schoolName' => 'test_'.str_random(10),
+            'schoolName' => 'test_' . str_random(10),
             'schoolCode' => 'SB',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -100,7 +100,7 @@ class OtherSchoolTest extends TestCase
     public function it_updates_the_specified_school()
     {
         $attributes = [
-            'schoolName' => 'test_'.str_random(10),
+            'schoolName' => 'test_' . str_random(10),
             'schoolCode' => 'SB',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -110,13 +110,13 @@ class OtherSchoolTest extends TestCase
 
 
         $changedAttributes = [
-            'schoolName' => 'testAnother_'.str_random(5),
+            'schoolName' => 'testAnother_' . str_random(5),
             'schoolCode' => 'TEST',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
         ];
 
-        (new OtherSchoolController($this->school))->update($id,$changedAttributes);
+        (new OtherSchoolController($this->school))->update($id, $changedAttributes);
 
         $school = (new OtherSchoolController($this->school))->show($id);
 

@@ -59,7 +59,7 @@ class HumanResourcesEmployeeTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -70,9 +70,9 @@ class HumanResourcesEmployeeTest extends TestCase
         foreach ($employees as $employee):
             $this->assertTrue(is_a($employee, Employee::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $employee));
-            endforeach;
+        endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'hrEmployees.index'));
     }
@@ -129,7 +129,7 @@ class HumanResourcesEmployeeTest extends TestCase
             'surname' => 'Dolly',
         ];
 
-        (new HumanResourcesEmployeeController($this->school))->update($id,$changedAttributes);
+        (new HumanResourcesEmployeeController($this->school))->update($id, $changedAttributes);
 
         $employee = (new HumanResourcesEmployeeController($this->school))->show($id);
 

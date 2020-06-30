@@ -19,7 +19,7 @@ class SystemConfigurationLanguageTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -30,10 +30,10 @@ class SystemConfigurationLanguageTest extends TestCase
         foreach ($languages as $language):
             $this->assertTrue(is_a($language, Language::class));
 
-            $properties = ['id', 'description', 'listType', 'name'];
-            foreach ($properties as $property):
+        $properties = ['id', 'description', 'listType', 'name'];
+        foreach ($properties as $property):
                 $this->assertTrue(array_key_exists($property, $language));
-            endforeach;
+        endforeach;
         endforeach;
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'languages.index'));
@@ -65,7 +65,7 @@ class SystemConfigurationLanguageTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new LanguageController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
@@ -94,7 +94,7 @@ class SystemConfigurationLanguageTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new LanguageController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 

@@ -34,7 +34,7 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -49,7 +49,7 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
         $id = json_decode($response->getContent())->id;
 
         //Create qualification
-        $response = (new HumanResourcesEmployeeQualificationController($this->school))->store($id,[
+        $response = (new HumanResourcesEmployeeQualificationController($this->school))->store($id, [
             'dateAwarded' => now()->toDateString(),
             'name' => 'BSc',
         ]);
@@ -71,7 +71,7 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
         $id = json_decode($response->getContent())->id;
 
         //Create qualification
-        (new HumanResourcesEmployeeQualificationController($this->school))->store($id,[
+        (new HumanResourcesEmployeeQualificationController($this->school))->store($id, [
             'dateAwarded' => now()->toDateString(),
             'name' => 'BSc',
         ]);

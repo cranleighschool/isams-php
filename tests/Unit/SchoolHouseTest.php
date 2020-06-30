@@ -39,7 +39,7 @@ class SchoolHouseTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -50,9 +50,9 @@ class SchoolHouseTest extends TestCase
         foreach ($houses as $house):
             $this->assertTrue(is_a($house, House::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $house));
-            endforeach;
+        endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'schoolHouses.index'));
     }

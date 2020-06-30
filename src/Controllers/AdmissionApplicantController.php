@@ -18,7 +18,7 @@ class AdmissionApplicantController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/admissions/applicants';
+        $this->endpoint = $this->getDomain() . '/api/admissions/applicants';
     }
 
     /**
@@ -29,7 +29,7 @@ class AdmissionApplicantController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'admissionApplicants.index';
+        $key = $this->institution->getConfigName() . 'admissionApplicants.index';
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->applicants)->map(function ($item) {
@@ -41,15 +41,15 @@ class AdmissionApplicantController extends Endpoint
         while ($pageNumber <= $decoded->totalPages):
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
-            collect($decoded->applicants)->map(function ($item) use ($items) {
-                $items->push(new Applicant($item));
-            });
+        collect($decoded->applicants)->map(function ($item) use ($items) {
+            $items->push(new Applicant($item));
+        });
 
-            $pageNumber++;
+        $pageNumber++;
         endwhile;
 
         if ($totalCount !== $items->count()) {
-            throw new \Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
+            throw new \Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
         }
 
         return Cache::remember($key, config('isams.cacheDuration'), function () use ($items) {
@@ -92,7 +92,7 @@ class AdmissionApplicantController extends Endpoint
      */
     public function show(string $schoolId): Applicant
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$schoolId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -118,7 +118,7 @@ class AdmissionApplicantController extends Endpoint
             'gender',
         ], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$schoolId, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $schoolId, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

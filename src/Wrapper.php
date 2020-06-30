@@ -57,7 +57,7 @@ abstract class Wrapper
             return get_object_vars($this->item);
         }
 
-        if($this->item === null){
+        if ($this->item === null) {
             return [];
         }
 

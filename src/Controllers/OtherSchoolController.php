@@ -18,7 +18,7 @@ class OtherSchoolController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/otherschools';
+        $this->endpoint = $this->getDomain() . '/api/otherschools';
     }
 
     /**
@@ -29,7 +29,7 @@ class OtherSchoolController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'otherSchools.index';
+        $key = $this->institution->getConfigName() . 'otherSchools.index';
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->otherSchools)->map(function ($item) {
@@ -41,15 +41,15 @@ class OtherSchoolController extends Endpoint
         while ($pageNumber <= $decoded->totalPages):
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
-            collect($decoded->otherSchools)->map(function ($item) use ($items) {
-                $items->push(new School($item));
-            });
+        collect($decoded->otherSchools)->map(function ($item) use ($items) {
+            $items->push(new School($item));
+        });
 
-            $pageNumber++;
+        $pageNumber++;
         endwhile;
 
         if ($totalCount !== $items->count()):
-            throw new \Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
+            throw new \Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
         endif;
 
         return Cache::remember($key, config('isams.cacheDuration'), function () use ($items) {
@@ -90,7 +90,7 @@ class OtherSchoolController extends Endpoint
      */
     public function show(int $id): School
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -114,7 +114,7 @@ class OtherSchoolController extends Endpoint
             'postcode',
         ], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

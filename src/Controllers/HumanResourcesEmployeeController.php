@@ -23,7 +23,7 @@ class HumanResourcesEmployeeController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/humanresources/employees';
+        $this->endpoint = $this->getDomain() . '/api/humanresources/employees';
     }
 
     /**
@@ -34,7 +34,7 @@ class HumanResourcesEmployeeController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'hrEmployees.index';
+        $key = $this->institution->getConfigName() . 'hrEmployees.index';
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->employees)->map(function ($item) {
@@ -46,15 +46,15 @@ class HumanResourcesEmployeeController extends Endpoint
         while ($pageNumber <= $decoded->totalPages):
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
-            collect($decoded->employees)->map(function ($item) use ($items) {
-                $items->push(new Employee($item));
-            });
+        collect($decoded->employees)->map(function ($item) use ($items) {
+            $items->push(new Employee($item));
+        });
 
-            $pageNumber++;
+        $pageNumber++;
         endwhile;
 
         if ($totalCount !== $items->count()) {
-            throw new \Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
+            throw new \Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
         }
 
         $items = $this->sortBySurname($items);
@@ -73,8 +73,7 @@ class HumanResourcesEmployeeController extends Endpoint
     private function sortBySurname(Collection $collection): Collection
     {
         $itemsArray = $collection->toArray();
-        usort($itemsArray, function($a, $b)
-        {
+        usort($itemsArray, function ($a, $b) {
             return strcmp($a->surname, $b->surname);
         });
 
@@ -112,7 +111,7 @@ class HumanResourcesEmployeeController extends Endpoint
      */
     public function show(int $id): Employee
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -181,7 +180,7 @@ class HumanResourcesEmployeeController extends Endpoint
             'surname',
         ], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

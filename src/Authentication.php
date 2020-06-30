@@ -2,7 +2,7 @@
 
 namespace spkm\isams;
 
-use \GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\Client as Guzzle;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Contracts\Institution;
 
@@ -75,7 +75,7 @@ class Authentication
             ],
         ]);
 
-        if($response->getStatusCode() !== 200){
+        if ($response->getStatusCode() !== 200) {
             throw new \Exception('Unable to request new authentication token, invalid response (Error 500)');
         }
 
@@ -114,8 +114,8 @@ class Authentication
         endif;
 
         $this->clientId = config("isams.schools.$configName.client_id");
-        $this->authenticationUrl = config("isams.schools.$configName.domain").'/main/sso/idp/connect/token';
+        $this->authenticationUrl = config("isams.schools.$configName.domain") . '/main/sso/idp/connect/token';
         $this->clientSecret = config("isams.schools.$configName.client_secret");
-        $this->cacheKey = $configName.'RestApiAccessToken';
+        $this->cacheKey = $configName . 'RestApiAccessToken';
     }
 }

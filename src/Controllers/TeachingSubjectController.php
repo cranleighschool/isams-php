@@ -17,7 +17,7 @@ class TeachingSubjectController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/teaching/subjects';
+        $this->endpoint = $this->getDomain() . '/api/teaching/subjects';
     }
 
     /**
@@ -28,7 +28,7 @@ class TeachingSubjectController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'teachingSubjects.index';
+        $key = $this->institution->getConfigName() . 'teachingSubjects.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -62,7 +62,7 @@ class TeachingSubjectController extends Endpoint
      */
     public function show(int $id)
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

@@ -18,7 +18,7 @@ class LanguageController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/systemconfiguration/list/languages';
+        $this->endpoint = $this->getDomain() . '/api/systemconfiguration/list/languages';
     }
 
     /**
@@ -29,7 +29,7 @@ class LanguageController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'languages.index';
+        $key = $this->institution->getConfigName() . 'languages.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -54,7 +54,7 @@ class LanguageController extends Endpoint
             'json' => $attributes,
         ]);
 
-        return $this->response(201,$response,'The language has been created.');
+        return $this->response(201, $response, 'The language has been created.');
     }
 
     /**
@@ -69,12 +69,12 @@ class LanguageController extends Endpoint
     {
         $this->validate(['name'], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
 
-        return $this->response(201,$response,'The language has been updated.');
+        return $this->response(201, $response, 'The language has been updated.');
     }
 
     /**
@@ -86,11 +86,11 @@ class LanguageController extends Endpoint
      */
     public function destroy(int $id): JsonResponse
     {
-        $response = $this->guzzle->request('DELETE', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('DELETE', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
         ]);
 
 
-        return $this->response(200,$response,'The language has been removed.');
+        return $this->response(200, $response, 'The language has been removed.');
     }
 }

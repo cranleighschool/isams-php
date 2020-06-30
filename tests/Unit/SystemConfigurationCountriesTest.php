@@ -19,7 +19,7 @@ class SystemConfigurationCountriesTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -30,10 +30,10 @@ class SystemConfigurationCountriesTest extends TestCase
         foreach ($countries as $country):
             $this->assertTrue(is_a($country, Country::class));
 
-            $properties = ['id', 'description', 'listType', 'name'];
-            foreach ($properties as $property):
+        $properties = ['id', 'description', 'listType', 'name'];
+        foreach ($properties as $property):
                 $this->assertTrue(array_key_exists($property, $country));
-            endforeach;
+        endforeach;
         endforeach;
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'countries.index'));
@@ -65,7 +65,7 @@ class SystemConfigurationCountriesTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new CountryController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
@@ -94,7 +94,7 @@ class SystemConfigurationCountriesTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new CountryController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 

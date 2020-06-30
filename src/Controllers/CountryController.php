@@ -18,7 +18,7 @@ class CountryController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/systemconfiguration/list/countries';
+        $this->endpoint = $this->getDomain() . '/api/systemconfiguration/list/countries';
     }
 
     /**
@@ -29,7 +29,7 @@ class CountryController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'countries.index';
+        $key = $this->institution->getConfigName() . 'countries.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -54,7 +54,7 @@ class CountryController extends Endpoint
             'json' => $attributes,
         ]);
 
-        return $this->response(201,$response,'The country has been created.');
+        return $this->response(201, $response, 'The country has been created.');
     }
 
     /**
@@ -69,12 +69,12 @@ class CountryController extends Endpoint
     {
         $this->validate(['name'], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
 
-        return $this->response(200,$response,'The country has been updated.');
+        return $this->response(200, $response, 'The country has been updated.');
     }
 
     /**
@@ -86,10 +86,10 @@ class CountryController extends Endpoint
      */
     public function destroy(int $id): JsonResponse
     {
-        $response = $this->guzzle->request('DELETE', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('DELETE', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
         ]);
 
-        return $this->response(200,$response,'The country has been removed.');
+        return $this->response(200, $response, 'The country has been removed.');
     }
 }
