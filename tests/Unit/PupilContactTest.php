@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
+use spkm\isams\Controllers\PupilContactController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\PupilContact;
-use spkm\isams\Controllers\PupilContactController;
+use Tests\TestCase;
 
 class PupilContactTest extends TestCase
 {
@@ -42,7 +42,7 @@ class PupilContactTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -54,9 +54,9 @@ class PupilContactTest extends TestCase
         foreach ($contacts as $contact):
             $this->assertTrue(is_a($contact, PupilContact::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $contact));
-            endforeach;
+        endforeach;
         endforeach;
     }
 
@@ -79,7 +79,7 @@ class PupilContactTest extends TestCase
     public function it_creates_a_new_pupil_contact_and_returns_its_id()
     {
         $schoolId = '2450423956';
-        $response = (new PupilContactController($this->school))->store($schoolId,[
+        $response = (new PupilContactController($this->school))->store($schoolId, [
             'relationship' => 'Father',
             'contactType' => 'Legal Guardian',
             'title' => 'Mr',
@@ -95,12 +95,11 @@ class PupilContactTest extends TestCase
         $this->assertNotEmpty(json_decode($response->getContent())->id);
     }
 
-
     /** @test */
     public function it_updates_the_specified_pupil_contact()
     {
         $schoolId = '2450423956';
-        $response = (new PupilContactController($this->school))->store($schoolId,[
+        $response = (new PupilContactController($this->school))->store($schoolId, [
             'relationship' => 'Father',
             'contactType' => 'Legal Guardian',
             'title' => 'Mr',
@@ -123,9 +122,9 @@ class PupilContactTest extends TestCase
             'country' => 'Cloud2',
         ];
 
-        (new PupilContactController($this->school))->update($schoolId,$contactId, $changedAttributes);
+        (new PupilContactController($this->school))->update($schoolId, $contactId, $changedAttributes);
 
-        $contact = (new PupilContactController($this->school))->showContact($schoolId,$contactId);
+        $contact = (new PupilContactController($this->school))->showContact($schoolId, $contactId);
 
         $this->assertTrue(is_a($contact, PupilContact::class));
         foreach ($this->properties as $property):

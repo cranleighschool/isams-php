@@ -2,22 +2,22 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\House;
 
 class SchoolHouseController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/school/houses';
+        $this->endpoint = $this->getDomain() . '/api/school/houses';
     }
 
     /**
@@ -28,7 +28,7 @@ class SchoolHouseController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'schoolHouses.index';
+        $key = $this->institution->getConfigName() . 'schoolHouses.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -38,7 +38,7 @@ class SchoolHouseController extends Endpoint
     }
 
     /**
-     * Show the resource
+     * Show the resource.
      *
      * @param int $id
      * @return \spkm\isams\Wrappers\House
@@ -46,7 +46,7 @@ class SchoolHouseController extends Endpoint
      */
     public function show(int $id): House
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

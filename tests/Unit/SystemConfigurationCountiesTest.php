@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
-use spkm\isams\Wrappers\County;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\CountyController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\County;
+use Tests\TestCase;
 
 class SystemConfigurationCountiesTest extends TestCase
 {
@@ -19,7 +19,7 @@ class SystemConfigurationCountiesTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -30,10 +30,10 @@ class SystemConfigurationCountiesTest extends TestCase
         foreach ($counties as $county):
             $this->assertTrue(is_a($county, County::class));
 
-            $properties = ['id', 'description', 'listType', 'name'];
-            foreach ($properties as $property):
+        $properties = ['id', 'description', 'listType', 'name'];
+        foreach ($properties as $property):
                 $this->assertTrue(array_key_exists($property, $county));
-            endforeach;
+        endforeach;
         endforeach;
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'counties.index'));
@@ -65,7 +65,7 @@ class SystemConfigurationCountiesTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new CountyController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
@@ -94,12 +94,12 @@ class SystemConfigurationCountiesTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new CountyController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $counties

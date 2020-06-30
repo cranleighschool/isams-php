@@ -2,23 +2,23 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
 use Illuminate\Http\JsonResponse;
-use spkm\isams\Wrappers\Applicant;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\Applicant;
 
 class AdmissionApplicantController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/admissions/applicants';
+        $this->endpoint = $this->getDomain() . '/api/admissions/applicants';
     }
 
     /**
@@ -29,7 +29,7 @@ class AdmissionApplicantController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'admissionApplicants.index';
+        $key = $this->institution->getConfigName() . 'admissionApplicants.index';
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->applicants)->map(function ($item) {
@@ -41,15 +41,15 @@ class AdmissionApplicantController extends Endpoint
         while ($pageNumber <= $decoded->totalPages):
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
-            collect($decoded->applicants)->map(function ($item) use ($items) {
-                $items->push(new Applicant($item));
-            });
+        collect($decoded->applicants)->map(function ($item) use ($items) {
+            $items->push(new Applicant($item));
+        });
 
-            $pageNumber++;
+        $pageNumber++;
         endwhile;
 
         if ($totalCount !== $items->count()) {
-            throw new \Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
+            throw new \Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
         }
 
         return Cache::remember($key, config('isams.cacheDuration'), function () use ($items) {
@@ -84,7 +84,7 @@ class AdmissionApplicantController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @param string $schoolId
      * @return \spkm\isams\Wrappers\Applicant
@@ -92,7 +92,7 @@ class AdmissionApplicantController extends Endpoint
      */
     public function show(string $schoolId): Applicant
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$schoolId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -118,7 +118,7 @@ class AdmissionApplicantController extends Endpoint
             'gender',
         ], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$schoolId, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $schoolId, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

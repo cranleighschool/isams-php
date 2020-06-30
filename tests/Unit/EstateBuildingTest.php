@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
 use Illuminate\Support\Facades\Cache;
-use spkm\isams\Wrappers\EstateBuilding;
 use spkm\isams\Controllers\EstateBuildingController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\EstateBuilding;
+use Tests\TestCase;
 
 class EstateBuildingTest extends TestCase
 {
@@ -19,7 +19,7 @@ class EstateBuildingTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -30,10 +30,10 @@ class EstateBuildingTest extends TestCase
         foreach ($buildings as $building):
             $this->assertTrue(is_a($building, EstateBuilding::class));
 
-            $properties = ['id', 'description', 'hasClassrooms', 'initials', 'modifiedOn', 'name', 'ordinal'];
-            foreach ($properties as $property):
+        $properties = ['id', 'description', 'hasClassrooms', 'initials', 'modifiedOn', 'name', 'ordinal'];
+        foreach ($properties as $property):
                 $this->assertTrue(array_key_exists($property, $building));
-            endforeach;
+        endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'estateBuildings.index'));
     }
@@ -73,7 +73,7 @@ class EstateBuildingTest extends TestCase
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $buildings

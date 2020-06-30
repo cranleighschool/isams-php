@@ -2,23 +2,23 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\PupilBoardingStatus;
 
 class PupilBoardingStatusController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/students/boardingstatuses';
+        $this->endpoint = $this->getDomain() . '/api/students/boardingstatuses';
     }
 
     /**
@@ -29,7 +29,7 @@ class PupilBoardingStatusController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'pupilBoardingStatuses.index';
+        $key = $this->institution->getConfigName() . 'pupilBoardingStatuses.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -69,7 +69,7 @@ class PupilBoardingStatusController extends Endpoint
     {
         $this->validate(['name'], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
@@ -86,7 +86,7 @@ class PupilBoardingStatusController extends Endpoint
      */
     public function destroy(int $id): JsonResponse
     {
-        $response = $this->guzzle->request('DELETE', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('DELETE', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
         ]);
 

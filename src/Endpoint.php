@@ -31,14 +31,14 @@ abstract class Endpoint
     }
 
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      */
     abstract protected function setEndpoint();
 
     /**
-     * Get the School to be queried
+     * Get the School to be queried.
      *
      * @return \spkm\Isams\Contracts\Institution
      */
@@ -48,7 +48,7 @@ abstract class Endpoint
     }
 
     /**
-     * Get an access token for the specified Institution
+     * Get an access token for the specified Institution.
      *
      * @return string
      */
@@ -58,21 +58,21 @@ abstract class Endpoint
     }
 
     /**
-     * Get the Guzzle headers for a request
+     * Get the Guzzle headers for a request.
      *
      * @return array
      */
     protected function getHeaders()
     {
         return [
-            'Authorization' => 'Bearer '.$this->getAccessToken(),
+            'Authorization' => 'Bearer ' . $this->getAccessToken(),
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
     }
 
     /**
-     * Get the domain of the specified Institution
+     * Get the domain of the specified Institution.
      *
      * @return string
      * @throws \Exception
@@ -89,17 +89,17 @@ abstract class Endpoint
     }
 
     /**
-     * Instantiate Guzzle
+     * Instantiate Guzzle.
      *
      * @return void
      */
     protected function setGuzzle()
     {
-        $this->guzzle = new Guzzle;
+        $this->guzzle = new Guzzle();
     }
 
     /**
-     * Validate the attributes
+     * Validate the attributes.
      *
      * @param array $requiredAttributes
      * @param array $attributes
@@ -118,7 +118,7 @@ abstract class Endpoint
     }
 
     /**
-     * Generate the response
+     * Generate the response.
      *
      * @param  int $expectedStatusCode
      * @param  mixed $response
@@ -152,7 +152,7 @@ abstract class Endpoint
     }
 
     /**
-     * Get a specific page from the api
+     * Get a specific page from the api.
      *
      * @param string $url
      * @param int $page
@@ -170,14 +170,14 @@ abstract class Endpoint
     }
 
     /**
-     * Wrap the json returned by the API
+     * Wrap the json returned by the API.
      *
      * @param $json
      * @param string $property
      * @param string $wrapper
      * @return \Illuminate\Support\Collection
      */
-    public function wrapJson($json, string $property, string $wrapper)
+    public function wrapJson(string $json, string $property, string $wrapper)
     {
         $decoded = json_decode($json);
 

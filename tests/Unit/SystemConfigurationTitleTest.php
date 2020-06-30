@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
-use spkm\isams\Wrappers\Title;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\TitleController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\Title;
+use Tests\TestCase;
 
 class SystemConfigurationTitleTest extends TestCase
 {
@@ -19,7 +19,7 @@ class SystemConfigurationTitleTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -30,10 +30,10 @@ class SystemConfigurationTitleTest extends TestCase
         foreach ($titles as $title):
             $this->assertTrue(is_a($title, Title::class));
 
-            $properties = ['id', 'description', 'listType', 'name'];
-            foreach ($properties as $property):
+        $properties = ['id', 'description', 'listType', 'name'];
+        foreach ($properties as $property):
                 $this->assertTrue(array_key_exists($property, $title));
-            endforeach;
+        endforeach;
         endforeach;
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'titles.index'));
@@ -65,7 +65,7 @@ class SystemConfigurationTitleTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new TitleController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
@@ -94,12 +94,12 @@ class SystemConfigurationTitleTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new TitleController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $titles

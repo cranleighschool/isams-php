@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
-use spkm\isams\Wrappers\PupilBoardingStatus;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\PupilBoardingStatusController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\PupilBoardingStatus;
+use Tests\TestCase;
 
 class PupilBoardingStatusesTest extends TestCase
 {
@@ -19,7 +19,7 @@ class PupilBoardingStatusesTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -30,10 +30,10 @@ class PupilBoardingStatusesTest extends TestCase
         foreach ($boardingStatus as $status):
             $this->assertTrue(is_a($status, PupilBoardingStatus::class));
 
-            $properties = ['id', 'description', 'listType', 'name'];
-            foreach ($properties as $property):
+        $properties = ['id', 'description', 'listType', 'name'];
+        foreach ($properties as $property):
                 $this->assertTrue(array_key_exists($property, $status));
-            endforeach;
+        endforeach;
         endforeach;
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'pupilBoardingStatuses.index'));
@@ -66,7 +66,7 @@ class PupilBoardingStatusesTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new PupilBoardingStatusController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
@@ -95,12 +95,12 @@ class PupilBoardingStatusesTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new PupilBoardingStatusController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $boardingStatuses

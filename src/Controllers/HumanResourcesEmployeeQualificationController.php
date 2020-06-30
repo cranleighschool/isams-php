@@ -2,21 +2,21 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
 use Illuminate\Http\JsonResponse;
+use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\EmployeeQualification;
 
 class HumanResourcesEmployeeQualificationController extends Endpoint
 {
     /**
-     * Set the URL the request is made to
+     * Set the URL the request is made to.
      *
      * @return void
      * @throws \Exception
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/humanresources/employees';
+        $this->endpoint = $this->getDomain() . '/api/humanresources/employees';
     }
 
     /**
@@ -34,7 +34,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
             'name',
         ], $attributes);
 
-        $response = $this->guzzle->request('POST', $this->endpoint.'/'.$id.'/qualifications', [
+        $response = $this->guzzle->request('POST', $this->endpoint . '/' . $id . '/qualifications', [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
@@ -43,7 +43,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
     }
 
     /**
-     * Show the specified resource
+     * Show the specified resource.
      *
      * @param int $id
      * @return \spkm\isams\Wrappers\EmployeeQualification
@@ -51,7 +51,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
      */
     public function show(int $id): EmployeeQualification
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id.'/qualifications', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/qualifications', ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

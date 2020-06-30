@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
+use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\HumanResourcesEmployeeController;
+use spkm\isams\School;
 use spkm\isams\Wrappers\Employee;
 use Tests\TestCase;
-use spkm\isams\School;
-use Illuminate\Support\Facades\Cache;
 
 class HumanResourcesEmployeeTest extends TestCase
 {
@@ -59,7 +59,7 @@ class HumanResourcesEmployeeTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -70,9 +70,9 @@ class HumanResourcesEmployeeTest extends TestCase
         foreach ($employees as $employee):
             $this->assertTrue(is_a($employee, Employee::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $employee));
-            endforeach;
+        endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'hrEmployees.index'));
     }
@@ -100,7 +100,6 @@ class HumanResourcesEmployeeTest extends TestCase
         $response = (new HumanResourcesEmployeeController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-
         $employee = (new HumanResourcesEmployeeController($this->school))->show($id);
 
         $this->assertTrue(is_a($employee, Employee::class));
@@ -123,13 +122,12 @@ class HumanResourcesEmployeeTest extends TestCase
         $response = (new HumanResourcesEmployeeController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-
         $changedAttributes = [
             'forename' => 'Jane',
             'surname' => 'Dolly',
         ];
 
-        (new HumanResourcesEmployeeController($this->school))->update($id,$changedAttributes);
+        (new HumanResourcesEmployeeController($this->school))->update($id, $changedAttributes);
 
         $employee = (new HumanResourcesEmployeeController($this->school))->show($id);
 

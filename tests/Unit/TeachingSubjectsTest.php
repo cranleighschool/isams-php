@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
+use spkm\isams\Controllers\TeachingSubjectController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\TeachingSubject;
-use spkm\isams\Controllers\TeachingSubjectController;
+use Tests\TestCase;
 
 class TeachingSubjectsTest extends TestCase
 {
@@ -32,7 +32,7 @@ class TeachingSubjectsTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -43,9 +43,9 @@ class TeachingSubjectsTest extends TestCase
         foreach ($subjects as $subject):
             $this->assertTrue(is_a($subject, TeachingSubject::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $subject));
-            endforeach;
+        endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'teachingSubjects.index'));
     }

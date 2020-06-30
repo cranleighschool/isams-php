@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
+use spkm\isams\Controllers\SchoolYearGroupController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\YearGroup;
-use spkm\isams\Controllers\SchoolYearGroupController;
+use Tests\TestCase;
 
 class SchoolYearGroupTest extends TestCase
 {
@@ -36,7 +36,7 @@ class SchoolYearGroupTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -47,9 +47,9 @@ class SchoolYearGroupTest extends TestCase
         foreach ($yearGroups as $yearGroup):
             $this->assertTrue(is_a($yearGroup, YearGroup::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $yearGroup));
-            endforeach;
+        endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'schoolYearGroups.index'));
     }

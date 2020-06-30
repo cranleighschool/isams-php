@@ -2,11 +2,11 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
-use spkm\isams\School;
-use spkm\isams\Wrappers\Language;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Controllers\LanguageController;
+use spkm\isams\School;
+use spkm\isams\Wrappers\Language;
+use Tests\TestCase;
 
 class SystemConfigurationLanguageTest extends TestCase
 {
@@ -19,7 +19,7 @@ class SystemConfigurationLanguageTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -30,10 +30,10 @@ class SystemConfigurationLanguageTest extends TestCase
         foreach ($languages as $language):
             $this->assertTrue(is_a($language, Language::class));
 
-            $properties = ['id', 'description', 'listType', 'name'];
-            foreach ($properties as $property):
+        $properties = ['id', 'description', 'listType', 'name'];
+        foreach ($properties as $property):
                 $this->assertTrue(array_key_exists($property, $language));
-            endforeach;
+        endforeach;
         endforeach;
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'languages.index'));
@@ -65,7 +65,7 @@ class SystemConfigurationLanguageTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new LanguageController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
@@ -94,12 +94,12 @@ class SystemConfigurationLanguageTest extends TestCase
         //Delete it
         foreach ($toDelete as $idToDelete):
             $response = (new LanguageController($this->school))->destroy($idToDelete);
-            $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         endforeach;
     }
 
     /**
-     * Find the elements by name
+     * Find the elements by name.
      *
      * @param string $name
      * @param array $languages

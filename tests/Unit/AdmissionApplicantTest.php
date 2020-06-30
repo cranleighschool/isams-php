@@ -2,10 +2,10 @@
 
 namespace spkm\isams\Tests\Unit;
 
-use Tests\TestCase;
+use spkm\isams\Controllers\AdmissionApplicantController;
 use spkm\isams\School;
 use spkm\isams\Wrappers\Applicant;
-use spkm\isams\Controllers\AdmissionApplicantController;
+use Tests\TestCase;
 
 class AdmissionApplicantTest extends TestCase
 {
@@ -60,7 +60,7 @@ class AdmissionApplicantTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -71,9 +71,9 @@ class AdmissionApplicantTest extends TestCase
         foreach ($applicants as $applicant):
             $this->assertTrue(is_a($applicant, Applicant::class));
 
-            foreach ($this->properties as $property):
+        foreach ($this->properties as $property):
                 $this->assertTrue(array_key_exists($property, $applicant));
-            endforeach;
+        endforeach;
         endforeach;
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionApplicants.index'));
     }
@@ -109,7 +109,6 @@ class AdmissionApplicantTest extends TestCase
         $response = (new AdmissionApplicantController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-
         $applicant = (new AdmissionApplicantController($this->school))->show($id);
 
         $this->assertTrue(is_a($applicant, Applicant::class));
@@ -136,7 +135,6 @@ class AdmissionApplicantTest extends TestCase
         $response = (new AdmissionApplicantController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-
         $changedAttributes = [
             'forename' => 'Jane',
             'surname' => 'Dolly',
@@ -146,7 +144,7 @@ class AdmissionApplicantTest extends TestCase
             'gender' => 'F',
         ];
 
-        (new AdmissionApplicantController($this->school))->update($id,$changedAttributes);
+        (new AdmissionApplicantController($this->school))->update($id, $changedAttributes);
 
         $applicant = (new AdmissionApplicantController($this->school))->show($id);
 

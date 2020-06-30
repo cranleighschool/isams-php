@@ -4,10 +4,10 @@ namespace spkm\isams\Tests\Unit;
 
 use spkm\isams\Controllers\HumanResourcesEmployeeController;
 use spkm\isams\Controllers\HumanResourcesEmployeeQualificationController;
+use spkm\isams\School;
 use spkm\isams\Wrappers\Employee;
 use spkm\isams\Wrappers\EmployeeQualification;
 use Tests\TestCase;
-use spkm\isams\School;
 
 class HumanResourcesEmployeeQualificationTest extends TestCase
 {
@@ -34,7 +34,7 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School;
+        $this->school = new School();
     }
 
     /** @test */
@@ -49,7 +49,7 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
         $id = json_decode($response->getContent())->id;
 
         //Create qualification
-        $response = (new HumanResourcesEmployeeQualificationController($this->school))->store($id,[
+        $response = (new HumanResourcesEmployeeQualificationController($this->school))->store($id, [
             'dateAwarded' => now()->toDateString(),
             'name' => 'BSc',
         ]);
@@ -71,7 +71,7 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
         $id = json_decode($response->getContent())->id;
 
         //Create qualification
-        (new HumanResourcesEmployeeQualificationController($this->school))->store($id,[
+        (new HumanResourcesEmployeeQualificationController($this->school))->store($id, [
             'dateAwarded' => now()->toDateString(),
             'name' => 'BSc',
         ]);
