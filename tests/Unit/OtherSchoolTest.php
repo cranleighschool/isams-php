@@ -60,7 +60,7 @@ class OtherSchoolTest extends TestCase
     public function it_creates_a_new_school_and_returns_its_id()
     {
         $response = (new OtherSchoolController($this->school))->store([
-            'schoolName' => 'test_' . str_random(10),
+            'schoolName' => 'test_' . \Illuminate\Support\Str::random(10),
             'schoolCode' => 'SB',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -75,7 +75,7 @@ class OtherSchoolTest extends TestCase
     public function it_returns_the_specified_school()
     {
         $attributes = [
-            'schoolName' => 'test_' . str_random(10),
+            'schoolName' => 'test_' . \Illuminate\Support\Str::random(10),
             'schoolCode' => 'SB',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -99,7 +99,7 @@ class OtherSchoolTest extends TestCase
     public function it_updates_the_specified_school()
     {
         $attributes = [
-            'schoolName' => 'test_' . str_random(10),
+            'schoolName' => 'test_' . \Illuminate\Support\Str::random(10),
             'schoolCode' => 'SB',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -108,7 +108,7 @@ class OtherSchoolTest extends TestCase
         $id = json_decode($response->getContent())->id;
 
         $changedAttributes = [
-            'schoolName' => 'testAnother_' . str_random(5),
+            'schoolName' => 'testAnother_' . \Illuminate\Support\Str::random(5),
             'schoolCode' => 'TEST',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
