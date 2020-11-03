@@ -68,13 +68,13 @@ class AdmissionApplicantTest extends TestCase
     {
         $applicants = (new AdmissionApplicantController($this->school))->index();
 
-        foreach ($applicants as $applicant):
+        foreach ($applicants as $applicant) {
             $this->assertTrue(is_a($applicant, Applicant::class));
 
-        foreach ($this->properties as $property):
+            foreach ($this->properties as $property) {
                 $this->assertTrue(array_key_exists($property, $applicant));
-        endforeach;
-        endforeach;
+            }
+        }
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionApplicants.index'));
     }
 
@@ -112,13 +112,13 @@ class AdmissionApplicantTest extends TestCase
         $applicant = (new AdmissionApplicantController($this->school))->show($id);
 
         $this->assertTrue(is_a($applicant, Applicant::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($applicant, $property));
-        endforeach;
+        }
 
-        foreach ($attributes as $key => $value):
+        foreach ($attributes as $key => $value) {
             $this->assertTrue($applicant->$key == $value);
-        endforeach;
+        }
     }
 
     /** @test */
@@ -149,12 +149,12 @@ class AdmissionApplicantTest extends TestCase
         $applicant = (new AdmissionApplicantController($this->school))->show($id);
 
         $this->assertTrue(is_a($applicant, Applicant::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($applicant, $property));
-        endforeach;
+        }
 
-        foreach ($changedAttributes as $key => $value):
+        foreach ($changedAttributes as $key => $value) {
             $this->assertTrue($applicant->$key == $value);
-        endforeach;
+        }
     }
 }

@@ -27,14 +27,14 @@ class SystemConfigurationTitleTest extends TestCase
     {
         $titles = (new TitleController($this->school))->index();
 
-        foreach ($titles as $title):
+        foreach ($titles as $title) {
             $this->assertTrue(is_a($title, Title::class));
 
-        $properties = ['id', 'description', 'listType', 'name'];
-        foreach ($properties as $property):
+            $properties = ['id', 'description', 'listType', 'name'];
+            foreach ($properties as $property) {
                 $this->assertTrue(array_key_exists($property, $title));
-        endforeach;
-        endforeach;
+            }
+        }
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'titles.index'));
     }
@@ -63,10 +63,10 @@ class SystemConfigurationTitleTest extends TestCase
         $toDelete = ($this->findTitleByName($newTitle, $titles->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new TitleController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /** @test */
@@ -92,10 +92,10 @@ class SystemConfigurationTitleTest extends TestCase
         $toDelete = ($this->findTitleByName($renameTitle, $titles->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new TitleController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /**
@@ -108,11 +108,11 @@ class SystemConfigurationTitleTest extends TestCase
     private function findTitleByName(string $name, array $titles)
     {
         $matches = [];
-        foreach ($titles as $element):
+        foreach ($titles as $element) {
             if ($name == $element->name) {
                 array_push($matches, $element->id);
             }
-        endforeach;
+        }
 
         return $matches;
     }

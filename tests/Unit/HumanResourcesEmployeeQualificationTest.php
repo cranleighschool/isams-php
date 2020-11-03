@@ -78,8 +78,8 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
         $employee = (new HumanResourcesEmployeeQualificationController($this->school))->show($id);
 
         $this->assertTrue(is_a($employee, EmployeeQualification::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($employee, $property));
-        endforeach;
+        }
     }
 }

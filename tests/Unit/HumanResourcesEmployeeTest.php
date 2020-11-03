@@ -66,13 +66,13 @@ class HumanResourcesEmployeeTest extends TestCase
     {
         $employees = (new HumanResourcesEmployeeController($this->school))->index();
 
-        foreach ($employees as $employee):
+        foreach ($employees as $employee) {
             $this->assertTrue(is_a($employee, Employee::class));
 
-        foreach ($this->properties as $property):
+            foreach ($this->properties as $property) {
                 $this->assertTrue(array_key_exists($property, $employee));
-        endforeach;
-        endforeach;
+            }
+        }
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'hrEmployees.index'));
     }
 
@@ -102,13 +102,13 @@ class HumanResourcesEmployeeTest extends TestCase
         $employee = (new HumanResourcesEmployeeController($this->school))->show($id);
 
         $this->assertTrue(is_a($employee, Employee::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($employee, $property));
-        endforeach;
+        }
 
-        foreach ($attributes as $key => $value):
+        foreach ($attributes as $key => $value) {
             $this->assertTrue($employee->$key == $value);
-        endforeach;
+        }
     }
 
     /** @test */
@@ -131,12 +131,12 @@ class HumanResourcesEmployeeTest extends TestCase
         $employee = (new HumanResourcesEmployeeController($this->school))->show($id);
 
         $this->assertTrue(is_a($employee, Employee::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($employee, $property));
-        endforeach;
+        }
 
-        foreach ($changedAttributes as $key => $value):
+        foreach ($changedAttributes as $key => $value) {
             $this->assertTrue($employee->$key == $value);
-        endforeach;
+        }
     }
 }

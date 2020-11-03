@@ -26,14 +26,14 @@ class AdmissionStatusTest extends TestCase
     {
         $admissionStatuses = (new AdmissionStatusController($this->school))->index();
 
-        foreach ($admissionStatuses as $admissionStatus):
+        foreach ($admissionStatuses as $admissionStatus) {
             $this->assertTrue(is_a($admissionStatus, AdmissionStatus::class));
 
-        $properties = ['id', 'description', 'listType', 'name'];
-        foreach ($properties as $property):
+            $properties = ['id', 'description', 'listType', 'name'];
+            foreach ($properties as $property) {
                 $this->assertTrue(array_key_exists($property, $admissionStatus));
-        endforeach;
-        endforeach;
+            }
+        }
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionStatuses.index'));
     }
@@ -62,11 +62,10 @@ class AdmissionStatusTest extends TestCase
         $toDelete = ($this->findAdmissionStatusByName($newAdmissionStatus, $admissionStatuses->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
-
+        foreach ($toDelete as $idToDelete) {
             $response = (new AdmissionStatusController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /** @test */
@@ -92,10 +91,10 @@ class AdmissionStatusTest extends TestCase
         $toDelete = ($this->findAdmissionStatusByName($renameAdmissionStatus, $admissionStatuses->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new AdmissionStatusController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /**
@@ -108,11 +107,11 @@ class AdmissionStatusTest extends TestCase
     private function findAdmissionStatusByName(string $name, array $admissionStatuses)
     {
         $matches = [];
-        foreach ($admissionStatuses as $element):
+        foreach ($admissionStatuses as $element) {
             if ($name == $element->name) {
                 array_push($matches, $element->id);
             }
-        endforeach;
+        }
 
         return $matches;
     }

@@ -51,13 +51,13 @@ class AdmissionsApplicantContactTest extends TestCase
         $schoolId = '2443384966';
         $contacts = (new AdmissionApplicantContactController($this->school))->show($schoolId);
 
-        foreach ($contacts as $contact):
+        foreach ($contacts as $contact) {
             $this->assertTrue(is_a($contact, PupilContact::class));
 
-        foreach ($this->properties as $property):
+            foreach ($this->properties as $property) {
                 $this->assertTrue(array_key_exists($property, $contact));
-        endforeach;
-        endforeach;
+            }
+        }
     }
 
     /** @test */
@@ -70,9 +70,9 @@ class AdmissionsApplicantContactTest extends TestCase
 
         $this->assertTrue(is_a($contact, PupilContact::class));
 
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($contact, $property));
-        endforeach;
+        }
     }
 
     /** @test */
@@ -127,12 +127,12 @@ class AdmissionsApplicantContactTest extends TestCase
         $contact = (new AdmissionApplicantContactController($this->school))->showContact($schoolId, $contactId);
 
         $this->assertTrue(is_a($contact, PupilContact::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($contact, $property));
-        endforeach;
+        }
 
-        foreach ($changedAttributes as $key => $value):
+        foreach ($changedAttributes as $key => $value) {
             $this->assertTrue($contact->$key == $value);
-        endforeach;
+        }
     }
 }

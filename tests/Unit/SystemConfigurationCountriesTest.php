@@ -27,14 +27,14 @@ class SystemConfigurationCountriesTest extends TestCase
     {
         $countries = (new CountryController($this->school))->index();
 
-        foreach ($countries as $country):
+        foreach ($countries as $country) {
             $this->assertTrue(is_a($country, Country::class));
 
-        $properties = ['id', 'description', 'listType', 'name'];
-        foreach ($properties as $property):
+            $properties = ['id', 'description', 'listType', 'name'];
+            foreach ($properties as $property) {
                 $this->assertTrue(array_key_exists($property, $country));
-        endforeach;
-        endforeach;
+            }
+        }
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'countries.index'));
     }
@@ -63,10 +63,10 @@ class SystemConfigurationCountriesTest extends TestCase
         $toDelete = ($this->findCountryByName($newCountry, $countries->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new CountryController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /** @test */
@@ -92,10 +92,10 @@ class SystemConfigurationCountriesTest extends TestCase
         $toDelete = ($this->findCountryByName($renameCountry, $countries->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new CountryController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /**
@@ -108,11 +108,11 @@ class SystemConfigurationCountriesTest extends TestCase
     private function findCountryByName(string $name, array $countries)
     {
         $matches = [];
-        foreach ($countries as $element):
+        foreach ($countries as $element) {
             if ($name == $element->name) {
                 array_push($matches, $element->id);
             }
-        endforeach;
+        }
 
         return $matches;
     }

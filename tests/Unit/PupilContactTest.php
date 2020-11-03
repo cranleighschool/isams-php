@@ -51,13 +51,13 @@ class PupilContactTest extends TestCase
         $schoolId = '2450423956';
         $contacts = (new PupilContactController($this->school))->show($schoolId);
 
-        foreach ($contacts as $contact):
+        foreach ($contacts as $contact) {
             $this->assertTrue(is_a($contact, PupilContact::class));
 
-        foreach ($this->properties as $property):
+            foreach ($this->properties as $property) {
                 $this->assertTrue(array_key_exists($property, $contact));
-        endforeach;
-        endforeach;
+            }
+        }
     }
 
     /** @test */
@@ -70,9 +70,9 @@ class PupilContactTest extends TestCase
 
         $this->assertTrue(is_a($contact, PupilContact::class));
 
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($contact, $property));
-        endforeach;
+        }
     }
 
     /** @test */
@@ -127,12 +127,12 @@ class PupilContactTest extends TestCase
         $contact = (new PupilContactController($this->school))->showContact($schoolId, $contactId);
 
         $this->assertTrue(is_a($contact, PupilContact::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($contact, $property));
-        endforeach;
+        }
 
-        foreach ($changedAttributes as $key => $value):
+        foreach ($changedAttributes as $key => $value) {
             $this->assertTrue($contact->$key == $value);
-        endforeach;
+        }
     }
 }

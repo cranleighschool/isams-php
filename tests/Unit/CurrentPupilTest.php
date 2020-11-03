@@ -69,13 +69,13 @@ class CurrentPupilTest extends TestCase
     {
         $pupils = (new CurrentPupilController($this->school))->index();
 
-        foreach ($pupils as $pupil):
+        foreach ($pupils as $pupil) {
             $this->assertTrue(is_a($pupil, Pupil::class));
 
-        foreach ($this->properties as $property):
+            foreach ($this->properties as $property) {
                 $this->assertTrue(array_key_exists($property, $pupil->toArray()));
-        endforeach;
-        endforeach;
+            }
+        }
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'currentPupils.index'));
     }
 
@@ -109,13 +109,13 @@ class CurrentPupilTest extends TestCase
         $pupil = (new CurrentPupilController($this->school))->show($id);
 
         $this->assertTrue(is_a($pupil, Pupil::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($pupil, $property));
-        endforeach;
+        }
 
-        foreach ($attributes as $key => $value):
+        foreach ($attributes as $key => $value) {
             $this->assertTrue($pupil->$key == $value);
-        endforeach;
+        }
     }
 
     /** @test */
@@ -142,12 +142,12 @@ class CurrentPupilTest extends TestCase
         $pupil = (new CurrentPupilController($this->school))->show($id);
 
         $this->assertTrue(is_a($pupil, Pupil::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($pupil, $property));
-        endforeach;
+        }
 
-        foreach ($changedAttributes as $key => $value):
+        foreach ($changedAttributes as $key => $value) {
             $this->assertTrue($pupil->$key == $value);
-        endforeach;
+        }
     }
 }

@@ -27,14 +27,14 @@ class SystemConfigurationLanguageTest extends TestCase
     {
         $languages = (new LanguageController($this->school))->index();
 
-        foreach ($languages as $language):
+        foreach ($languages as $language) {
             $this->assertTrue(is_a($language, Language::class));
 
-        $properties = ['id', 'description', 'listType', 'name'];
-        foreach ($properties as $property):
+            $properties = ['id', 'description', 'listType', 'name'];
+            foreach ($properties as $property) {
                 $this->assertTrue(array_key_exists($property, $language));
-        endforeach;
-        endforeach;
+            }
+        }
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'languages.index'));
     }
@@ -63,10 +63,10 @@ class SystemConfigurationLanguageTest extends TestCase
         $toDelete = ($this->findLanguageByName($newLanguage, $languages->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new LanguageController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /** @test */
@@ -92,10 +92,10 @@ class SystemConfigurationLanguageTest extends TestCase
         $toDelete = ($this->findLanguageByName($renameLanguage, $languages->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new LanguageController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /**
@@ -108,11 +108,11 @@ class SystemConfigurationLanguageTest extends TestCase
     private function findLanguageByName(string $name, array $languages)
     {
         $matches = [];
-        foreach ($languages as $element):
+        foreach ($languages as $element) {
             if ($name == $element->name) {
                 array_push($matches, $element->id);
             }
-        endforeach;
+        }
 
         return $matches;
     }

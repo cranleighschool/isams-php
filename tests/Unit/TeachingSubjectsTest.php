@@ -40,13 +40,13 @@ class TeachingSubjectsTest extends TestCase
     {
         $subjects = (new TeachingSubjectController($this->school))->index();
 
-        foreach ($subjects as $subject):
+        foreach ($subjects as $subject) {
             $this->assertTrue(is_a($subject, TeachingSubject::class));
 
-        foreach ($this->properties as $property):
+            foreach ($this->properties as $property) {
                 $this->assertTrue(array_key_exists($property, $subject));
-        endforeach;
-        endforeach;
+            }
+        }
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'teachingSubjects.index'));
     }
 
@@ -59,8 +59,8 @@ class TeachingSubjectsTest extends TestCase
         $house = (new TeachingSubjectController($this->school))->show($id);
 
         $this->assertTrue(is_a($house, TeachingSubject::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($house, $property));
-        endforeach;
+        }
     }
 }
