@@ -44,13 +44,13 @@ class SchoolYearGroupTest extends TestCase
     {
         $yearGroups = (new SchoolYearGroupController($this->school))->index();
 
-        foreach ($yearGroups as $yearGroup):
+        foreach ($yearGroups as $yearGroup) {
             $this->assertTrue(is_a($yearGroup, YearGroup::class));
 
-        foreach ($this->properties as $property):
+            foreach ($this->properties as $property) {
                 $this->assertTrue(array_key_exists($property, $yearGroup));
-        endforeach;
-        endforeach;
+            }
+        }
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'schoolYearGroups.index'));
     }
 
@@ -63,8 +63,8 @@ class SchoolYearGroupTest extends TestCase
         $yearGroup = (new SchoolYearGroupController($this->school))->show($id);
 
         $this->assertTrue(is_a($yearGroup, YearGroup::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($yearGroup, $property));
-        endforeach;
+        }
     }
 }

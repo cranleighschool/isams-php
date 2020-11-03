@@ -47,13 +47,13 @@ class SchoolHouseTest extends TestCase
     {
         $houses = (new SchoolHouseController($this->school))->index();
 
-        foreach ($houses as $house):
+        foreach ($houses as $house) {
             $this->assertTrue(is_a($house, House::class));
 
-        foreach ($this->properties as $property):
+            foreach ($this->properties as $property) {
                 $this->assertTrue(array_key_exists($property, $house));
-        endforeach;
-        endforeach;
+            }
+        }
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'schoolHouses.index'));
     }
 
@@ -66,8 +66,8 @@ class SchoolHouseTest extends TestCase
         $house = (new SchoolHouseController($this->school))->show($id);
 
         $this->assertTrue(is_a($house, House::class));
-        foreach ($this->properties as $property):
+        foreach ($this->properties as $property) {
             $this->assertTrue(property_exists($house, $property));
-        endforeach;
+        }
     }
 }

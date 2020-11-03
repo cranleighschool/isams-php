@@ -108,11 +108,11 @@ abstract class Endpoint
      */
     protected function validate(array $requiredAttributes, array $attributes)
     {
-        foreach ($requiredAttributes as $requiredAttribute):
+        foreach ($requiredAttributes as $requiredAttribute) {
             if (array_key_exists($requiredAttribute, $attributes) === false) {
                 throw new ValidationException("'$requiredAttribute' is required by this endpoint.");
             }
-        endforeach;
+        }
 
         return true;
     }

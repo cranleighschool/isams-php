@@ -26,14 +26,14 @@ class EstateBuildingTest extends TestCase
     {
         $buildings = (new EstateBuildingController($this->school))->index();
 
-        foreach ($buildings as $building):
+        foreach ($buildings as $building) {
             $this->assertTrue(is_a($building, EstateBuilding::class));
 
-        $properties = ['id', 'description', 'hasClassrooms', 'initials', 'modifiedOn', 'name', 'ordinal'];
-        foreach ($properties as $property):
+            $properties = ['id', 'description', 'hasClassrooms', 'initials', 'modifiedOn', 'name', 'ordinal'];
+            foreach ($properties as $property) {
                 $this->assertTrue(array_key_exists($property, $building));
-        endforeach;
-        endforeach;
+            }
+        }
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'estateBuildings.index'));
     }
 
@@ -81,11 +81,11 @@ class EstateBuildingTest extends TestCase
     private function findBuildingByName(string $name, array $buildings)
     {
         $matches = [];
-        foreach ($buildings as $element):
+        foreach ($buildings as $element) {
             if ($name == $element->name) {
                 array_push($matches, $element->id);
             }
-        endforeach;
+        }
 
         return $matches;
     }

@@ -27,14 +27,14 @@ class PupilBoardingStatusesTest extends TestCase
     {
         $boardingStatus = (new PupilBoardingStatusController($this->school))->index();
 
-        foreach ($boardingStatus as $status):
+        foreach ($boardingStatus as $status) {
             $this->assertTrue(is_a($status, PupilBoardingStatus::class));
 
-        $properties = ['id', 'description', 'listType', 'name'];
-        foreach ($properties as $property):
+            $properties = ['id', 'description', 'listType', 'name'];
+            foreach ($properties as $property) {
                 $this->assertTrue(array_key_exists($property, $status));
-        endforeach;
-        endforeach;
+            }
+        }
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'pupilBoardingStatuses.index'));
     }
@@ -64,10 +64,10 @@ class PupilBoardingStatusesTest extends TestCase
         $toDelete = ($this->findBoardingStatusByName($newboardingStatus, $newBoardingStatuses->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new PupilBoardingStatusController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /** @test */
@@ -93,10 +93,10 @@ class PupilBoardingStatusesTest extends TestCase
         $toDelete = ($this->findBoardingStatusByName($renameBoardingStatus, $counties->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new PupilBoardingStatusController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /**
@@ -109,11 +109,11 @@ class PupilBoardingStatusesTest extends TestCase
     private function findBoardingStatusByName(string $name, array $boardingStatuses)
     {
         $matches = [];
-        foreach ($boardingStatuses as $element):
+        foreach ($boardingStatuses as $element) {
             if ($name == $element->name) {
                 array_push($matches, $element->id);
             }
-        endforeach;
+        }
 
         return $matches;
     }
