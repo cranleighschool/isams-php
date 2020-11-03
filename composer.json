@@ -23,7 +23,7 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^6.5||^7.0||^7.1||^7.2",
+        "guzzlehttp/guzzle": "~6||~7",
         "illuminate/support": "~6||~7||~8",
         "symfony/http-foundation": "^4.4.7 || ^5.1",
         "symfony/psr-http-message-bridge": "^1.0 || ^2.0"
