@@ -45,9 +45,9 @@ class Authentication
      */
     public function getToken()
     {
-        if (Cache::store('file')->has($this->cacheKey)):
+        if (Cache::store('file')->has($this->cacheKey)) {
             return Cache::store('file')->get($this->cacheKey);
-        endif;
+        }
 
         return $this->requestNewToken();
     }
@@ -109,9 +109,9 @@ class Authentication
     private function getConfig(Institution $institution)
     {
         $configName = $institution->getConfigName();
-        if (array_key_exists($configName, config('isams.schools')) === false):
+        if (array_key_exists($configName, config('isams.schools')) === false) {
             throw new \Exception("Configuration key '$configName' does not exist in 'isams.schools'");
-        endif;
+        }
 
         $this->clientId = config("isams.schools.$configName.client_id");
         $this->authenticationUrl = config("isams.schools.$configName.domain") . '/main/sso/idp/connect/token';

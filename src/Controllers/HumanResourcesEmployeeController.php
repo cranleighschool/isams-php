@@ -43,15 +43,15 @@ class HumanResourcesEmployeeController extends Endpoint
 
         $totalCount = $decoded->totalCount;
         $pageNumber = $decoded->page + 1;
-        while ($pageNumber <= $decoded->totalPages):
+        while ($pageNumber <= $decoded->totalPages) {
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
-        collect($decoded->employees)->map(function ($item) use ($items) {
-            $items->push(new Employee($item));
-        });
+            collect($decoded->employees)->map(function ($item) use ($items) {
+                $items->push(new Employee($item));
+            });
 
-        $pageNumber++;
-        endwhile;
+            $pageNumber++;
+        }
 
         if ($totalCount !== $items->count()) {
             throw new \Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');

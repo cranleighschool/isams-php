@@ -27,14 +27,14 @@ class SystemConfigurationCountiesTest extends TestCase
     {
         $counties = (new CountyController($this->school))->index();
 
-        foreach ($counties as $county):
+        foreach ($counties as $county) {
             $this->assertTrue(is_a($county, County::class));
 
-        $properties = ['id', 'description', 'listType', 'name'];
-        foreach ($properties as $property):
+            $properties = ['id', 'description', 'listType', 'name'];
+            foreach ($properties as $property) {
                 $this->assertTrue(array_key_exists($property, $county));
-        endforeach;
-        endforeach;
+            }
+        }
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'counties.index'));
     }
@@ -63,10 +63,10 @@ class SystemConfigurationCountiesTest extends TestCase
         $toDelete = ($this->findCountyByName($newCounty, $counties->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new CountyController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /** @test */
@@ -92,10 +92,10 @@ class SystemConfigurationCountiesTest extends TestCase
         $toDelete = ($this->findCountyByName($renameCounty, $counties->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new CountyController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /**
@@ -108,11 +108,11 @@ class SystemConfigurationCountiesTest extends TestCase
     private function findCountyByName(string $name, array $counties)
     {
         $matches = [];
-        foreach ($counties as $element):
+        foreach ($counties as $element) {
             if ($name == $element->name) {
                 array_push($matches, $element->id);
             }
-        endforeach;
+        }
 
         return $matches;
     }

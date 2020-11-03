@@ -27,14 +27,14 @@ class SystemConfigurationNationalityTest extends TestCase
     {
         $nationalities = (new NationalityController($this->school))->index();
 
-        foreach ($nationalities as $nationality):
+        foreach ($nationalities as $nationality) {
             $this->assertTrue(is_a($nationality, Nationality::class));
 
-        $properties = ['id', 'description', 'listType', 'name'];
-        foreach ($properties as $property):
+            $properties = ['id', 'description', 'listType', 'name'];
+            foreach ($properties as $property) {
                 $this->assertTrue(array_key_exists($property, $nationality));
-        endforeach;
-        endforeach;
+            }
+        }
 
         //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'nationalities.index'));
     }
@@ -63,10 +63,10 @@ class SystemConfigurationNationalityTest extends TestCase
         $toDelete = ($this->findNationalityByName($newNationality, $nationalities->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new NationalityController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /** @test */
@@ -92,10 +92,10 @@ class SystemConfigurationNationalityTest extends TestCase
         $toDelete = ($this->findNationalityByName($renameNationality, $nationalities->toArray()));
 
         //Delete it
-        foreach ($toDelete as $idToDelete):
+        foreach ($toDelete as $idToDelete) {
             $response = (new NationalityController($this->school))->destroy($idToDelete);
-        $this->assertEquals(200, $response->getStatusCode());
-        endforeach;
+            $this->assertEquals(200, $response->getStatusCode());
+        }
     }
 
     /**
@@ -108,11 +108,11 @@ class SystemConfigurationNationalityTest extends TestCase
     private function findNationalityByName(string $name, array $nationalities)
     {
         $matches = [];
-        foreach ($nationalities as $element):
+        foreach ($nationalities as $element) {
             if ($name == $element->name) {
                 array_push($matches, $element->id);
             }
-        endforeach;
+        }
 
         return $matches;
     }
