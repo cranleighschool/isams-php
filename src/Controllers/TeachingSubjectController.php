@@ -39,16 +39,20 @@ class TeachingSubjectController extends Endpoint
 
     /**
      * Create a new resource.
+     *
+     * @return void
      */
-    public function store()
+    public function store(): void
     {
         //TODO
     }
 
     /**
      * Update the specified resource.
+     *
+     * @return void
      */
-    public function update()
+    public function update(): void
     {
         //TODO
     }
