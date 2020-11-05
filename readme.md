@@ -4,6 +4,7 @@
 ![StyleCI Status](https://github.styleci.io/repos/144165171/shield)
 [![Total Downloads](https://img.shields.io/packagist/dt/spkm/isams.svg?style=flat-square)](https://packagist.org/packages/spkm/isams)
 
+![Banner](https://banners.beyondco.de/ISAMS%20PHP.png?theme=light&packageName=spkm%2Fisams&pattern=charlieBrown&style=style_1&description=A+Laravel+wrapper+for+the+ISAMS+REST+API&md=1&showWatermark=0&fontSize=175px&images=code)
 
 This package is a PHP wrapper for iSAMS (https://isams.com) using their REST API. It transforms the json 
 objects returned from the API into model instances.
