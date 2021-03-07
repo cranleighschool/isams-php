@@ -24,7 +24,7 @@ class StorageFileController extends Endpoint
      *
      * @param string $path
      * @param string $name
-     * @return binary|string
+     * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(string $path, string $name)
@@ -42,7 +42,7 @@ class StorageFileController extends Endpoint
      * @author Fred Bradley <frb@cranleigh.org>
      * @param string $path
      * @param string $name
-     * @return binary|string
+     * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function download(string $path, string $name)

@@ -9,6 +9,7 @@ use spkm\isams\Wrapper;
  */
 class TeachingSubject extends Wrapper
 {
+    protected bool $isHidden;
     /**
      * Handle the data.
      *

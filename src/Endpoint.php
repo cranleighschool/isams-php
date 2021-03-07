@@ -40,7 +40,7 @@ abstract class Endpoint
     /**
      * Get the School to be queried.
      *
-     * @return \spkm\Isams\Contracts\Institution
+     * @return \spkm\isams\Contracts\Institution
      */
     protected function getInstitution()
     {

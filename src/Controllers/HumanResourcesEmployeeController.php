@@ -12,6 +12,7 @@ use Intervention\Image\ImageManagerStatic;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\Employee;
 use spkm\isams\Wrappers\EmployeePhoto;
+use Exception;
 
 class HumanResourcesEmployeeController extends Endpoint
 {
@@ -129,10 +130,10 @@ class HumanResourcesEmployeeController extends Endpoint
     public function getCurrentPhoto(int $id, int $quality = 75): EmployeePhoto
     {
         /**
-         * At the moment this package doesn't auto-include Intervention, so we need to check for its existance first.
+         * At the moment this package doesn't auto-include Intervention, so we need to check for its existence first.
          */
         if (! method_exists(ImageManagerStatic::class, 'make')) {
-            throw new \Exception('This method requires Intervention/Image package.', 500);
+            throw new Exception('This method requires Intervention/Image package.', 500);
         }
 
         try {
