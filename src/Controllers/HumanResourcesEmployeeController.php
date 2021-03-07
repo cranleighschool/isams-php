@@ -2,6 +2,7 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
@@ -12,7 +13,6 @@ use Intervention\Image\ImageManagerStatic;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\Employee;
 use spkm\isams\Wrappers\EmployeePhoto;
-use Exception;
 
 class HumanResourcesEmployeeController extends Endpoint
 {
