@@ -1,14 +1,11 @@
 <?php
 
-
 namespace spkm\isams\Controllers;
 
-use Psr\Http\Message\ResponseInterface;
 use spkm\isams\Endpoint;
 
 /**
- * Class RoughAndReadyController
- * @package spkm\isams\Controllers
+ * Class RoughAndReadyController.
  */
 class RoughAndReadyController extends Endpoint
 {
@@ -19,7 +16,7 @@ class RoughAndReadyController extends Endpoint
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function request(string $method, string $endpoint, array $query=[])
+    public function request(string $method, string $endpoint, array $query = [])
     {
         $endpoint = $this->endpoint . $endpoint;
         $response = $this->guzzle->request($method, $endpoint, ['query' => $query, 'headers' => $this->getHeaders()]);
