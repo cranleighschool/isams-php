@@ -24,7 +24,7 @@ class RoughAndReadyController extends Endpoint
         $endpoint = $this->endpoint . $endpoint;
         $response = $this->guzzle->request($method, $endpoint, ['headers' => $this->getHeaders()]);
 
-        return $response;
+        return json_decode($response->getBody()->getContents());
     }
 
     /**
