@@ -16,10 +16,9 @@ class RoughAndReadyController extends Endpoint
      * @param  string  $method
      * @param  string  $endpoint
      *
-     * @return \Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function request(string $method, string $endpoint): ResponseInterface
+    public function request(string $method, string $endpoint)
     {
         $endpoint = $this->endpoint . $endpoint;
         $response = $this->guzzle->request($method, $endpoint, ['headers' => $this->getHeaders()]);
