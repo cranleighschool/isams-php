@@ -31,7 +31,7 @@ class RoughAndReadyController extends Endpoint
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function get(string $endpoint, array $query=[])
+    public function get(string $endpoint, array $query = [])
     {
         return $this->request('GET', $endpoint, $query);
     }
