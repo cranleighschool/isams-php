@@ -15,6 +15,7 @@ class RoughAndReadyController extends Endpoint
     /**
      * @param  string  $method
      * @param  string  $endpoint
+     * @param string $query
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -24,6 +25,18 @@ class RoughAndReadyController extends Endpoint
         $response = $this->guzzle->request($method, $endpoint, ['query' => $query, 'headers' => $this->getHeaders()]);
 
         return json_decode($response->getBody()->getContents());
+    }
+
+    /**
+     * @param  string  $endpoint
+     * @param  array  $query
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function get(string $endpoint, array $query=[])
+    {
+        return $this->request('GET', $endpoint, $query);
     }
 
     /**
