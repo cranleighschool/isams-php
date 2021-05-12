@@ -5,8 +5,7 @@ namespace spkm\isams\Controllers;
 use spkm\isams\Endpoint;
 
 /**
- * Class AbsenseCodesController
- * @package spkm\isams\Controllers
+ * Class AbsenseCodesController.
  */
 class AbsenseCodesController extends Endpoint
 {
@@ -28,6 +27,6 @@ class AbsenseCodesController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/registration/absencecodes';
+        $this->endpoint = $this->getDomain() . '/api/registration/absencecodes';
     }
 }
