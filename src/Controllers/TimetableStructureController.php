@@ -1,8 +1,6 @@
 <?php
 
-
 namespace spkm\isams\Controllers;
-
 
 use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
@@ -40,13 +38,15 @@ class TimetableStructureController extends Endpoint
         $days = $week->timetableDays;
         $frbDays = [];
         foreach ($days as $day) {
-            $frbDays[$day->name] = collect($day->periods)->map(function($item) {
+            $frbDays[$day->name] = collect($day->periods)->map(function ($item) {
                 unset($item->lastUpdated);
                 unset($item->ordinal);
                 unset($item->author);
+
                 return $item;
             });
         }
+
         return collect($frbDays);
     }
 }
