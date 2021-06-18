@@ -4,6 +4,9 @@ namespace spkm\isams\Controllers;
 
 use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\TimetableDay;
+use spkm\isams\Wrappers\TimetableDayPart;
+use spkm\isams\Wrappers\TimetableWeek;
 
 class TimetableStructureController extends Endpoint
 {
@@ -19,9 +22,8 @@ class TimetableStructureController extends Endpoint
     }
 
     /**
-     * Get the timetable for the specified pupil.
+     * Get the timetable structure.
      *
-     * @param string $schoolId
      * @return \Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -29,24 +31,25 @@ class TimetableStructureController extends Endpoint
     {
         $this->endpoint = $this->endpoint . '/';
 
-        $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint, [
+            'headers' => $this->getHeaders()
+        ]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
         $week = collect($decoded)['timetableWeeks'][0];
 
         $days = $week->timetableDays;
-        $frbDays = [];
+        $result = [];
         foreach ($days as $day) {
-            $frbDays[$day->name] = collect($day->periods)->map(function ($item) {
-                unset($item->lastUpdated);
-                unset($item->ordinal);
-                unset($item->author);
-
-                return $item;
+            $result[$day->name] = collect($day->periods)->map(function ($item) {
+                return new TimetableDayPart($item);
             });
         }
 
-        return collect($frbDays);
+
+        return collect($result)->map(function($item) {
+            return new TimetableDay($item);
+        });
     }
 }
