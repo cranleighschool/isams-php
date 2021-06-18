@@ -2,8 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
-use spkm\isams\Endpoint;
 use Illuminate\Support\Collection;
+use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\TeachingSubject;
 
 class SchoolTeachingDepartmentSubjectController extends Endpoint
