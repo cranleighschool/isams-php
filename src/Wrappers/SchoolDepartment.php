@@ -7,13 +7,8 @@ use spkm\isams\Wrapper;
 /**
  * Wrapper for the array returned by the iSAMS REST API endpoint.
  */
-class TeachingSubject extends Wrapper
+class SchoolDepartment extends Wrapper
 {
-    /*
-     * @var bool
-     */
-    protected $isHidden;
-
     /**
      * Handle the data.
      *
@@ -21,6 +16,6 @@ class TeachingSubject extends Wrapper
      */
     protected function handle()
     {
-        $this->isHidden = (bool) optional($this->item)->hidden;
+        //
     }
 }
