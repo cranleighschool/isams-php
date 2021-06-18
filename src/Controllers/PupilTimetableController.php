@@ -2,7 +2,6 @@
 
 namespace spkm\isams\Controllers;
 
-use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\PupilTimetable;
 
@@ -26,15 +25,29 @@ class PupilTimetableController extends Endpoint
      * @return \Illuminate\Support\Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function show(string $schoolId): Collection
+    public function show(string $schoolId)
     {
-        $this->endpoint = $this->endpoint . '/' . $schoolId;
-
-        $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
+        $this->endpoint = $this->endpoint.'/'.$schoolId;
+        $response = $this->guzzle->request('GET', $this->endpoint,
+            ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return collect($decoded)->map(function ($item) {
+        $timetable = collect($decoded->sets);
+
+        $schedule = new TimetableStructureController($this->institution);
+
+        $result = [];
+        foreach ($schedule->index() as $day => $days) {
+            foreach ($days as $period) {
+                $lesson = $timetable->filter(function($item) use ($period) {
+                    return $item->periodId===$period->id;
+                });
+                $period->lesson = $lesson;
+                $result[$day][] = $period;
+            }
+        }
+        return collect($result)->map(function ($item) {
             return new PupilTimetable($item);
         });
     }
