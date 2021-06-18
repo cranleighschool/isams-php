@@ -36,13 +36,13 @@ class SchoolDepartmentController extends Endpoint
      */
     public function index(string $departmentType)
     {
-        if (!in_array(strtolower($departmentType), $this->departmentTypes)) {
+        if (! in_array(strtolower($departmentType), $this->departmentTypes)) {
             return response()->json([
                 'message' => 'Invalid Department Type; Valid types are Teaching or NonTeaching',
             ], 400);
         }
 
-        $key = $this->institution->getConfigName() . sprintf("schoolDepartments%s.index", $departmentType);
+        $key = $this->institution->getConfigName() . sprintf('schoolDepartments%s.index', $departmentType);
 
         $response = $this->guzzle->request('GET', $this->endpoint . '/' . $departmentType, ['headers' => $this->getHeaders()]);
 
@@ -61,7 +61,7 @@ class SchoolDepartmentController extends Endpoint
      */
     public function show(string $departmentType, int $departmentId)
     {
-        if (!in_array(strtolower($departmentType), $this->departmentTypes)) {
+        if (! in_array(strtolower($departmentType), $this->departmentTypes)) {
             return response()->json([
                 'message' => 'Invalid Department Type; Valid types are Teaching or NonTeaching',
             ], 400);
