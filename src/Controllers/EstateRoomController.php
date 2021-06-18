@@ -2,11 +2,9 @@
 
 namespace spkm\isams\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\EstateBuilding;
 use spkm\isams\Wrappers\EstateRoom;
 
 class EstateRoomController extends Endpoint
