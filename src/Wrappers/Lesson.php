@@ -17,7 +17,7 @@ class Lesson extends Wrapper
     protected function handle()
     {
         unset($this->employeeId);
-        $this->teacher = $this->employeeTitle." ".$this->employeeSurname;
+        $this->teacher = $this->employeeTitle . ' ' . $this->employeeSurname;
         unset($this->employeeTitle);
         unset($this->employeeSurname);
     }

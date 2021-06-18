@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\TimetableDay;
 use spkm\isams\Wrappers\TimetableDayPart;
-use spkm\isams\Wrappers\TimetableWeek;
 
 class TimetableStructureController extends Endpoint
 {
@@ -32,7 +31,7 @@ class TimetableStructureController extends Endpoint
         $this->endpoint = $this->endpoint . '/';
 
         $response = $this->guzzle->request('GET', $this->endpoint, [
-            'headers' => $this->getHeaders()
+            'headers' => $this->getHeaders(),
         ]);
 
         $decoded = json_decode($response->getBody()->getContents());
@@ -47,8 +46,7 @@ class TimetableStructureController extends Endpoint
             });
         }
 
-
-        return collect($result)->map(function($item) {
+        return collect($result)->map(function ($item) {
             return new TimetableDay($item);
         });
     }

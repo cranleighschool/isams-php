@@ -20,14 +20,13 @@ class PupilTimetableController extends Endpoint
      */
     public function show(string $schoolId): Collection
     {
-        $this->endpoint = $this->endpoint.'/'.$schoolId;
+        $this->endpoint = $this->endpoint . '/' . $schoolId;
         $response = $this->guzzle->request('GET', $this->endpoint,
             ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
         $timetable = collect($decoded->sets);
-
 
         $result = [];
         foreach ($this->getTimetableStructure() as $day => $days) {
@@ -42,7 +41,7 @@ class PupilTimetableController extends Endpoint
                     $lesson->subjectName = $subjectName;
                 }
                 $period->lesson = $lesson;
-                $result[ $day ][] = $period;
+                $result[$day][] = $period;
             }
         }
 
@@ -60,6 +59,7 @@ class PupilTimetableController extends Endpoint
     private function getSubject(int $subjectId)
     {
         $subjects = new TeachingSubjectController($this->institution);
+
         return $subjects->index()->filter(function ($subject) use ($subjectId) {
             return $subject->id === $subjectId;
         })->first();
@@ -73,14 +73,16 @@ class PupilTimetableController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/timetables/students';
+        $this->endpoint = $this->getDomain() . '/api/timetables/students';
     }
 
     private function getTimetableStructure(): Collection
     {
-        $key = $this->institution->getConfigName().'timetableStructure.index';
+        $key = $this->institution->getConfigName() . 'timetableStructure.index';
+
         return Cache::remember($key, now()->addWeek(), function () {
             $schedule = new TimetableStructureController($this->institution);
+
             return $schedule->index();
         });
     }
