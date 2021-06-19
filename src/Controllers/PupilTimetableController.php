@@ -10,8 +10,7 @@ use spkm\isams\Wrappers\SchoolTerm;
 use spkm\isams\Wrappers\TimetableDay;
 
 /**
- * Class PupilTimetableController
- * @package spkm\isams\Controllers
+ * Class PupilTimetableController.
  */
 class PupilTimetableController extends Endpoint
 {
@@ -36,7 +35,7 @@ class PupilTimetableController extends Endpoint
         $result = [];
         foreach ($this->getTimetableStructure() as $day => $days) {
             foreach ($days as $period) {
-                $lesson = collect($timetable[ 'sets' ])->filter(function ($item) use ($period) {
+                $lesson = collect($timetable['sets'])->filter(function ($item) use ($period) {
                     return $item->periodId === $period->id;
                 })->map(function ($item) {
                     return new Lesson($item);
@@ -46,7 +45,7 @@ class PupilTimetableController extends Endpoint
                     $lesson->subjectName = $subjectName;
                 }
                 $period->lesson = $lesson;
-                $result[ $day ][] = $period;
+                $result[$day][] = $period;
             }
         }
 
@@ -65,15 +64,13 @@ class PupilTimetableController extends Endpoint
      */
     public function show(string $schoolId): Collection
     {
-        $this->endpoint = $this->endpoint.'/'.$schoolId;
+        $this->endpoint = $this->endpoint . '/' . $schoolId;
         $response = $this->guzzle->request('GET', $this->endpoint,
             ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
         return collect($decoded);
-
-
     }
 
     /**
@@ -81,7 +78,7 @@ class PupilTimetableController extends Endpoint
      */
     private function getTimetableStructure(): Collection
     {
-        $key = $this->institution->getConfigName().'timetableStructure.index';
+        $key = $this->institution->getConfigName() . 'timetableStructure.index';
 
         return Cache::remember($key, now()->addWeek(), function () {
             $schedule = new TimetableStructureController($this->institution);
@@ -105,9 +102,6 @@ class PupilTimetableController extends Endpoint
         })->first();
     }
 
-
-
-
     /**
      * @return \spkm\isams\Wrappers\SchoolTerm
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -119,6 +113,7 @@ class PupilTimetableController extends Endpoint
 
         $this->termStart = $currentTerm->startDate;
         $this->termEnd = $currentTerm->finishDate;
+
         return $currentTerm;
     }
 
@@ -130,6 +125,6 @@ class PupilTimetableController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/timetables/students';
+        $this->endpoint = $this->getDomain() . '/api/timetables/students';
     }
 }
