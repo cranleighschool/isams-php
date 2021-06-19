@@ -24,7 +24,7 @@ class SchoolTermsController extends Endpoint
      */
     protected function setEndpoint()
     {
-        $this->endpoint = $this->getDomain().'/api/school/terms';
+        $this->endpoint = $this->getDomain() . '/api/school/terms';
     }
 
     /**
@@ -35,8 +35,9 @@ class SchoolTermsController extends Endpoint
      */
     public function thisTerm(): object
     {
-        Cache::forget('termDatesThisTerm_'.$this->institution->short_code);
-        return Cache::remember('termDatesThisTerm_'.$this->institution->short_code, now()->addWeek(), function () {
+        Cache::forget('termDatesThisTerm_' . $this->institution->short_code);
+
+        return Cache::remember('termDatesThisTerm_' . $this->institution->short_code, now()->addWeek(), function () {
             $currentTerm = $this->getCurrentTerm();
             array_walk($currentTerm, function (&$item, $key) {
                 if ($key == 'startDate' || $key == 'finishDate') {
@@ -46,7 +47,6 @@ class SchoolTermsController extends Endpoint
 
             return $currentTerm;
         });
-
     }
 
     /**
@@ -130,11 +130,11 @@ class SchoolTermsController extends Endpoint
              * If there are exactly two nearest terms at this point, then we assume it's a holiday.
              * We now want to find the nearest term relevant to today's date.
              */
-            $term[ 'first' ] = $nearestTerm->first();
-            $term[ 'last' ] = $nearestTerm->last();
+            $term['first'] = $nearestTerm->first();
+            $term['last'] = $nearestTerm->last();
 
-            $daysSinceEndOfTerm = now()->diffInMilliseconds($term[ 'first' ]->finishDate);
-            $daysUntilStartOfTerm = now()->diffInMilliseconds($term[ 'last' ]->startDate);
+            $daysSinceEndOfTerm = now()->diffInMilliseconds($term['first']->finishDate);
+            $daysUntilStartOfTerm = now()->diffInMilliseconds($term['last']->startDate);
 
             $times = collect([
                 'first' => $daysSinceEndOfTerm,
@@ -142,7 +142,7 @@ class SchoolTermsController extends Endpoint
             ])->sort()->keys();
 
             // The Nearest Term...
-            return $term[ $times[ 0 ] ];
+            return $term[$times[0]];
         } else {
             throw new FailedtoFindNearestTerm('Could not find nearest term', 500);
         }
