@@ -7,7 +7,7 @@ use spkm\isams\Wrapper;
 /**
  * Wrapper for the array returned by the iSAMS REST API endpoint.
  */
-class PupilTimetable extends Wrapper
+class TimetableDay extends Wrapper
 {
     /**
      * Handle the data.
@@ -16,6 +16,5 @@ class PupilTimetable extends Wrapper
      */
     protected function handle()
     {
-        //
     }
 }
