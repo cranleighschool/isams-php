@@ -8,7 +8,7 @@ use spkm\isams\Wrapper;
 
 class SchoolTerm extends Wrapper
 {
-    protected function handle()
+    protected function handle(): void
     {
         // Convert the Dates into Carbon Objects!
         foreach (get_object_vars($this) as $key => $var) {

@@ -6,7 +6,7 @@ use spkm\isams\Wrapper;
 
 class EmployeePhoto extends Wrapper
 {
-    protected function handle()
+    protected function handle(): void
     {
         // TODO: Implement handle() method.
     }

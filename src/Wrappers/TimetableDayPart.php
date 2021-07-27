@@ -14,7 +14,7 @@ class TimetableDayPart extends Wrapper
      *
      * @return void
      */
-    protected function handle()
+    protected function handle(): void
     {
         unset($this->lastUpdated);
         unset($this->ordinal);

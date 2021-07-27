@@ -19,7 +19,7 @@ class TeachingSubject extends Wrapper
      *
      * @return void
      */
-    protected function handle()
+    protected function handle(): void
     {
         $this->isHidden = (bool) optional($this->item)->hidden;
     }
