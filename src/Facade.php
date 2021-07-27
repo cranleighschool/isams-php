@@ -8,6 +8,7 @@ use spkm\isams\Contracts\Institution;
 
 class Facade
 {
+    private const CONTROLLER_NAMESPACE = "\\spkm\\isams\\Controllers\\";
     /**
      * @var Institution
      */
@@ -29,13 +30,17 @@ class Facade
     }
 
     /**
-     * @param  \spkm\isams\Endpoint  $controller
+     * @param  string  $controller
      */
-    public function useController(Endpoint $controller): self
+    public function useController(string $controller): self
     {
-        $this->controller = $controller;
+        if (class_exists(self::CONTROLLER_NAMESPACE.$controller)) {
+            $this->controller = new $controller($this->institution);
+            return $this;
+        }
+        throw new \Exception("Could not find Controller: ".self::CONTROLLER_NAMESPACE.$controller);
 
-        return $this;
+
     }
 
     /**
@@ -46,9 +51,8 @@ class Facade
      */
     public function method(string $method, array $args=null)
     {
-        $controller = new $this->controller($this->institution);
 
-        return call_user_func_array([$controller, $method], $args);
+        return call_user_func_array([$this->controller, $method], $args);
     }
 
 }
