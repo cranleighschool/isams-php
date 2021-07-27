@@ -48,7 +48,7 @@
         }
     },
     "suggest": {
-        "laravel/laravel": "The Laravel Framework."
+        "laravel/framework": "The Laravel Framework."
     },
     "autoload-dev": {
         "psr-4": {
