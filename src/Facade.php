@@ -42,7 +42,7 @@ class Facade
      * @return $this
      * @throws \spkm\isams\Exceptions\ControllerNotFound
      */
-    public function use(string $controller): self
+    public function endpoint(string $controller): self
     {
         if (class_exists(self::CONTROLLER_NAMESPACE.$controller)) {
             $controllerClass = self::CONTROLLER_NAMESPACE.$controller;
