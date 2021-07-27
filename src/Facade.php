@@ -4,6 +4,7 @@
 namespace spkm\isams;
 
 
+use Illuminate\Support\Str;
 use spkm\isams\Contracts\Institution;
 use spkm\isams\Exceptions\ControllerNotFound;
 use spkm\isams\Exceptions\MethodNotFound;
@@ -44,15 +45,31 @@ class Facade
      */
     public function endpoint(string $controller): self
     {
-        if (class_exists(self::CONTROLLER_NAMESPACE.$controller)) {
-            $controllerClass = self::CONTROLLER_NAMESPACE.$controller;
+        $controllerClass = $this->getController($controller);
+        $this->controller = new $controllerClass($this->institution);
+        return $this;
+    }
 
-            $this->controller = new $controllerClass($this->institution);
-
-            return $this;
+    /**
+     * Sanatizes the controller name for us, so people can use ::class notation if they wish
+     *
+     * @param  string  $controllerClassName
+     *
+     * @return string
+     * @throws \spkm\isams\Exceptions\ControllerNotFound
+     */
+    private function getController(string $controllerClassName): string
+    {
+        if (Str::contains($controllerClassName, self::CONTROLLER_NAMESPACE) && class_exists($controllerClassName)) {
+            return $controllerClassName;
         }
 
-        throw new ControllerNotFound("Could not find Controller: ".self::CONTROLLER_NAMESPACE.$controller, 500);
+        if (class_exists(self::CONTROLLER_NAMESPACE.$controllerClassName)) {
+            return self::CONTROLLER_NAMESPACE.$controllerClassName;
+        }
+
+        throw new ControllerNotFound("Could not find Controller: ".$controllerClassName,
+            500);
     }
 
     /**
@@ -70,5 +87,6 @@ class Facade
 
         return call_user_func_array([$this->controller, $method], $args);
     }
+
 
 }
