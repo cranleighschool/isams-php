@@ -35,7 +35,7 @@ class Facade
     public function useController(string $controller): self
     {
         if (class_exists(self::CONTROLLER_NAMESPACE.$controller)) {
-            $this->controller = new $controller($this->institution);
+            $this->controller = new self::CONTROLLER_NAMESPACE.$controller($this->institution);
             return $this;
         }
         throw new \Exception("Could not find Controller: ".self::CONTROLLER_NAMESPACE.$controller);
