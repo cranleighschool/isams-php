@@ -21,17 +21,21 @@ class Facade
     /**
      * @param  \spkm\isams\Contracts\Institution  $institution
      */
-    public function useInstitution(Institution $institution)
+    public function useInstitution(Institution $institution): self
     {
         $this->institution = $institution;
+
+        return $this;
     }
 
     /**
      * @param  \spkm\isams\Endpoint  $controller
      */
-    public function useController(Endpoint $controller)
+    public function useController(Endpoint $controller): self
     {
         $this->controller = $controller;
+
+        return $this;
     }
 
     /**
