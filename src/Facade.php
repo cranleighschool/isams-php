@@ -67,6 +67,7 @@ class Facade
         if (! method_exists($this->controller, $method)) {
             throw new MethodNotFound("Method ".$method." not found on ".get_class($this->controller));
         }
+
         return call_user_func_array([$this->controller, $method], $args);
     }
 
