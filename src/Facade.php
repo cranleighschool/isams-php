@@ -29,7 +29,7 @@ class Facade
      *
      * @return $this
      */
-    public function useInstitution(Institution $institution): self
+    public function institution(Institution $institution): self
     {
         $this->institution = $institution;
 
@@ -42,7 +42,7 @@ class Facade
      * @return $this
      * @throws \spkm\isams\Exceptions\ControllerNotFound
      */
-    public function useController(string $controller): self
+    public function use(string $controller): self
     {
         if (class_exists(self::CONTROLLER_NAMESPACE.$controller)) {
             $controllerClass = self::CONTROLLER_NAMESPACE.$controller;
