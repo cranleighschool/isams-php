@@ -14,7 +14,7 @@ class Facade
     /**
      *
      */
-    private const CONTROLLER_NAMESPACE = "\\spkm\\isams\\Controllers\\";
+    private const CONTROLLER_NAMESPACE = "spkm\\isams\\Controllers\\";
     /**
      * @var Institution
      */
