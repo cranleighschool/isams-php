@@ -3,6 +3,7 @@
 namespace spkm\isams\Controllers;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
@@ -35,18 +36,22 @@ class SchoolTermsController extends Endpoint
      */
     public function thisTerm(): object
     {
-        Cache::forget('termDatesThisTerm_' . $this->institution->short_code);
+        try {
+            return Cache::remember('termDatesThisTerm_'.$this->institution->short_code, now()->addWeek(), function () {
+                $currentTerm = $this->getCurrentTerm();
+                array_walk($currentTerm, function (&$item, $key) {
+                    if ($key == 'startDate' || $key == 'finishDate') {
+                        $item = Carbon::parse($item);
+                    }
+                });
 
-        return Cache::remember('termDatesThisTerm_' . $this->institution->short_code, now()->addWeek(), function () {
-            $currentTerm = $this->getCurrentTerm();
-            array_walk($currentTerm, function (&$item, $key) {
-                if ($key == 'startDate' || $key == 'finishDate') {
-                    $item = Carbon::parse($item);
-                }
+                return $currentTerm;
             });
+        } catch (FailedtoFindNearestTerm $exception) {
+            Cache::forget('termDatesThisTerm_'.$this->institution->short_code);
 
-            return $currentTerm;
-        });
+            return $this->thisTerm();
+        }
     }
 
     /**
@@ -112,7 +117,7 @@ class SchoolTermsController extends Endpoint
     /**
      * @return SchoolTerm
      *
-     * @throws \App\Exceptions\FailedToFindNearestTerm
+     * @throws \spkm\isams\Exceptions\FailedtoFindNearestTerm
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function getNearestTerm(): SchoolTerm
@@ -148,5 +153,28 @@ class SchoolTermsController extends Endpoint
         } else {
             throw new FailedtoFindNearestTerm('Could not find nearest term', 500);
         }
+    }
+
+    /**
+     * @param  \Carbon\CarbonInterface  $date
+     *
+     * @return bool
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function isDateInTermTime(CarbonInterface $date): bool
+    {
+        $list = $this->index();
+
+        $lastYear = $date->format('Y') - 1;
+
+        $whittledDownList = $list->where('schoolYear', '>=', $lastYear); // purpose here is to limit the foreach loop
+
+        foreach ($whittledDownList as $term) {
+            if ($date > $term->startDate && $date < $term->finishDate->addDay()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
