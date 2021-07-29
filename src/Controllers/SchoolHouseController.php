@@ -15,7 +15,7 @@ class SchoolHouseController extends Endpoint
      * @return void
      * @throws \Exception
      */
-    protected function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain() . '/api/school/houses';
     }

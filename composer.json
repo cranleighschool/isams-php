@@ -44,11 +44,14 @@
         "laravel": {
             "providers": [
                 "spkm\\isams\\IsamsServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Isams": "spkm\\isams\\Facades\\Isams"
+            }
         }
     },
     "suggest": {
-        "laravel/laravel": "The Laravel Framework."
+        "laravel/framework": "The Laravel Framework."
     },
     "autoload-dev": {
         "psr-4": {

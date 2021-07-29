@@ -2,6 +2,7 @@
 
 namespace spkm\isams\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
@@ -21,7 +22,7 @@ class AdmissionApplicantContactController extends Endpoint
      * @return void
      * @throws \Exception
      */
-    protected function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain() . '/api/admissions/applicants';
     }
@@ -54,7 +55,7 @@ class AdmissionApplicantContactController extends Endpoint
             'json' => $attributes,
         ]);
 
-        return $this->response(201, $response, 'The contact has been created.');
+        return $this->response(Response::HTTP_CREATED, $response, 'The contact has been created.');
     }
 
     /**

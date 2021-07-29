@@ -12,7 +12,7 @@ class StorageFileController extends Endpoint
      * @return void
      * @throws \Exception
      */
-    protected function setEndpoint()
+    protected function setEndpoint(): void
     {
         //Note: /api/storage/files does not work as of 2018/08/21 - iSAMS aware.
         //Therefore using alternative below '/api/storage/files/download?'

@@ -11,10 +11,16 @@ class IsamsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publishes([
             __DIR__ . '/Config/config.php' => config_path('isams.php'),
         ], 'config');
+    }
+    public function register()
+    {
+        $this->app->bind('isams', function($app) {
+            return new Facade();
+        });
     }
 }

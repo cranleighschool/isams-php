@@ -15,7 +15,7 @@ class TeachingSubjectController extends Endpoint
      * @return void
      * @throws \Exception
      */
-    protected function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain() . '/api/teaching/subjects';
     }
@@ -64,7 +64,7 @@ class TeachingSubjectController extends Endpoint
      * @return \spkm\isams\Wrappers\TeachingSubject
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function show(int $id)
+    public function show(int $id): TeachingSubject
     {
         $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
 

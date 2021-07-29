@@ -22,7 +22,7 @@ class SchoolTermsController extends Endpoint
      * @return void
      * @throws \Exception
      */
-    protected function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain() . '/api/school/terms';
     }
@@ -70,7 +70,8 @@ class SchoolTermsController extends Endpoint
     }
 
     /**
-     * @return object
+     * @return SchoolTerm
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getCurrentTerm(): SchoolTerm
@@ -109,7 +110,8 @@ class SchoolTermsController extends Endpoint
     }
 
     /**
-     * @return object
+     * @return SchoolTerm
+     *
      * @throws \App\Exceptions\FailedToFindNearestTerm
      * @throws \GuzzleHttp\Exception\GuzzleException
      */

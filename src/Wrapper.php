@@ -28,14 +28,14 @@ abstract class Wrapper
      *
      * @return void
      */
-    abstract protected function handle();
+    abstract protected function handle(): void;
 
     /**
      * Set the contents of $this->item to public properties. Use $this->handle() to unset/override if required.
      *
      * @return void
      */
-    protected function setPublicProperties()
+    protected function setPublicProperties(): void
     {
         if (is_array($this->item) || is_object($this->item)) {
             foreach ($this->item as $key => $value) {

@@ -43,7 +43,7 @@ class Authentication
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getToken()
+    public function getToken(): string
     {
         if (Cache::store('file')->has($this->cacheKey)) {
             return Cache::store('file')->get($this->cacheKey);
@@ -58,7 +58,7 @@ class Authentication
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    private function requestNewToken()
+    private function requestNewToken(): string
     {
         $guzzle = new Guzzle();
 
@@ -91,7 +91,7 @@ class Authentication
      * @param int $expiry
      * @return string
      */
-    private function cache($accessToken, $expiry)
+    private function cache(string $accessToken, int $expiry): string
     {
         $minutes = (int) ($expiry / 60);
         Cache::store('file')->put($this->cacheKey, $accessToken, now()->addMinutes($minutes));
@@ -106,7 +106,7 @@ class Authentication
      * @return void
      * @throws \Exception
      */
-    private function getConfig(Institution $institution)
+    private function getConfig(Institution $institution): void
     {
         $configName = $institution->getConfigName();
         if (array_key_exists($configName, config('isams.schools')) === false) {

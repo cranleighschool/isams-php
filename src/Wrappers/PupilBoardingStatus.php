@@ -14,7 +14,7 @@ class PupilBoardingStatus extends Wrapper
      *
      * @return void
      */
-    protected function handle()
+    protected function handle(): void
     {
         //
     }

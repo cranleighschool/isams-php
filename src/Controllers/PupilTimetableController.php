@@ -65,8 +65,11 @@ class PupilTimetableController extends Endpoint
     public function show(string $schoolId): Collection
     {
         $this->endpoint = $this->endpoint . '/' . $schoolId;
-        $response = $this->guzzle->request('GET', $this->endpoint,
-            ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request(
+            'GET',
+            $this->endpoint,
+            ['headers' => $this->getHeaders()]
+        );
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -123,7 +126,7 @@ class PupilTimetableController extends Endpoint
      * @return void
      * @throws \Exception
      */
-    protected function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain() . '/api/timetables/students';
     }

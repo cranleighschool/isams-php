@@ -10,7 +10,7 @@ class School implements \spkm\isams\Contracts\Institution
     /**
      * @return string
      */
-    public function getConfigName()
+    public function getConfigName(): string
     {
         return 'cranleighSandbox';
     }

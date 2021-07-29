@@ -3,6 +3,8 @@
 namespace spkm\isams;
 
 use GuzzleHttp\Client as Guzzle;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use spkm\isams\Contracts\Institution;
 use spkm\isams\Exceptions\ValidationException;
 
@@ -31,30 +33,39 @@ abstract class Endpoint
     }
 
     /**
+     * Instantiate Guzzle.
+     *
+     * @return void
+     */
+    protected function setGuzzle()
+    {
+        $this->guzzle = new Guzzle();
+    }
+
+    /**
      * Set the URL the request is made to.
      *
      * @return void
      */
-    abstract protected function setEndpoint();
+    abstract protected function setEndpoint(): void;
 
     /**
-     * Get the School to be queried.
+     * Get a specific page from the api.
      *
-     * @return \spkm\isams\Contracts\Institution
+     * @param  string  $url
+     * @param  int  $page
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function getInstitution()
+    public function pageRequest(string $url, int $page)
     {
-        return $this->institution;
-    }
+        $response = $this->guzzle->request('GET', $url, [
+            'query' => ['page' => $page],
+            'headers' => $this->getHeaders(),
+        ]);
 
-    /**
-     * Get an access token for the specified Institution.
-     *
-     * @return string
-     */
-    protected function getAccessToken()
-    {
-        return (new Authentication($this->getInstitution()))->getToken();
+        return $response->getBody()->getContents();
     }
 
     /**
@@ -72,12 +83,40 @@ abstract class Endpoint
     }
 
     /**
+     * Get an access token for the specified Institution.
+     *
+     * @return string
+     */
+    protected function getAccessToken(): string
+    {
+        return (new Authentication($this->getInstitution()))->getToken();
+    }
+
+    /**
+     * Wrap the json returned by the API.
+     *
+     * @param  string  $json
+     * @param  string  $property
+     * @param  string  $wrapper
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function wrapJson(string $json, string $property, string $wrapper): Collection
+    {
+        $decoded = json_decode($json);
+
+        return collect($decoded->$property)->map(function ($item) use ($wrapper) {
+            return new $wrapper($item);
+        });
+    }
+
+    /**
      * Get the domain of the specified Institution.
      *
      * @return string
      * @throws \Exception
      */
-    protected function getDomain()
+    protected function getDomain(): string
     {
         $configName = $this->getInstitution()->getConfigName();
 
@@ -89,24 +128,25 @@ abstract class Endpoint
     }
 
     /**
-     * Instantiate Guzzle.
+     * Get the School to be queried.
      *
-     * @return void
+     * @return \spkm\isams\Contracts\Institution
      */
-    protected function setGuzzle()
+    protected function getInstitution(): Institution
     {
-        $this->guzzle = new Guzzle();
+        return $this->institution;
     }
 
     /**
      * Validate the attributes.
      *
-     * @param array $requiredAttributes
-     * @param array $attributes
+     * @param  array  $requiredAttributes
+     * @param  array  $attributes
+     *
      * @return bool
      * @throws \Exception
      */
-    protected function validate(array $requiredAttributes, array $attributes)
+    protected function validate(array $requiredAttributes, array $attributes): bool
     {
         foreach ($requiredAttributes as $requiredAttribute) {
             if (array_key_exists($requiredAttribute, $attributes) === false) {
@@ -120,13 +160,14 @@ abstract class Endpoint
     /**
      * Generate the response.
      *
-     * @param  int $expectedStatusCode
-     * @param  mixed $response
-     * @param  mixed $data
-     * @param  array $errors
+     * @param  int  $expectedStatusCode
+     * @param  mixed  $response
+     * @param  mixed  $data
+     * @param  array  $errors
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function response(int $expectedStatusCode, $response, $data, array $errors = [])
+    protected function response(int $expectedStatusCode, $response, $data, array $errors = []): JsonResponse
     {
         $status = $response->getStatusCode() === $expectedStatusCode ? 'success' : 'error';
         $errors = empty($errors) === true ? null : $errors;
@@ -138,51 +179,16 @@ abstract class Endpoint
             'errors' => $errors,
         ];
 
-        if (isset($response->getHeaders()['Location'])) {
-            $location = $response->getHeaders()['Location'][0];
+        if (isset($response->getHeaders()[ 'Location' ])) {
+            $location = $response->getHeaders()[ 'Location' ][ 0 ];
             $id = ltrim(str_replace($this->endpoint, '', $location), '\//');
 
-            $json['location'] = $location;
+            $json[ 'location' ] = $location;
             if (! empty($id)) {
-                $json['id'] = $id;
+                $json[ 'id' ] = $id;
             }
         }
 
         return response()->json($json, $response->getStatusCode());
-    }
-
-    /**
-     * Get a specific page from the api.
-     *
-     * @param string $url
-     * @param int $page
-     * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function pageRequest(string $url, int $page)
-    {
-        $response = $this->guzzle->request('GET', $url, [
-            'query' => ['page' => $page],
-            'headers' => $this->getHeaders(),
-        ]);
-
-        return $response->getBody()->getContents();
-    }
-
-    /**
-     * Wrap the json returned by the API.
-     *
-     * @param $json
-     * @param string $property
-     * @param string $wrapper
-     * @return \Illuminate\Support\Collection
-     */
-    public function wrapJson(string $json, string $property, string $wrapper)
-    {
-        $decoded = json_decode($json);
-
-        return collect($decoded->$property)->map(function ($item) use ($wrapper) {
-            return new $wrapper($item);
-        });
     }
 }

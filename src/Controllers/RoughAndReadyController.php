@@ -10,9 +10,9 @@ use spkm\isams\Endpoint;
 class RoughAndReadyController extends Endpoint
 {
     /**
-     * @param  string  $method
-     * @param  string  $endpoint
-     * @param string $query
+     * @param string  $method
+     * @param string  $endpoint
+     * @param array $query
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -39,7 +39,7 @@ class RoughAndReadyController extends Endpoint
     /**
      * @throws \Exception
      */
-    protected function setEndpoint()
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain() . '/api/';
     }

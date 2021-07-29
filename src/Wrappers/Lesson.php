@@ -14,7 +14,7 @@ class Lesson extends Wrapper
      *
      * @return void
      */
-    protected function handle()
+    protected function handle(): void
     {
         unset($this->employeeId);
         $this->teacher = $this->employeeTitle . ' ' . $this->employeeSurname;
