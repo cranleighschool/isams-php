@@ -37,7 +37,7 @@ class SchoolTermsController extends Endpoint
     public function thisTerm(): object
     {
         try {
-            return Cache::remember('termDatesThisTerm_'.$this->institution->short_code, now()->addWeek(), function () {
+            return Cache::remember('termDatesThisTerm_' . $this->institution->short_code, now()->addWeek(), function () {
                 $currentTerm = $this->getCurrentTerm();
                 array_walk($currentTerm, function (&$item, $key) {
                     if ($key == 'startDate' || $key == 'finishDate') {
@@ -48,7 +48,7 @@ class SchoolTermsController extends Endpoint
                 return $currentTerm;
             });
         } catch (FailedtoFindNearestTerm $exception) {
-            Cache::forget('termDatesThisTerm_'.$this->institution->short_code);
+            Cache::forget('termDatesThisTerm_' . $this->institution->short_code);
 
             return $this->thisTerm();
         }
