@@ -2,8 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
-use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\PupilContact;
