@@ -179,13 +179,13 @@ abstract class Endpoint
             'errors' => $errors,
         ];
 
-        if (isset($response->getHeaders()[ 'Location' ])) {
-            $location = $response->getHeaders()[ 'Location' ][ 0 ];
+        if (isset($response->getHeaders()['Location'])) {
+            $location = $response->getHeaders()['Location'][0];
             $id = ltrim(str_replace($this->endpoint, '', $location), '\//');
 
-            $json[ 'location' ] = $location;
+            $json['location'] = $location;
             if (! empty($id)) {
-                $json[ 'id' ] = $id;
+                $json['id'] = $id;
             }
         }
 
