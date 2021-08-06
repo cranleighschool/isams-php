@@ -42,7 +42,7 @@ class School extends Model implements \spkm\isams\Contracts\Institution
     /**
      * Define the name used to identify this Schools entry in the config
      */
-    public function getConfigName()
+    public function getConfigName(): string
     {
         return 'cranleighSandbox';
     }
