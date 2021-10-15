@@ -29,7 +29,8 @@ class Authentication
     private $cacheKey;
 
     /**
-     * @param \spkm\isams\Contracts\Institution $institution
+     * @param  \spkm\isams\Contracts\Institution  $institution
+     *
      * @throws \Exception
      */
     public function __construct(Institution $institution)
@@ -41,6 +42,7 @@ class Authentication
      * Get an authentication token from the cache or request a new one.
      *
      * @return string
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getToken(): string
@@ -56,6 +58,7 @@ class Authentication
      * Request a new authentication token.
      *
      * @return string
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function requestNewToken(): string
@@ -87,8 +90,8 @@ class Authentication
     /**
      * Save the access token to the cache & return it for use.
      *
-     * @param string $accessToken
-     * @param int $expiry
+     * @param  string  $accessToken
+     * @param  int  $expiry
      * @return string
      */
     private function cache(string $accessToken, int $expiry): string
@@ -102,8 +105,9 @@ class Authentication
     /**
      * Set the client settings.
      *
-     * @param \spkm\isams\Contracts\Institution $institution
+     * @param  \spkm\isams\Contracts\Institution  $institution
      * @return void
+     *
      * @throws \Exception
      */
     private function getConfig(Institution $institution): void

@@ -100,8 +100,8 @@ class AdmissionStatusTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param string $name
-     * @param array $admissionStatuses
+     * @param  string  $name
+     * @param  array  $admissionStatuses
      * @return array
      */
     private function findAdmissionStatusByName(string $name, array $admissionStatuses)

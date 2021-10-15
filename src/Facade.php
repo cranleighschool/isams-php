@@ -22,7 +22,6 @@ class Facade
 
     /**
      * @param  \spkm\isams\Contracts\Institution  $institution
-     *
      * @return $this
      */
     public function institution(Institution $institution): self
@@ -34,8 +33,8 @@ class Facade
 
     /**
      * @param  string  $controller
-     *
      * @return $this
+     *
      * @throws \spkm\isams\Exceptions\ControllerNotFound
      */
     public function endpoint(string $controller): self
@@ -50,8 +49,8 @@ class Facade
      * Sanatizes the controller name for us, so people can use ::class notation if they wish.
      *
      * @param  string  $controllerClassName
-     *
      * @return string
+     *
      * @throws \spkm\isams\Exceptions\ControllerNotFound
      */
     private function getController(string $controllerClassName): string
@@ -64,17 +63,15 @@ class Facade
             return self::CONTROLLER_NAMESPACE . $controllerClassName;
         }
 
-
         throw new ControllerNotFound('Could not find Controller: ' . $controllerClassName,
             500);
-
     }
 
     /**
      * @param  string  $method
      * @param  array  $args
-     *
      * @return false|mixed
+     *
      * @throws \spkm\isams\Exceptions\MethodNotFound
      */
     public function callMethod(string $method, array $args = [])

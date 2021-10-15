@@ -12,6 +12,7 @@ class AbsenseCodesController extends Endpoint
 {
     /**
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
