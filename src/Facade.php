@@ -1,6 +1,5 @@
 <?php
 
-
 namespace spkm\isams;
 
 use Illuminate\Support\Str;
@@ -10,10 +9,7 @@ use spkm\isams\Exceptions\MethodNotFound;
 
 class Facade
 {
-    /**
-     *
-     */
-    private const CONTROLLER_NAMESPACE = "spkm\\isams\\Controllers\\";
+    private const CONTROLLER_NAMESPACE = 'spkm\\isams\\Controllers\\';
     /**
      * @var Institution
      */
@@ -46,11 +42,12 @@ class Facade
     {
         $controllerClass = $this->getController($controller);
         $this->controller = new $controllerClass($this->institution);
+
         return $this;
     }
 
     /**
-     * Sanatizes the controller name for us, so people can use ::class notation if they wish
+     * Sanatizes the controller name for us, so people can use ::class notation if they wish.
      *
      * @param  string  $controllerClassName
      *
@@ -67,10 +64,10 @@ class Facade
             return self::CONTROLLER_NAMESPACE . $controllerClassName;
         }
 
-        throw new ControllerNotFound(
-            "Could not find Controller: " . $controllerClassName,
-            500
-        );
+
+        throw new ControllerNotFound('Could not find Controller: ' . $controllerClassName,
+            500);
+
     }
 
     /**
@@ -83,7 +80,7 @@ class Facade
     public function callMethod(string $method, array $args = [])
     {
         if (! method_exists($this->controller, $method)) {
-            throw new MethodNotFound("Method " . $method . " not found on " . get_class($this->controller));
+            throw new MethodNotFound('Method ' . $method . ' not found on ' . get_class($this->controller));
         }
 
         return call_user_func_array([$this->controller, $method], $args);

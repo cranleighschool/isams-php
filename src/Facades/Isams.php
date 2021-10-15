@@ -1,6 +1,5 @@
 <?php
 
-
 namespace spkm\isams\Facades;
 
 use Illuminate\Support\Facades\Facade;

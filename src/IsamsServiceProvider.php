@@ -17,6 +17,7 @@ class IsamsServiceProvider extends ServiceProvider
             __DIR__ . '/Config/config.php' => config_path('isams.php'),
         ], 'config');
     }
+
     public function register()
     {
         $this->app->bind('isams', function ($app) {
