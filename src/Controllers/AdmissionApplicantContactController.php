@@ -20,6 +20,7 @@ class AdmissionApplicantContactController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint(): void
@@ -30,10 +31,12 @@ class AdmissionApplicantContactController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param string $schoolId
-     * @param array $attributes
+     * @param  string  $schoolId
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
      * @deprecated
      */
     public function store(string $schoolId, array $attributes): JsonResponse
@@ -61,8 +64,9 @@ class AdmissionApplicantContactController extends Endpoint
     /**
      * Get all contacts for the specified applicant.
      *
-     * @param string $schoolId
+     * @param  string  $schoolId
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(string $schoolId): Collection
@@ -83,10 +87,12 @@ class AdmissionApplicantContactController extends Endpoint
     /**
      * Gets a specific applicant contact.
      *
-     * @param string $schoolId
-     * @param int $contactId
+     * @param  string  $schoolId
+     * @param  int  $contactId
      * @return \spkm\isams\Wrappers\PupilContact
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
      * @deprecated
      */
     public function showContact(string $schoolId, int $contactId): PupilContact
@@ -103,11 +109,13 @@ class AdmissionApplicantContactController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param string $schoolId
-     * @param int $contactId
-     * @param array $attributes
+     * @param  string  $schoolId
+     * @param  int  $contactId
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
      * @deprecated
      */
     public function update(string $schoolId, int $contactId, array $attributes): JsonResponse

@@ -101,8 +101,8 @@ class SystemConfigurationNationalityTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param string $name
-     * @param array $nationalities
+     * @param  string  $name
+     * @param  array  $nationalities
      * @return array
      */
     private function findNationalityByName(string $name, array $nationalities)

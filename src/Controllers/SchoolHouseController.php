@@ -13,6 +13,7 @@ class SchoolHouseController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint(): void
@@ -24,6 +25,7 @@ class SchoolHouseController extends Endpoint
      * Display a listing of the resource.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
@@ -40,8 +42,9 @@ class SchoolHouseController extends Endpoint
     /**
      * Show the resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \spkm\isams\Wrappers\House
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(int $id): House

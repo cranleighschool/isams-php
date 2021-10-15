@@ -21,6 +21,7 @@ class SchoolTermsController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint(): void
@@ -56,6 +57,7 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @return Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
@@ -100,7 +102,6 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @param  int  $year
-     *
      * @return Collection
      */
     public function getYear(int $year): Collection
@@ -157,8 +158,8 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @param  \Carbon\CarbonInterface  $date
-     *
      * @return bool
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function isDateInTermTime(CarbonInterface $date): bool

@@ -102,8 +102,8 @@ class PupilBoardingStatusesTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param string $name
-     * @param array $boardingStatuses
+     * @param  string  $name
+     * @param  array  $boardingStatuses
      * @return array
      */
     private function findBoardingStatusByName(string $name, array $boardingStatuses)

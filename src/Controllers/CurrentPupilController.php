@@ -14,6 +14,7 @@ class CurrentPupilController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint(): void
@@ -25,6 +26,7 @@ class CurrentPupilController extends Endpoint
      * Display a listing of the resource.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
@@ -60,8 +62,9 @@ class CurrentPupilController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param array $attributes
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function store(array $attributes): JsonResponse
@@ -84,8 +87,9 @@ class CurrentPupilController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param string $schoolId
+     * @param  string  $schoolId
      * @return \spkm\isams\Wrappers\Pupil
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(string $schoolId): Pupil
@@ -100,9 +104,10 @@ class CurrentPupilController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param string $schoolId
-     * @param array $attributes
+     * @param  string  $schoolId
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function update(string $schoolId, array $attributes): JsonResponse

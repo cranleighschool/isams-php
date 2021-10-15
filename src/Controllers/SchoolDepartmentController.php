@@ -20,6 +20,7 @@ class SchoolDepartmentController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint(): void
@@ -30,8 +31,9 @@ class SchoolDepartmentController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @param string $departmentType Teaching|NonTeaching
+     * @param  string  $departmentType  Teaching|NonTeaching
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(string $departmentType)
@@ -54,9 +56,10 @@ class SchoolDepartmentController extends Endpoint
     /**
      * Show the resource.
      *
-     * @param string $departmentType
-     * @param int $departmentId
+     * @param  string  $departmentType
+     * @param  int  $departmentId
      * @return \Illuminate\Http\JsonResponse|SchoolDepartment
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(string $departmentType, int $departmentId)

@@ -14,6 +14,7 @@ class PupilBoardingStatusController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint(): void
@@ -25,6 +26,7 @@ class PupilBoardingStatusController extends Endpoint
      * Display a listing of the resource.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
@@ -41,8 +43,9 @@ class PupilBoardingStatusController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param array $attributes
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function store(array $attributes): JsonResponse
@@ -60,9 +63,10 @@ class PupilBoardingStatusController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param int $id
-     * @param array $attributes
+     * @param  int  $id
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function update(int $id, array $attributes): JsonResponse
@@ -80,8 +84,9 @@ class PupilBoardingStatusController extends Endpoint
     /**
      * Remove the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function destroy(int $id): JsonResponse

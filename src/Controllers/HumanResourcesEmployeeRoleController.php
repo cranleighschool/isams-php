@@ -12,6 +12,7 @@ class HumanResourcesEmployeeRoleController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint(): void
@@ -22,9 +23,10 @@ class HumanResourcesEmployeeRoleController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param int $id
-     * @param int $roleId
+     * @param  int  $id
+     * @param  int  $roleId
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function store(int $id, int $roleId): JsonResponse
@@ -39,8 +41,9 @@ class HumanResourcesEmployeeRoleController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \spkm\isams\Wrappers\EmployeeRole
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(int $id): EmployeeRole
