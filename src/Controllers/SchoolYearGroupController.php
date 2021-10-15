@@ -32,7 +32,7 @@ class SchoolYearGroupController extends Endpoint
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
-        return Cache::remember($key, config('isams.cacheDuration'), function () use ($response) {
+        return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
             return $this->wrapJson($response->getBody()->getContents(), 'yearGroups', YearGroup::class);
         });
     }

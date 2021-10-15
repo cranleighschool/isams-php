@@ -191,4 +191,12 @@ abstract class Endpoint
 
         return response()->json($json, $response->getStatusCode());
     }
+
+    /**
+     * @return \Carbon\Carbon
+     */
+    protected function getCacheDuration()
+    {
+        return config('isams.cacheDuration', now()->addHours(12));
+    }
 }
