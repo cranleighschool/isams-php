@@ -16,7 +16,7 @@ class AdmissionApplicantController extends Endpoint
      * @return void
      * @throws \Exception
      */
-    protected function setEndpoint():void
+    protected function setEndpoint(): void
     {
         $this->endpoint = $this->getDomain() . '/api/admissions/applicants';
     }

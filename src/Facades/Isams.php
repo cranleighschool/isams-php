@@ -3,7 +3,6 @@
 
 namespace spkm\isams\Facades;
 
-
 use Illuminate\Support\Facades\Facade;
 
 class Isams extends Facade

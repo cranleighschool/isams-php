@@ -19,7 +19,7 @@ class IsamsServiceProvider extends ServiceProvider
     }
     public function register()
     {
-        $this->app->bind('isams', function($app) {
+        $this->app->bind('isams', function ($app) {
             return new Facade();
         });
     }
