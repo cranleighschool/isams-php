@@ -64,8 +64,10 @@ class Facade
             return self::CONTROLLER_NAMESPACE . $controllerClassName;
         }
 
+
         throw new ControllerNotFound('Could not find Controller: ' . $controllerClassName,
             500);
+
     }
 
     /**
