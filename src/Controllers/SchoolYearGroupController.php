@@ -13,6 +13,7 @@ class SchoolYearGroupController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint()
@@ -24,6 +25,7 @@ class SchoolYearGroupController extends Endpoint
      * Display a listing of the resource.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
@@ -40,8 +42,9 @@ class SchoolYearGroupController extends Endpoint
     /**
      * Show the resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \spkm\isams\Wrappers\YearGroup
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(int $id): YearGroup

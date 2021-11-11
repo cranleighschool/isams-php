@@ -101,8 +101,8 @@ class SystemConfigurationLanguageTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param string $name
-     * @param array $languages
+     * @param  string  $name
+     * @param  array  $languages
      * @return array
      */
     private function findLanguageByName(string $name, array $languages)

@@ -13,6 +13,7 @@ class TimetableStructureController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint()
@@ -24,6 +25,7 @@ class TimetableStructureController extends Endpoint
      * Get the timetable structure.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection

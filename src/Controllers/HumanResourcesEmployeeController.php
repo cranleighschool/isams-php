@@ -20,6 +20,7 @@ class HumanResourcesEmployeeController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint()
@@ -31,6 +32,7 @@ class HumanResourcesEmployeeController extends Endpoint
      * Display a listing of the resource.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
@@ -68,7 +70,7 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Sort by collection of Employee objects by surname.
      *
-     * @param \Illuminate\Support\Collection $collection
+     * @param  \Illuminate\Support\Collection  $collection
      * @return \Illuminate\Support\Collection
      */
     private function sortBySurname(Collection $collection): Collection
@@ -84,8 +86,9 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param array $attributes
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function store(array $attributes): JsonResponse
@@ -106,8 +109,9 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \spkm\isams\Wrappers\Employee
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(int $id): Employee
@@ -122,9 +126,10 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Gets the Current Photo for the Employee.
      *
-     * @param int $id
-     * @param int $quality
+     * @param  int  $id
+     * @param  int  $quality
      * @return EmployeePhoto
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getCurrentPhoto(int $id, int $quality = 75): EmployeePhoto
@@ -169,9 +174,10 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param int $id
-     * @param array $attributes
+     * @param  int  $id
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function update(int $id, array $attributes): JsonResponse

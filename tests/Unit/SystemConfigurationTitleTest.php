@@ -101,8 +101,8 @@ class SystemConfigurationTitleTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param string $name
-     * @param array $titles
+     * @param  string  $name
+     * @param  array  $titles
      * @return array
      */
     private function findTitleByName(string $name, array $titles)

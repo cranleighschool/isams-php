@@ -10,6 +10,7 @@ class StorageFileController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint()
@@ -22,9 +23,10 @@ class StorageFileController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param string $path
-     * @param string $name
+     * @param  string  $path
+     * @param  string  $name
      * @return mixed
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(string $path, string $name)
@@ -40,9 +42,11 @@ class StorageFileController extends Endpoint
      * Show the specified resource.
      *
      * @author Fred Bradley <frb@cranleigh.org>
-     * @param string $path
-     * @param string $name
+     *
+     * @param  string  $path
+     * @param  string  $name
      * @return mixed
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function download(string $path, string $name)

@@ -75,6 +75,7 @@ abstract class Endpoint
      * Get the domain of the specified Institution.
      *
      * @return string
+     *
      * @throws \Exception
      */
     protected function getDomain()
@@ -101,9 +102,10 @@ abstract class Endpoint
     /**
      * Validate the attributes.
      *
-     * @param array $requiredAttributes
-     * @param array $attributes
+     * @param  array  $requiredAttributes
+     * @param  array  $attributes
      * @return bool
+     *
      * @throws \Exception
      */
     protected function validate(array $requiredAttributes, array $attributes)
@@ -120,10 +122,10 @@ abstract class Endpoint
     /**
      * Generate the response.
      *
-     * @param  int $expectedStatusCode
-     * @param  mixed $response
-     * @param  mixed $data
-     * @param  array $errors
+     * @param  int  $expectedStatusCode
+     * @param  mixed  $response
+     * @param  mixed  $data
+     * @param  array  $errors
      * @return \Illuminate\Http\JsonResponse
      */
     protected function response(int $expectedStatusCode, $response, $data, array $errors = [])
@@ -154,9 +156,10 @@ abstract class Endpoint
     /**
      * Get a specific page from the api.
      *
-     * @param string $url
-     * @param int $page
+     * @param  string  $url
+     * @param  int  $page
      * @return mixed
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function pageRequest(string $url, int $page)
@@ -173,8 +176,8 @@ abstract class Endpoint
      * Wrap the json returned by the API.
      *
      * @param $json
-     * @param string $property
-     * @param string $wrapper
+     * @param  string  $property
+     * @param  string  $wrapper
      * @return \Illuminate\Support\Collection
      */
     public function wrapJson(string $json, string $property, string $wrapper)
