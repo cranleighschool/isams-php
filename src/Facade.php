@@ -36,7 +36,6 @@ class Facade
      * long word to write when you're in a hurry!
      *
      * @param  \spkm\isams\Contracts\Institution  $institution
-     *
      * @return $this
      */
     public function school(Institution $institution): self
