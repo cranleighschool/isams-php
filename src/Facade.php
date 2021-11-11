@@ -33,6 +33,19 @@ class Facade
     }
 
     /**
+     * Because 'Institution' is such an awkwardly
+     * long word to write when you're in a hurry!
+     *
+     * @param  \spkm\isams\Contracts\Institution  $institution
+     *
+     * @return $this
+     */
+    public function school(Institution $institution): self
+    {
+        return $this->institution($institution);
+    }
+
+    /**
      * @param  string  $controller
      *
      * @return $this
