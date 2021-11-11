@@ -13,6 +13,7 @@ class TeachingSubjectController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint()
@@ -24,6 +25,7 @@ class TeachingSubjectController extends Endpoint
      * Display a listing of the resource.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
@@ -60,8 +62,9 @@ class TeachingSubjectController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \spkm\isams\Wrappers\TeachingSubject
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(int $id)

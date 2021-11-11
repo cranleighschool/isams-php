@@ -12,6 +12,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint()
@@ -22,9 +23,10 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param int $id
-     * @param array $attributes
+     * @param  int  $id
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function store(int $id, array $attributes): JsonResponse
@@ -45,8 +47,9 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \spkm\isams\Wrappers\EmployeeQualification
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function show(int $id): EmployeeQualification

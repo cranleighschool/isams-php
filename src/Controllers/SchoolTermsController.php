@@ -20,6 +20,7 @@ class SchoolTermsController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint()
@@ -51,6 +52,7 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @return Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
@@ -71,6 +73,7 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @return object
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getCurrentTerm(): SchoolTerm
@@ -94,7 +97,6 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @param  int  $year
-     *
      * @return Collection
      */
     public function getYear(int $year): Collection
@@ -110,6 +112,7 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @return object
+     *
      * @throws \App\Exceptions\FailedToFindNearestTerm
      * @throws \GuzzleHttp\Exception\GuzzleException
      */

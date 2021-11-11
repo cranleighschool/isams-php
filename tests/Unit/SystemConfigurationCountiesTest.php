@@ -101,8 +101,8 @@ class SystemConfigurationCountiesTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param string $name
-     * @param array $counties
+     * @param  string  $name
+     * @param  array  $counties
      * @return array
      */
     private function findCountyByName(string $name, array $counties)

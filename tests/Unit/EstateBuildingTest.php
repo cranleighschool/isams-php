@@ -74,8 +74,8 @@ class EstateBuildingTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param string $name
-     * @param array $buildings
+     * @param  string  $name
+     * @param  array  $buildings
      * @return array
      */
     private function findBuildingByName(string $name, array $buildings)

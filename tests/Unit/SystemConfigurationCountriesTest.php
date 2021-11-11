@@ -101,8 +101,8 @@ class SystemConfigurationCountriesTest extends TestCase
     /**
      * Find the country by name.
      *
-     * @param string $name
-     * @param array $countries
+     * @param  string  $name
+     * @param  array  $countries
      * @return array
      */
     private function findCountryByName(string $name, array $countries)

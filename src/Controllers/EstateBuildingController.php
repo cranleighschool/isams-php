@@ -14,6 +14,7 @@ class EstateBuildingController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws \Exception
      */
     protected function setEndpoint()
@@ -25,6 +26,7 @@ class EstateBuildingController extends Endpoint
      * Display a listing of the resource.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function index(): Collection
@@ -41,8 +43,9 @@ class EstateBuildingController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param array $attributes
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function store(array $attributes): JsonResponse
@@ -60,9 +63,10 @@ class EstateBuildingController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param int $id
-     * @param array $attributes
+     * @param  int  $id
+     * @param  array  $attributes
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function update(int $id, array $attributes): JsonResponse

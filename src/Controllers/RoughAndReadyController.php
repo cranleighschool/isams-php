@@ -12,7 +12,7 @@ class RoughAndReadyController extends Endpoint
     /**
      * @param  string  $method
      * @param  string  $endpoint
-     * @param string $query
+     * @param  string  $query
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -27,8 +27,8 @@ class RoughAndReadyController extends Endpoint
     /**
      * @param  string  $endpoint
      * @param  array  $query
-     *
      * @return mixed
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function get(string $endpoint, array $query = [])
