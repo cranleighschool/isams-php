@@ -6,7 +6,6 @@ use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Image;
 use Intervention\Image\ImageManagerStatic;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\EmployeePhoto;
