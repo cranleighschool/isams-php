@@ -9,10 +9,11 @@ use spkm\isams\Endpoint;
 class RoughAndReadyController extends Endpoint
 {
     /**
-     * @param string $method
-     * @param string $endpoint
-     * @param array $query
+     * @param  string  $method
+     * @param  string  $endpoint
+     * @param  array  $query
      * @return mixed
+     *
      * @throws GuzzleException
      */
     public function request(string $method, string $endpoint, array $query = [])

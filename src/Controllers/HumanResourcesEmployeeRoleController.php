@@ -28,6 +28,7 @@ class HumanResourcesEmployeeRoleController extends Endpoint
      * @param  int  $id
      * @param  int  $roleId
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(int $id, int $roleId): JsonResponse
@@ -44,6 +45,7 @@ class HumanResourcesEmployeeRoleController extends Endpoint
      *
      * @param  int  $id
      * @return EmployeeRole
+     *
      * @throws GuzzleException
      */
     public function show(int $id): EmployeeRole

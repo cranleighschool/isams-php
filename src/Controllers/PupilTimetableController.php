@@ -30,6 +30,7 @@ class PupilTimetableController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws Exception
      */
     protected function setEndpoint(): void
@@ -40,6 +41,7 @@ class PupilTimetableController extends Endpoint
     /**
      * @param  string  $schoolId
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function getWeekCalendar(string $schoolId): Collection
@@ -72,6 +74,7 @@ class PupilTimetableController extends Endpoint
      *
      * @param  string  $schoolId
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function show(string $schoolId): Collection
@@ -105,6 +108,7 @@ class PupilTimetableController extends Endpoint
     /**
      * @param  int  $subjectId
      * @return mixed
+     *
      * @throws GuzzleException
      */
     private function getSubject(int $subjectId)
@@ -118,6 +122,7 @@ class PupilTimetableController extends Endpoint
 
     /**
      * @return SchoolTerm
+     *
      * @throws GuzzleException
      */
     public function getCurrentTermDates(): SchoolTerm

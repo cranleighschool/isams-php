@@ -75,6 +75,7 @@ abstract class Endpoint
      * Get the Guzzle headers for a request.
      *
      * @return array
+     *
      * @throws GuzzleException
      */
     protected function getHeaders()
@@ -90,6 +91,7 @@ abstract class Endpoint
      * Get an access token for the specified Institution.
      *
      * @return string
+     *
      * @throws GuzzleException
      * @throws Exception
      */

@@ -3,12 +3,12 @@
 namespace spkm\isams\Controllers;
 
 use Exception;
-use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\Employee;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use GuzzleHttp\Exception\GuzzleException;
+use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\Employee;
 
 class HumanResourcesEmployeeController extends Endpoint
 {
@@ -28,6 +28,7 @@ class HumanResourcesEmployeeController extends Endpoint
      * Display a listing of the resource.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
@@ -65,7 +66,7 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Sort by collection of Employee objects by surname.
      *
-     * @param Collection $collection
+     * @param  Collection  $collection
      * @return Collection
      */
     private function sortBySurname(Collection $collection): Collection

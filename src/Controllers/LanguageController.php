@@ -27,6 +27,7 @@ class LanguageController extends Endpoint
      * Display a listing of the resource.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
@@ -45,6 +46,7 @@ class LanguageController extends Endpoint
      *
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
@@ -65,6 +67,7 @@ class LanguageController extends Endpoint
      * @param  int  $id
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function update(int $id, array $attributes): JsonResponse
@@ -84,6 +87,7 @@ class LanguageController extends Endpoint
      *
      * @param  int  $id
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function destroy(int $id): JsonResponse

@@ -28,6 +28,7 @@ class OtherSchoolController extends Endpoint
      * Display a listing of the resource.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
@@ -65,6 +66,7 @@ class OtherSchoolController extends Endpoint
      *
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
@@ -89,6 +91,7 @@ class OtherSchoolController extends Endpoint
      *
      * @param  int  $id
      * @return School
+     *
      * @throws GuzzleException
      */
     public function show(int $id): School
@@ -106,6 +109,7 @@ class OtherSchoolController extends Endpoint
      * @param  int  $id
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function update(int $id, array $attributes): JsonResponse

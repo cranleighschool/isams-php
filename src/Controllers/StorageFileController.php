@@ -28,6 +28,7 @@ class StorageFileController extends Endpoint
      * @param  string  $path
      * @param  string  $name
      * @return string
+     *
      * @throws GuzzleException
      */
     public function show(string $path, string $name): string
@@ -45,7 +46,9 @@ class StorageFileController extends Endpoint
      * @param  string  $path
      * @param  string  $name
      * @return void
+     *
      * @throws GuzzleException
+     *
      * @author Fred Bradley <frb@cranleigh.org>
      */
     public function download(string $path, string $name)

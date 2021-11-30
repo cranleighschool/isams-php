@@ -26,15 +26,16 @@ class RewardAndConductRewardController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @param string $id
+     * @param  string  $id
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(string $id): Collection
     {
         $key = $this->institution->getConfigName() . 'rewardsAndConduct.index';
 
-        $response = $this->guzzle->request('GET', $this->endpoint. '/'. $id . '/rewards', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/rewards', ['headers' => $this->getHeaders()]);
 
         return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
             return $this->wrapJson($response->getBody()->getContents(), 'items', RewardAndConductReward::class);
