@@ -14,7 +14,6 @@ class HumanResourcesEmployeeDepartmentController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
-     *
      * @throws Exception
      */
     protected function setEndpoint(): void
