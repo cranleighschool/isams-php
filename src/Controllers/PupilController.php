@@ -28,6 +28,7 @@ class PupilController extends Endpoint
      * Display a listing of the resource.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
@@ -65,6 +66,7 @@ class PupilController extends Endpoint
      *
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
@@ -89,6 +91,7 @@ class PupilController extends Endpoint
      *
      * @param  string  $schoolId
      * @return Pupil
+     *
      * @throws GuzzleException
      */
     public function show(string $schoolId): Pupil
@@ -106,6 +109,7 @@ class PupilController extends Endpoint
      * @param  string  $schoolId
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function update(string $schoolId, array $attributes): JsonResponse

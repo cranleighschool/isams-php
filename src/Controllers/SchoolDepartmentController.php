@@ -36,6 +36,7 @@ class SchoolDepartmentController extends Endpoint
      *
      * @param  string  $departmentType  Teaching|NonTeaching
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function index(string $departmentType): JsonResponse
@@ -61,6 +62,7 @@ class SchoolDepartmentController extends Endpoint
      * @param  string  $departmentType
      * @param  int  $departmentId
      * @return JsonResponse|SchoolDepartment
+     *
      * @throws GuzzleException
      */
     public function show(string $departmentType, int $departmentId)

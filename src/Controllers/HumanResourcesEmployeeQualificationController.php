@@ -28,6 +28,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
      * @param  int  $id
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(int $id, array $attributes): JsonResponse

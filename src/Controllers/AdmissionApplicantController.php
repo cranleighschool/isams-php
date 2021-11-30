@@ -16,6 +16,7 @@ class AdmissionApplicantController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws Exception
      */
     protected function setEndpoint(): void
@@ -27,6 +28,7 @@ class AdmissionApplicantController extends Endpoint
      * Display a listing of the resource.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
@@ -64,6 +66,7 @@ class AdmissionApplicantController extends Endpoint
      *
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
@@ -90,6 +93,7 @@ class AdmissionApplicantController extends Endpoint
      *
      * @param  string  $schoolId
      * @return Applicant
+     *
      * @throws GuzzleException
      */
     public function show(string $schoolId): Applicant
@@ -107,6 +111,7 @@ class AdmissionApplicantController extends Endpoint
      * @param  string  $schoolId
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function update(string $schoolId, array $attributes): JsonResponse

@@ -3,12 +3,12 @@
 namespace spkm\isams\Controllers;
 
 use Exception;
-use spkm\isams\Endpoint;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\TeachingSubject;
-use GuzzleHttp\Exception\GuzzleException;
 
 class TeachingSubjectController extends Endpoint
 {
@@ -28,6 +28,7 @@ class TeachingSubjectController extends Endpoint
      * Display a listing of the resource.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
@@ -44,8 +45,9 @@ class TeachingSubjectController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param array $attributes
+     * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
@@ -70,9 +72,10 @@ class TeachingSubjectController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param string $subjectId
-     * @param array $attributes
+     * @param  string  $subjectId
+     * @param  array  $attributes
      * @return void
+     *
      * @throws GuzzleException
      */
     public function update(string $subjectId, array $attributes): JsonResponse
@@ -99,6 +102,7 @@ class TeachingSubjectController extends Endpoint
      *
      * @param  int  $id
      * @return TeachingSubject
+     *
      * @throws GuzzleException
      */
     public function show(int $id): TeachingSubject

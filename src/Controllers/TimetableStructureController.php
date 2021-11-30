@@ -27,6 +27,7 @@ class TimetableStructureController extends Endpoint
      * Get the timetable structure.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection

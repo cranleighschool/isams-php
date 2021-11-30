@@ -3,12 +3,11 @@
 namespace spkm\isams\Controllers;
 
 use Exception;
-use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\Employee;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
-use GuzzleHttp\Exception\GuzzleException;
+use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\Employee;
 use spkm\isams\Wrappers\EmployeeCustomField;
 use spkm\isams\Wrappers\EmployeeCustomFieldProperty;
 
@@ -27,30 +26,32 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
     }
 
     /**
-     * Retrieve all custom fields associated with an employee
+     * Retrieve all custom fields associated with an employee.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(int $id): Collection
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id .'/customFields', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/customFields', ['headers' => $this->getHeaders()]);
 
         return $this->wrapJson($response->getBody()->getContents(), 'customFields', EmployeeCustomFieldProperty::class);
     }
 
     /**
-     * Retrieve a custom field associated with an employee
+     * Retrieve a custom field associated with an employee.
      *
-     * @param int $id
-     * @param int $customFieldId
+     * @param  int  $id
+     * @param  int  $customFieldId
      * @return EmployeeCustomField
+     *
      * @throws GuzzleException
      */
     public function show(int $id, int $customFieldId): EmployeeCustomField
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id .'/customFields/'. $customFieldId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/customFields/' . $customFieldId, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -60,10 +61,11 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param int $id
-     * @param int $customFieldId
-     * @param array $attributes
+     * @param  int  $id
+     * @param  int  $customFieldId
+     * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function update(int $id, int $customFieldId, array $attributes): JsonResponse
@@ -72,7 +74,7 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
             'value',
         ], $attributes);
 
-        $response = $this->guzzle->request('PATCH', $this->endpoint . '/' . $id .'/customFields/'. $customFieldId, [
+        $response = $this->guzzle->request('PATCH', $this->endpoint . '/' . $id . '/customFields/' . $customFieldId, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
@@ -83,21 +85,22 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param int $id
-     * @param array $attributes an array with one or more arrays within
+     * @param  int  $id
+     * @param  array  $attributes  an array with one or more arrays within
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function bulkUpdate(int $id, array $attributes): JsonResponse
     {
-        foreach($attributes as $attributeSubArray) {
+        foreach ($attributes as $attributeSubArray) {
             $this->validate([
                 'id',
                 'value',
             ], $attributeSubArray);
         }
 
-        $response = $this->guzzle->request('PATCH', $this->endpoint . '/' . $id .'/customFields', [
+        $response = $this->guzzle->request('PATCH', $this->endpoint . '/' . $id . '/customFields', [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

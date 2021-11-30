@@ -27,6 +27,7 @@ class SchoolYearGroupController extends Endpoint
      * Display a listing of the resource.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
@@ -45,6 +46,7 @@ class SchoolYearGroupController extends Endpoint
      *
      * @param  int  $id
      * @return YearGroup
+     *
      * @throws GuzzleException
      */
     public function show(int $id): YearGroup

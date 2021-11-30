@@ -19,6 +19,7 @@ class RegistrationAbsenceCodeController extends Endpoint
 
     /**
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection

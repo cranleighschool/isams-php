@@ -19,6 +19,7 @@ class RegistrationPresentCodeController extends Endpoint
 
     /**
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
