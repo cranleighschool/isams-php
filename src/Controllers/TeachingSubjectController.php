@@ -3,11 +3,12 @@
 namespace spkm\isams\Controllers;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
+use spkm\isams\Endpoint;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\TeachingSubject;
+use GuzzleHttp\Exception\GuzzleException;
 
 class TeachingSubjectController extends Endpoint
 {
@@ -43,21 +44,54 @@ class TeachingSubjectController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @return void
+     * @param array $attributes
+     * @return JsonResponse
+     * @throws GuzzleException
      */
-    public function store(): void
+    public function store(array $attributes): JsonResponse
     {
-        //TODO
+        $this->validate([
+            'active',
+            'code',
+            'formSubject',
+            'name',
+            'reportingName',
+            'setSubject',
+        ], $attributes);
+
+        $response = $this->guzzle->request('POST', $this->endpoint, [
+            'headers' => $this->getHeaders(),
+            'json' => $attributes,
+        ]);
+
+        return $this->response(201, $response, 'The subject has been created.');
     }
 
     /**
      * Update the specified resource.
      *
+     * @param string $subjectId
+     * @param array $attributes
      * @return void
+     * @throws GuzzleException
      */
-    public function update(): void
+    public function update(string $subjectId, array $attributes): JsonResponse
     {
-        //TODO
+        $this->validate([
+            'active',
+            'code',
+            'formSubject',
+            'name',
+            'reportingName',
+            'setSubject',
+        ], $attributes);
+
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $subjectId, [
+            'headers' => $this->getHeaders(),
+            'json' => $attributes,
+        ]);
+
+        return $this->response(200, $response, 'The subject has been updated.');
     }
 
     /**
