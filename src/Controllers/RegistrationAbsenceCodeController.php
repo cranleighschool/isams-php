@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
 
-class AbsenseCodesController extends Endpoint
+class RegistrationAbsenceCodeController extends Endpoint
 {
     /**
      * @throws Exception
