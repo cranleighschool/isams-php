@@ -2,8 +2,11 @@
 
 namespace spkm\isams;
 
+use Exception;
 use GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Cache;
+use Psr\SimpleCache\InvalidArgumentException;
 use spkm\isams\Contracts\Institution;
 
 class Authentication
@@ -29,9 +32,8 @@ class Authentication
     private $cacheKey;
 
     /**
-     * @param  \spkm\isams\Contracts\Institution  $institution
-     *
-     * @throws \Exception
+     * @param Institution $institution
+     * @throws Exception
      */
     public function __construct(Institution $institution)
     {
@@ -42,8 +44,7 @@ class Authentication
      * Get an authentication token from the cache or request a new one.
      *
      * @return string
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException|InvalidArgumentException
      */
     public function getToken(): string
     {
@@ -59,7 +60,7 @@ class Authentication
      *
      * @return string
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     private function requestNewToken(): string
     {
@@ -79,7 +80,7 @@ class Authentication
         ]);
 
         if ($response->getStatusCode() !== 200) {
-            throw new \Exception('Unable to request new authentication token, invalid response (Error 500)');
+            throw new Exception('Unable to request new authentication token, invalid response (Error 500)');
         }
 
         $data = json_decode($response->getBody()->getContents());
@@ -90,9 +91,10 @@ class Authentication
     /**
      * Save the access token to the cache & return it for use.
      *
-     * @param  string  $accessToken
-     * @param  int  $expiry
+     * @param string $accessToken
+     * @param int $expiry
      * @return string
+     * @throws InvalidArgumentException
      */
     private function cache(string $accessToken, int $expiry): string
     {
@@ -105,16 +107,16 @@ class Authentication
     /**
      * Set the client settings.
      *
-     * @param  \spkm\isams\Contracts\Institution  $institution
+     * @param Institution $institution
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     private function getConfig(Institution $institution): void
     {
         $configName = $institution->getConfigName();
         if (array_key_exists($configName, config('isams.schools')) === false) {
-            throw new \Exception("Configuration key '$configName' does not exist in 'isams.schools'");
+            throw new Exception("Configuration key '$configName' does not exist in 'isams.schools'");
         }
 
         $this->clientId = config("isams.schools.$configName.client_id");

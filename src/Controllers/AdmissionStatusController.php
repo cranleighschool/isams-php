@@ -2,6 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -14,8 +16,7 @@ class AdmissionStatusController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -25,9 +26,8 @@ class AdmissionStatusController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function index(): Collection
     {
@@ -44,9 +44,9 @@ class AdmissionStatusController extends Endpoint
      * Create a new resource.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
     {
@@ -65,9 +65,9 @@ class AdmissionStatusController extends Endpoint
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function update(int $id, array $attributes): JsonResponse
     {
@@ -85,9 +85,9 @@ class AdmissionStatusController extends Endpoint
      * Remove the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function destroy(int $id): JsonResponse
     {

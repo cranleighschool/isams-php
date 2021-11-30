@@ -2,6 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
@@ -14,7 +16,7 @@ class TeachingSubjectController extends Endpoint
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -24,9 +26,8 @@ class TeachingSubjectController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function index(): Collection
     {
@@ -63,9 +64,8 @@ class TeachingSubjectController extends Endpoint
      * Show the specified resource.
      *
      * @param  int  $id
-     * @return \spkm\isams\Wrappers\TeachingSubject
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return TeachingSubject
+     * @throws GuzzleException
      */
     public function show(int $id): TeachingSubject
     {

@@ -2,19 +2,18 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use spkm\isams\Endpoint;
 
-/**
- * Class RoughAndReadyController.
- */
 class RoughAndReadyController extends Endpoint
 {
     /**
-     * @param  string  $method
-     * @param  string  $endpoint
-     * @param  array  $query
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @param string $method
+     * @param string $endpoint
+     * @param array $query
+     * @return mixed
+     * @throws GuzzleException
      */
     public function request(string $method, string $endpoint, array $query = [])
     {
@@ -29,7 +28,7 @@ class RoughAndReadyController extends Endpoint
      * @param  array  $query
      * @return mixed
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function get(string $endpoint, array $query = [])
     {
@@ -37,7 +36,7 @@ class RoughAndReadyController extends Endpoint
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {

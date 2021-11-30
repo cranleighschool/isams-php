@@ -2,6 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -15,7 +17,7 @@ class EstateBuildingController extends Endpoint
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -25,9 +27,8 @@ class EstateBuildingController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function index(): Collection
     {
@@ -44,9 +45,8 @@ class EstateBuildingController extends Endpoint
      * Create a new resource.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
     {
@@ -65,9 +65,8 @@ class EstateBuildingController extends Endpoint
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function update(int $id, array $attributes): JsonResponse
     {

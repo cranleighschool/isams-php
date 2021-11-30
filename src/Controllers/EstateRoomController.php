@@ -2,6 +2,7 @@
 
 namespace spkm\isams\Controllers;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
@@ -24,9 +25,8 @@ class EstateRoomController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function index(): Collection
     {

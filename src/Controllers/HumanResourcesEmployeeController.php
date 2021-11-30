@@ -3,6 +3,7 @@
 namespace spkm\isams\Controllers;
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
@@ -31,9 +32,8 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function index(): Collection
     {
@@ -70,8 +70,8 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Sort by collection of Employee objects by surname.
      *
-     * @param  \Illuminate\Support\Collection  $collection
-     * @return \Illuminate\Support\Collection
+     * @param Collection $collection
+     * @return Collection
      */
     private function sortBySurname(Collection $collection): Collection
     {
@@ -87,9 +87,9 @@ class HumanResourcesEmployeeController extends Endpoint
      * Create a new resource.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
     {
@@ -110,9 +110,9 @@ class HumanResourcesEmployeeController extends Endpoint
      * Show the specified resource.
      *
      * @param  int  $id
-     * @return \spkm\isams\Wrappers\Employee
+     * @return Employee
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function show(int $id): Employee
     {
@@ -130,7 +130,7 @@ class HumanResourcesEmployeeController extends Endpoint
      * @param  int  $quality
      * @return EmployeePhoto
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function getCurrentPhoto(int $id, int $quality = 75): EmployeePhoto
     {
@@ -176,9 +176,9 @@ class HumanResourcesEmployeeController extends Endpoint
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function update(int $id, array $attributes): JsonResponse
     {

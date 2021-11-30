@@ -2,6 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\TimetableDay;
@@ -14,7 +16,7 @@ class TimetableStructureController extends Endpoint
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -24,9 +26,8 @@ class TimetableStructureController extends Endpoint
     /**
      * Get the timetable structure.
      *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function index(): Collection
     {

@@ -2,6 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\EmployeeQualification;
@@ -13,7 +15,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -25,9 +27,8 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function store(int $id, array $attributes): JsonResponse
     {
@@ -48,9 +49,9 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
      * Show the specified resource.
      *
      * @param  int  $id
-     * @return \spkm\isams\Wrappers\EmployeeQualification
+     * @return EmployeeQualification
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function show(int $id): EmployeeQualification
     {

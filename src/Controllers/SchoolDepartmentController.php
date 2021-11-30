@@ -2,6 +2,9 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\SchoolDepartment;
@@ -21,7 +24,7 @@ class SchoolDepartmentController extends Endpoint
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -32,11 +35,10 @@ class SchoolDepartmentController extends Endpoint
      * Display a listing of the resource.
      *
      * @param  string  $departmentType  Teaching|NonTeaching
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse
+     * @throws GuzzleException
      */
-    public function index(string $departmentType)
+    public function index(string $departmentType): JsonResponse
     {
         if (! in_array(strtolower($departmentType), $this->departmentTypes)) {
             return response()->json([
@@ -58,9 +60,8 @@ class SchoolDepartmentController extends Endpoint
      *
      * @param  string  $departmentType
      * @param  int  $departmentId
-     * @return \Illuminate\Http\JsonResponse|SchoolDepartment
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse|SchoolDepartment
+     * @throws GuzzleException
      */
     public function show(string $departmentType, int $departmentId)
     {

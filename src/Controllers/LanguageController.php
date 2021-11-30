@@ -2,6 +2,7 @@
 
 namespace spkm\isams\Controllers;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -25,9 +26,8 @@ class LanguageController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function index(): Collection
     {
@@ -44,9 +44,8 @@ class LanguageController extends Endpoint
      * Create a new resource.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
     {
@@ -65,9 +64,8 @@ class LanguageController extends Endpoint
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function update(int $id, array $attributes): JsonResponse
     {
@@ -85,9 +83,8 @@ class LanguageController extends Endpoint
      * Remove the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function destroy(int $id): JsonResponse
     {

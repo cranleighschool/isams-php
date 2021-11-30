@@ -2,6 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use spkm\isams\Endpoint;
 
 class StorageFileController extends Endpoint
@@ -11,7 +13,7 @@ class StorageFileController extends Endpoint
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -25,11 +27,10 @@ class StorageFileController extends Endpoint
      *
      * @param  string  $path
      * @param  string  $name
-     * @return mixed
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return string
+     * @throws GuzzleException
      */
-    public function show(string $path, string $name)
+    public function show(string $path, string $name): string
     {
         $url = $this->endpoint . '?path=' . $path . '&fileName=' . $name;
 
@@ -41,13 +42,11 @@ class StorageFileController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @author Fred Bradley <frb@cranleigh.org>
-     *
      * @param  string  $path
      * @param  string  $name
-     * @return mixed
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return void
+     * @throws GuzzleException
+     * @author Fred Bradley <frb@cranleigh.org>
      */
     public function download(string $path, string $name)
     {

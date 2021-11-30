@@ -2,6 +2,9 @@
 
 namespace spkm\isams\Controllers;
 
+use Carbon\Carbon;
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
@@ -15,19 +18,29 @@ use spkm\isams\Wrappers\TimetableDay;
 class PupilTimetableController extends Endpoint
 {
     /**
-     * @var \Carbon\Carbon
+     * @var Carbon
      */
     public $termStart;
     /**
-     * @var \Carbon\Carbon
+     * @var Carbon
      */
     public $termEnd;
 
     /**
-     * @param  string  $schoolId
-     * @return \Illuminate\Support\Collection
+     * Set the URL the request is made to.
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return void
+     * @throws Exception
+     */
+    protected function setEndpoint(): void
+    {
+        $this->endpoint = $this->getDomain() . '/api/timetables/students';
+    }
+
+    /**
+     * @param  string  $schoolId
+     * @return Collection
+     * @throws GuzzleException
      */
     public function getWeekCalendar(string $schoolId): Collection
     {
@@ -58,9 +71,8 @@ class PupilTimetableController extends Endpoint
      * Get the timetable for the specified pupil.
      *
      * @param  string  $schoolId
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function show(string $schoolId): Collection
     {
@@ -77,7 +89,7 @@ class PupilTimetableController extends Endpoint
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     private function getTimetableStructure(): Collection
     {
@@ -93,8 +105,7 @@ class PupilTimetableController extends Endpoint
     /**
      * @param  int  $subjectId
      * @return mixed
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     private function getSubject(int $subjectId)
     {
@@ -106,9 +117,8 @@ class PupilTimetableController extends Endpoint
     }
 
     /**
-     * @return \spkm\isams\Wrappers\SchoolTerm
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return SchoolTerm
+     * @throws GuzzleException
      */
     public function getCurrentTermDates(): SchoolTerm
     {
@@ -119,17 +129,5 @@ class PupilTimetableController extends Endpoint
         $this->termEnd = $currentTerm->finishDate;
 
         return $currentTerm;
-    }
-
-    /**
-     * Set the URL the request is made to.
-     *
-     * @return void
-     *
-     * @throws \Exception
-     */
-    protected function setEndpoint(): void
-    {
-        $this->endpoint = $this->getDomain() . '/api/timetables/students';
     }
 }

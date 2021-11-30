@@ -21,7 +21,7 @@ class Facade
     protected $controller;
 
     /**
-     * @param  \spkm\isams\Contracts\Institution  $institution
+     * @param Institution $institution
      * @return $this
      */
     public function institution(Institution $institution): self
@@ -35,7 +35,7 @@ class Facade
      * Because 'Institution' is such an awkwardly
      * long word to write when you're in a hurry!
      *
-     * @param  \spkm\isams\Contracts\Institution  $institution
+     * @param Institution $institution
      * @return $this
      */
     public function school(Institution $institution): self
@@ -46,8 +46,7 @@ class Facade
     /**
      * @param  string  $controller
      * @return $this
-     *
-     * @throws \spkm\isams\Exceptions\ControllerNotFound
+     * @throws ControllerNotFound
      */
     public function endpoint(string $controller): self
     {
@@ -58,12 +57,12 @@ class Facade
     }
 
     /**
-     * Sanatizes the controller name for us, so people can use ::class notation if they wish.
+     * Sanitizes the controller name for us, so people can use ::class notation if they wish.
      *
      * @param  string  $controllerClassName
      * @return string
      *
-     * @throws \spkm\isams\Exceptions\ControllerNotFound
+     * @throws ControllerNotFound
      */
     private function getController(string $controllerClassName): string
     {
@@ -83,8 +82,7 @@ class Facade
      * @param  string  $method
      * @param  array  $args
      * @return false|mixed
-     *
-     * @throws \spkm\isams\Exceptions\MethodNotFound
+     * @throws MethodNotFound
      */
     public function callMethod(string $method, array $args = [])
     {

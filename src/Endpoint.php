@@ -2,7 +2,10 @@
 
 namespace spkm\isams;
 
+use Carbon\Carbon;
+use Exception;
 use GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use spkm\isams\Contracts\Institution;
@@ -16,7 +19,7 @@ abstract class Endpoint
     protected $guzzle;
 
     /**
-     * @var \spkm\isams\Contracts\Institution
+     * @var Institution
      */
     protected $institution;
 
@@ -56,7 +59,7 @@ abstract class Endpoint
      * @param  int  $page
      * @return mixed
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function pageRequest(string $url, int $page)
     {
@@ -72,6 +75,7 @@ abstract class Endpoint
      * Get the Guzzle headers for a request.
      *
      * @return array
+     * @throws GuzzleException
      */
     protected function getHeaders()
     {
@@ -86,6 +90,8 @@ abstract class Endpoint
      * Get an access token for the specified Institution.
      *
      * @return string
+     * @throws GuzzleException
+     * @throws Exception
      */
     protected function getAccessToken(): string
     {
@@ -98,7 +104,7 @@ abstract class Endpoint
      * @param  string  $json
      * @param  string  $property
      * @param  string  $wrapper
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function wrapJson(string $json, string $property, string $wrapper): Collection
     {
@@ -114,14 +120,14 @@ abstract class Endpoint
      *
      * @return string
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getDomain(): string
     {
         $configName = $this->getInstitution()->getConfigName();
 
         if (array_key_exists($configName, config('isams.schools')) === false) {
-            throw new \Exception("Configuration key '$configName' does not exist in 'isams.schools'");
+            throw new Exception("Configuration key '$configName' does not exist in 'isams.schools'");
         }
 
         return config("isams.schools.$configName.domain");
@@ -130,7 +136,7 @@ abstract class Endpoint
     /**
      * Get the School to be queried.
      *
-     * @return \spkm\isams\Contracts\Institution
+     * @return Institution
      */
     protected function getInstitution(): Institution
     {
@@ -144,7 +150,7 @@ abstract class Endpoint
      * @param  array  $attributes
      * @return bool
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function validate(array $requiredAttributes, array $attributes): bool
     {
@@ -164,7 +170,7 @@ abstract class Endpoint
      * @param  mixed  $response
      * @param  mixed  $data
      * @param  array  $errors
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     protected function response(int $expectedStatusCode, $response, $data, array $errors = []): JsonResponse
     {
@@ -192,9 +198,9 @@ abstract class Endpoint
     }
 
     /**
-     * @return \Carbon\Carbon
+     * @return Carbon
      */
-    protected function getCacheDuration()
+    protected function getCacheDuration(): Carbon
     {
         return config('isams.cacheDuration', now()->addHours(12));
     }

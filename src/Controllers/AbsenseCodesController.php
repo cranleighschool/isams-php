@@ -2,18 +2,24 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
 
-/**
- * Class AbsenseCodesController.
- */
 class AbsenseCodesController extends Endpoint
 {
     /**
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws Exception
+     */
+    protected function setEndpoint(): void
+    {
+        $this->endpoint = $this->getDomain() . '/api/registration/absencecodes';
+    }
+
+    /**
+     * @return Collection
+     * @throws GuzzleException
      */
     public function index(): Collection
     {
@@ -22,13 +28,5 @@ class AbsenseCodesController extends Endpoint
         $absenceCodes = json_decode($response->getBody()->getContents())->absenceCodes;
 
         return collect($absenceCodes)->pluck('name');
-    }
-
-    /**
-     * @throws \Exception
-     */
-    protected function setEndpoint(): void
-    {
-        $this->endpoint = $this->getDomain() . '/api/registration/absencecodes';
     }
 }

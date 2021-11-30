@@ -4,6 +4,8 @@ namespace spkm\isams\Controllers;
 
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
@@ -21,8 +23,7 @@ class SchoolTermsController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -57,8 +58,7 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @return Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function index(): Collection
     {
@@ -78,8 +78,7 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @return SchoolTerm
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException|FailedtoFindNearestTerm
      */
     public function getCurrentTerm(): SchoolTerm
     {
@@ -101,8 +100,9 @@ class SchoolTermsController extends Endpoint
     }
 
     /**
-     * @param  int  $year
+     * @param int $year
      * @return Collection
+     * @throws GuzzleException
      */
     public function getYear(int $year): Collection
     {
@@ -117,9 +117,8 @@ class SchoolTermsController extends Endpoint
 
     /**
      * @return SchoolTerm
-     *
-     * @throws \spkm\isams\Exceptions\FailedtoFindNearestTerm
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws FailedtoFindNearestTerm
+     * @throws GuzzleException
      */
     private function getNearestTerm(): SchoolTerm
     {
@@ -157,10 +156,10 @@ class SchoolTermsController extends Endpoint
     }
 
     /**
-     * @param  \Carbon\CarbonInterface  $date
+     * @param CarbonInterface $date
      * @return bool
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function isDateInTermTime(CarbonInterface $date): bool
     {

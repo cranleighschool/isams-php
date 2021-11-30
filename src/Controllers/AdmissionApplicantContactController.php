@@ -2,6 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
@@ -12,7 +14,9 @@ use spkm\isams\Wrappers\PupilContact;
  * IMPORTANT NOTE:.
  *
  * As of July 2018, iSAMS have notified us that the contacts API endpoints are temporary & will be changed with the rollout of
- * the upgraded pupil contact module in 2019/2020
+ * the upgraded pupil contact module in 2019/2020.
+ *
+ * Update: Nov 2021 & there is still no sign of the upgraded pupil contact module in the near future.
  */
 class AdmissionApplicantContactController extends Endpoint
 {
@@ -20,8 +24,7 @@ class AdmissionApplicantContactController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -33,11 +36,8 @@ class AdmissionApplicantContactController extends Endpoint
      *
      * @param  string  $schoolId
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     *
-     * @deprecated
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function store(string $schoolId, array $attributes): JsonResponse
     {
@@ -65,9 +65,8 @@ class AdmissionApplicantContactController extends Endpoint
      * Get all contacts for the specified applicant.
      *
      * @param  string  $schoolId
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function show(string $schoolId): Collection
     {
@@ -89,11 +88,8 @@ class AdmissionApplicantContactController extends Endpoint
      *
      * @param  string  $schoolId
      * @param  int  $contactId
-     * @return \spkm\isams\Wrappers\PupilContact
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     *
-     * @deprecated
+     * @return PupilContact
+     * @throws GuzzleException
      */
     public function showContact(string $schoolId, int $contactId): PupilContact
     {
@@ -112,11 +108,8 @@ class AdmissionApplicantContactController extends Endpoint
      * @param  string  $schoolId
      * @param  int  $contactId
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     *
-     * @deprecated
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function update(string $schoolId, int $contactId, array $attributes): JsonResponse
     {

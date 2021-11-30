@@ -2,6 +2,8 @@
 
 namespace spkm\isams\Controllers;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -14,8 +16,7 @@ class AdmissionApplicantController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
-     *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function setEndpoint(): void
     {
@@ -25,9 +26,8 @@ class AdmissionApplicantController extends Endpoint
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Collection
+     * @throws GuzzleException
      */
     public function index(): Collection
     {
@@ -51,7 +51,7 @@ class AdmissionApplicantController extends Endpoint
         }
 
         if ($totalCount !== $items->count()) {
-            throw new \Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
+            throw new Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
         }
 
         return Cache::remember($key, $this->getCacheDuration(), function () use ($items) {
@@ -63,9 +63,8 @@ class AdmissionApplicantController extends Endpoint
      * Create a new resource.
      *
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function store(array $attributes): JsonResponse
     {
@@ -90,9 +89,8 @@ class AdmissionApplicantController extends Endpoint
      * Show the specified resource.
      *
      * @param  string  $schoolId
-     * @return \spkm\isams\Wrappers\Applicant
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Applicant
+     * @throws GuzzleException
      */
     public function show(string $schoolId): Applicant
     {
@@ -108,9 +106,8 @@ class AdmissionApplicantController extends Endpoint
      *
      * @param  string  $schoolId
      * @param  array  $attributes
-     * @return \Illuminate\Http\JsonResponse
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return JsonResponse
+     * @throws GuzzleException
      */
     public function update(string $schoolId, array $attributes): JsonResponse
     {

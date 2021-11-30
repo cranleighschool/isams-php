@@ -8,9 +8,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\School;
+use spkm\isams\Wrappers\Pupil;
 
-class OtherSchoolController extends Endpoint
+class PupilController extends Endpoint
 {
     /**
      * Set the URL the request is made to.
@@ -21,7 +21,7 @@ class OtherSchoolController extends Endpoint
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/otherschools';
+        $this->endpoint = $this->getDomain() . '/api/students';
     }
 
     /**
@@ -32,11 +32,11 @@ class OtherSchoolController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'otherSchools.index';
+        $key = $this->institution->getConfigName() . 'currentPupils.index';
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
-        $items = collect($decoded->otherSchools)->map(function ($item) {
-            return new School($item);
+        $items = collect($decoded->students)->map(function ($item) {
+            return new Pupil($item);
         });
 
         $totalCount = $decoded->totalCount;
@@ -44,8 +44,8 @@ class OtherSchoolController extends Endpoint
         while ($pageNumber <= $decoded->totalPages) {
             $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
 
-            collect($decoded->otherSchools)->map(function ($item) use ($items) {
-                $items->push(new School($item));
+            collect($decoded->students)->map(function ($item) use ($items) {
+                $items->push(new Pupil($item));
             });
 
             $pageNumber++;
@@ -70,10 +70,10 @@ class OtherSchoolController extends Endpoint
     public function store(array $attributes): JsonResponse
     {
         $this->validate([
-            'schoolName',
-            'schoolCode',
-            'schoolTelephone',
-            'postcode',
+            'forename',
+            'surname',
+            'dob',
+            'yearGroup',
         ], $attributes);
 
         $response = $this->guzzle->request('POST', $this->endpoint, [
@@ -81,47 +81,47 @@ class OtherSchoolController extends Endpoint
             'json' => $attributes,
         ]);
 
-        return $this->response(201, $response, 'The school has been created.');
+        return $this->response(201, $response, 'The pupil has been created.');
     }
 
     /**
      * Show the specified resource.
      *
-     * @param  int  $id
-     * @return School
+     * @param  string  $schoolId
+     * @return Pupil
      * @throws GuzzleException
      */
-    public function show(int $id): School
+    public function show(string $schoolId): Pupil
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        return new School($decoded);
+        return new Pupil($decoded);
     }
 
     /**
      * Update the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $schoolId
      * @param  array  $attributes
      * @return JsonResponse
      * @throws GuzzleException
      */
-    public function update(int $id, array $attributes): JsonResponse
+    public function update(string $schoolId, array $attributes): JsonResponse
     {
         $this->validate([
-            'schoolName',
-            'schoolCode',
-            'schoolTelephone',
-            'postcode',
+            'forename',
+            'surname',
+            'dob',
+            'yearGroup',
         ], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $schoolId, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
 
-        return $this->response(200, $response, 'The school has been updated.');
+        return $this->response(200, $response, 'The pupil has been updated.');
     }
 }
