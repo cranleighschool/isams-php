@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\RewardAndConductCategory;
-use spkm\isams\Wrappers\RewardAndConductReward;
 
 class RewardAndConductCategoryController extends Endpoint
 {
@@ -25,17 +24,18 @@ class RewardAndConductCategoryController extends Endpoint
     }
 
     /**
-     * Retrieves all categories associated with a module type
+     * Retrieves all categories associated with a module type.
      *
-     * @param int $moduleTypeId
+     * @param  int  $moduleTypeId
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(int $moduleTypeId): Collection
     {
         $key = $this->institution->getConfigName() . 'rewardsAndConductCategories.index';
 
-        $response = $this->guzzle->request('GET', $this->endpoint. '/'. $moduleTypeId . '/categories', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $moduleTypeId . '/categories', ['headers' => $this->getHeaders()]);
 
         return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
             return $this->wrapJson($response->getBody()->getContents(), 'categories', RewardAndConductCategory::class);
@@ -43,16 +43,17 @@ class RewardAndConductCategoryController extends Endpoint
     }
 
     /**
-     * Retrieves a category associated with a module type
+     * Retrieves a category associated with a module type.
      *
-     * @param string $moduleTypeId
-     * @param int $categoryId
+     * @param  string  $moduleTypeId
+     * @param  int  $categoryId
      * @return RewardAndConductCategory
+     *
      * @throws GuzzleException
      */
     public function show(string $moduleTypeId, int $categoryId): RewardAndConductCategory
     {
-        $response = $this->guzzle->request('GET', $this->endpoint. '/'. $moduleTypeId . '/categories/' .$categoryId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $moduleTypeId . '/categories/' . $categoryId, ['headers' => $this->getHeaders()]);
 
         $data = json_decode($response->getBody()->getContents());
 

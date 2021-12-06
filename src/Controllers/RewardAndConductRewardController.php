@@ -24,9 +24,9 @@ class RewardAndConductRewardController extends Endpoint
     }
 
     /**
-     * Retrieves all rewards associated with a student
+     * Retrieves all rewards associated with a student.
      *
-     * @param string $schoolId
+     * @param  string  $schoolId
      * @return Collection
      *
      * @throws GuzzleException
@@ -35,7 +35,7 @@ class RewardAndConductRewardController extends Endpoint
     {
         $key = $this->institution->getConfigName() . 'rewardsAndConduct.index';
 
-        $response = $this->guzzle->request('GET', $this->endpoint. '/'. $schoolId . '/rewards', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId . '/rewards', ['headers' => $this->getHeaders()]);
 
         return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
             return $this->wrapJson($response->getBody()->getContents(), 'rewards', RewardAndConductReward::class);
@@ -43,16 +43,17 @@ class RewardAndConductRewardController extends Endpoint
     }
 
     /**
-     * Retrieves a students rewards
+     * Retrieves a students rewards.
      *
-     * @param string $schoolId
-     * @param int $rewardId
+     * @param  string  $schoolId
+     * @param  int  $rewardId
      * @return RewardAndConductReward
+     *
      * @throws GuzzleException
      */
     public function show(string $schoolId, int $rewardId): RewardAndConductReward
     {
-        $response = $this->guzzle->request('GET', $this->endpoint. '/'. $schoolId . '/rewards/' .$rewardId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId . '/rewards/' . $rewardId, ['headers' => $this->getHeaders()]);
 
         $data = json_decode($response->getBody()->getContents());
 
