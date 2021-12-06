@@ -24,20 +24,37 @@ class RewardAndConductRewardController extends Endpoint
     }
 
     /**
-     * Display a listing of the resource.
+     * Retrieves all rewards associated with a student
      *
-     * @param string $id
+     * @param string $schoolId
      * @return Collection
      * @throws GuzzleException
      */
-    public function index(string $id): Collection
+    public function index(string $schoolId): Collection
     {
         $key = $this->institution->getConfigName() . 'rewardsAndConduct.index';
 
-        $response = $this->guzzle->request('GET', $this->endpoint. '/'. $id . '/rewards', ['headers' => $this->getHeaders()]);
-        
+        $response = $this->guzzle->request('GET', $this->endpoint. '/'. $schoolId . '/rewards', ['headers' => $this->getHeaders()]);
+
         return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
             return $this->wrapJson($response->getBody()->getContents(), 'rewards', RewardAndConductReward::class);
         });
+    }
+
+    /**
+     * Retrieves a students rewards
+     *
+     * @param string $schoolId
+     * @param int $rewardId
+     * @return RewardAndConductReward
+     * @throws GuzzleException
+     */
+    public function show(string $schoolId, int $rewardId): RewardAndConductReward
+    {
+        $response = $this->guzzle->request('GET', $this->endpoint. '/'. $schoolId . '/rewards/' .$rewardId, ['headers' => $this->getHeaders()]);
+
+        $data = json_decode($response->getBody()->getContents());
+
+        return new RewardAndConductReward($data);
     }
 }
