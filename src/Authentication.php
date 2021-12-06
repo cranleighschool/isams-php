@@ -32,7 +32,8 @@ class Authentication
     private $cacheKey;
 
     /**
-     * @param Institution $institution
+     * @param  Institution  $institution
+     *
      * @throws Exception
      */
     public function __construct(Institution $institution)
@@ -44,6 +45,7 @@ class Authentication
      * Get an authentication token from the cache or request a new one.
      *
      * @return string
+     *
      * @throws GuzzleException|InvalidArgumentException
      */
     public function getToken(): string
@@ -91,9 +93,10 @@ class Authentication
     /**
      * Save the access token to the cache & return it for use.
      *
-     * @param string $accessToken
-     * @param int $expiry
+     * @param  string  $accessToken
+     * @param  int  $expiry
      * @return string
+     *
      * @throws InvalidArgumentException
      */
     private function cache(string $accessToken, int $expiry): string
@@ -107,7 +110,7 @@ class Authentication
     /**
      * Set the client settings.
      *
-     * @param Institution $institution
+     * @param  Institution  $institution
      * @return void
      *
      * @throws Exception

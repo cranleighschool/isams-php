@@ -23,6 +23,7 @@ class PupilContactController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws Exception
      */
     protected function setEndpoint(): void
@@ -36,6 +37,7 @@ class PupilContactController extends Endpoint
      * @param  string  $schoolId
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(string $schoolId, array $attributes): JsonResponse
@@ -65,6 +67,7 @@ class PupilContactController extends Endpoint
      *
      * @param  string  $schoolId
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function show(string $schoolId): Collection
@@ -88,6 +91,7 @@ class PupilContactController extends Endpoint
      * @param  string  $schoolId
      * @param  int  $contactId
      * @return PupilContact
+     *
      * @throws GuzzleException
      */
     public function showContact(string $schoolId, int $contactId): PupilContact
@@ -108,6 +112,7 @@ class PupilContactController extends Endpoint
      * @param  int  $contactId
      * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function update(string $schoolId, int $contactId, array $attributes): JsonResponse

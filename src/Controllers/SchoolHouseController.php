@@ -27,6 +27,7 @@ class SchoolHouseController extends Endpoint
      * Display a listing of the resource.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
@@ -45,6 +46,7 @@ class SchoolHouseController extends Endpoint
      *
      * @param  int  $id
      * @return House
+     *
      * @throws GuzzleException
      */
     public function show(int $id): House

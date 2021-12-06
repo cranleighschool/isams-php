@@ -14,6 +14,7 @@ class SchoolTeachingDepartmentSubjectController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws Exception
      */
     protected function setEndpoint(): void
@@ -26,6 +27,7 @@ class SchoolTeachingDepartmentSubjectController extends Endpoint
      *
      * @param  int  $departmentId
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function show(int $departmentId): Collection

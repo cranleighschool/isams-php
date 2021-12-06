@@ -21,7 +21,7 @@ class Facade
     protected $controller;
 
     /**
-     * @param Institution $institution
+     * @param  Institution  $institution
      * @return $this
      */
     public function institution(Institution $institution): self
@@ -35,7 +35,7 @@ class Facade
      * Because 'Institution' is such an awkwardly
      * long word to write when you're in a hurry!
      *
-     * @param Institution $institution
+     * @param  Institution  $institution
      * @return $this
      */
     public function school(Institution $institution): self
@@ -46,6 +46,7 @@ class Facade
     /**
      * @param  string  $controller
      * @return $this
+     *
      * @throws ControllerNotFound
      */
     public function endpoint(string $controller): self
@@ -82,6 +83,7 @@ class Facade
      * @param  string  $method
      * @param  array  $args
      * @return false|mixed
+     *
      * @throws MethodNotFound
      */
     public function callMethod(string $method, array $args = [])

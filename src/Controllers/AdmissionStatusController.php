@@ -16,6 +16,7 @@ class AdmissionStatusController extends Endpoint
      * Set the URL the request is made to.
      *
      * @return void
+     *
      * @throws Exception
      */
     protected function setEndpoint(): void
@@ -27,6 +28,7 @@ class AdmissionStatusController extends Endpoint
      * Display a listing of the resource.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection

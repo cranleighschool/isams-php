@@ -28,6 +28,7 @@ class RewardAndConductRewardController extends Endpoint
      *
      * @param string $schoolId
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(string $schoolId): Collection
