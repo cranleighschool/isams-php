@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\RewardAndConductModuleType;
-use spkm\isams\Wrappers\RewardAndConductReward;
 
 class RewardAndConductModuleTypeController extends Endpoint
 {
@@ -25,9 +24,10 @@ class RewardAndConductModuleTypeController extends Endpoint
     }
 
     /**
-     * Retrieves all module types
+     * Retrieves all module types.
      *
      * @return Collection
+     *
      * @throws GuzzleException
      */
     public function index(): Collection
