@@ -35,9 +35,9 @@ class RewardAndConductRewardController extends Endpoint
         $key = $this->institution->getConfigName() . 'rewardsAndConduct.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint. '/'. $id . '/rewards', ['headers' => $this->getHeaders()]);
-
+        
         return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
-            return $this->wrapJson($response->getBody()->getContents(), 'items', RewardAndConductReward::class);
+            return $this->wrapJson($response->getBody()->getContents(), 'rewards', RewardAndConductReward::class);
         });
     }
 }
