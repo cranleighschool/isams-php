@@ -141,11 +141,34 @@ class HumanResourcesEmployeeController extends Endpoint
 
         $attributes = array_merge($currentData, $attributes);
 
+        $attributes = $this->fixEmptyNationalitiesData($attributes);
+
         $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
 
         return $this->response(200, $response, 'The employee has been updated.');
+    }
+
+    /**
+     * This is required because if Nationalities field is empty, it results in an array with one empty
+     * item inside. Which when we push back to ISAMS responds with: '' is not a known nationality.
+     * So what we are doing here is working out if that is the case, and if so unsetting the
+     * attribute.
+     *
+     * @param  array  $attributes
+     *
+     * @return array
+     */
+    private function fixEmptyNationalitiesData(array $attributes): array
+    {
+        if (isset($attributes['nationalities'])) {
+            $nationalities = $attributes['nationalities'];
+            if (count($nationalities)==1 && empty($nationalities[0])) {
+                unset($attributes['nationalities']);
+            }
+        }
+        return $attributes;
     }
 }
