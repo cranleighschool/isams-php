@@ -158,17 +158,17 @@ class HumanResourcesEmployeeController extends Endpoint
      * attribute.
      *
      * @param  array  $attributes
-     *
      * @return array
      */
     private function fixEmptyNationalitiesData(array $attributes): array
     {
         if (isset($attributes['nationalities'])) {
             $nationalities = $attributes['nationalities'];
-            if (count($nationalities)==1 && empty($nationalities[0])) {
+            if (count($nationalities) == 1 && empty($nationalities[0])) {
                 unset($attributes['nationalities']);
             }
         }
+
         return $attributes;
     }
 }
