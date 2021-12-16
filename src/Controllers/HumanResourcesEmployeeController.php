@@ -131,6 +131,8 @@ class HumanResourcesEmployeeController extends Endpoint
     public function update(int $id, array $attributes): JsonResponse
     {
         $this->validate([
+            'title',
+            'schoolInitials',
             'forename',
             'surname',
         ], $attributes);
