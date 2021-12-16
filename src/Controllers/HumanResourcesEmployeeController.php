@@ -137,6 +137,10 @@ class HumanResourcesEmployeeController extends Endpoint
             'surname',
         ], $attributes);
 
+        $currentData = (array) $this->show($id);
+
+        $attributes = array_merge($currentData, $attributes);
+
         $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
