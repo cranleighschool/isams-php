@@ -16,7 +16,7 @@ class HumanResourcesEmployeeHousesController extends Endpoint
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain().'/api/humanresources/employees';
+        $this->endpoint = $this->getDomain() . '/api/humanresources/employees';
     }
 
     /**
@@ -33,13 +33,14 @@ class HumanResourcesEmployeeHousesController extends Endpoint
             ->guzzle
             ->request(
                 'GET',
-                $this->endpoint.'/'.$id.'/houses',
+                $this->endpoint . '/' . $id . '/houses',
                 [
                     'headers' => $this->getHeaders(),
                 ]
             );
 
         $decoded = json_decode($response->getBody()->getContents());
+
         return new EmployeeHouse($decoded, $this->institution);
     }
 }
