@@ -8,6 +8,6 @@ class Isams extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'isams';
+        return Isams::class;
     }
 }
