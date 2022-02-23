@@ -35,7 +35,7 @@ class HumanResourcesEmployeeController extends Endpoint
     {
         $key = $this->institution->getConfigName() . 'hrEmployees.index';
 
-        return Cache::remember($key, $this->getCacheDuration(), function() use ($key) {
+        return Cache::remember($key, $this->getCacheDuration(), function () {
             $decoded = json_decode($this->pageRequest($this->endpoint, 1, ['expand' => 'customFields']));
             $items = collect($decoded->employees)->map(function ($item) {
                 return new Employee($item);
