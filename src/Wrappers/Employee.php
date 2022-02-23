@@ -2,6 +2,7 @@
 
 namespace spkm\isams\Wrappers;
 
+use Illuminate\Support\Carbon;
 use spkm\isams\Wrapper;
 
 /**
@@ -16,6 +17,12 @@ class Employee extends Wrapper
      */
     protected function handle(): void
     {
-        //
+        $fields = ['dateOfBirth', 'enrolmentDate'];
+        foreach ($fields as $field) {
+            if (!is_null($this->$field)) {
+                $this->$field = Carbon::parse($this->$field);
+            }
+        }
+        $this->customFields = collect($this->customFields);
     }
 }
