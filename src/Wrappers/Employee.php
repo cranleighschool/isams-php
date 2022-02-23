@@ -19,7 +19,7 @@ class Employee extends Wrapper
     {
         $fields = ['dateOfBirth', 'enrolmentDate'];
         foreach ($fields as $field) {
-            if (!is_null($this->$field)) {
+            if (! is_null($this->$field)) {
                 $this->$field = Carbon::parse($this->$field);
             }
         }
