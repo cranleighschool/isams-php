@@ -57,12 +57,12 @@ abstract class Endpoint
      *
      * @param  string  $url
      * @param  int  $page
-     * @param array $queryArgs
+     * @param  array  $queryArgs
      * @return mixed
      *
      * @throws GuzzleException
      */
-    public function pageRequest(string $url, int $page, array $queryArgs=[])
+    public function pageRequest(string $url, int $page, array $queryArgs = [])
     {
         $response = $this->guzzle->request('GET', $url, [
             'query' => array_merge(['page' => $page], $queryArgs),
