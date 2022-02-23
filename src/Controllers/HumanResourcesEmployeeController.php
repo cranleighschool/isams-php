@@ -35,31 +35,29 @@ class HumanResourcesEmployeeController extends Endpoint
     {
         $key = $this->institution->getConfigName() . 'hrEmployees.index';
 
-        $decoded = json_decode($this->pageRequest($this->endpoint, 1, ['expand' => 'customFields']));
-        $items = collect($decoded->employees)->map(function ($item) {
-            return new Employee($item);
-        });
-
-        $totalCount = $decoded->totalCount;
-        $pageNumber = $decoded->page + 1;
-        while ($pageNumber <= $decoded->totalPages) {
-            $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber, ['expand' => 'customFields']));
-
-            collect($decoded->employees)->map(function ($item) use ($items) {
-                $items->push(new Employee($item));
+        return Cache::remember($key, $this->getCacheDuration(), function() use ($key) {
+            $decoded = json_decode($this->pageRequest($this->endpoint, 1, ['expand' => 'customFields']));
+            $items = collect($decoded->employees)->map(function ($item) {
+                return new Employee($item);
             });
 
-            $pageNumber++;
-        }
+            $totalCount = $decoded->totalCount;
+            $pageNumber = $decoded->page + 1;
+            while ($pageNumber <= $decoded->totalPages) {
+                $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber, ['expand' => 'customFields']));
 
-        if ($totalCount !== $items->count()) {
-            throw new Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
-        }
+                collect($decoded->employees)->map(function ($item) use ($items) {
+                    $items->push(new Employee($item));
+                });
 
-        $items = $this->sortBySurname($items);
+                $pageNumber++;
+            }
 
-        return Cache::remember($key, $this->getCacheDuration(), function () use ($items) {
-            return $items;
+            if ($totalCount !== $items->count()) {
+                throw new Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
+            }
+
+            return $this->sortBySurname($items);
         });
     }
 
