@@ -35,7 +35,7 @@ class HumanResourcesEmployeeController extends Endpoint
     {
         $key = $this->institution->getConfigName() . 'hrEmployees.index';
 
-        $decoded = json_decode($this->pageRequest($this->endpoint, 1));
+        $decoded = json_decode($this->pageRequest($this->endpoint, 1, ['expand' => 'customFields']));
         $items = collect($decoded->employees)->map(function ($item) {
             return new Employee($item);
         });
@@ -43,7 +43,7 @@ class HumanResourcesEmployeeController extends Endpoint
         $totalCount = $decoded->totalCount;
         $pageNumber = $decoded->page + 1;
         while ($pageNumber <= $decoded->totalPages) {
-            $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
+            $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber, ['expand' => 'customFields']));
 
             collect($decoded->employees)->map(function ($item) use ($items) {
                 $items->push(new Employee($item));
