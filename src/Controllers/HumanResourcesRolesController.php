@@ -9,20 +9,29 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\EmployeeRole;
-use spkm\isams\Wrappers\Language;
 
 class HumanResourcesRolesController extends Endpoint
 {
     public function index(): Collection
     {
         $key = $this->institution->getConfigName().'hrRoles.index';
-        Cache::forget($key); // TODO: Remove
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
-
         return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
-            return $this->wrapJson($response->getBody()->getContents(), 'items', EmployeeRole::class);
+            return $this->wrapJson($response->getBody()->getContents(), 'roles', EmployeeRole::class);
         });
+    }
+
+    /**
+     * @param  string  $string
+     *
+     * @throws \Illuminate\Support\ItemNotFoundException
+     * @return \spkm\isams\Wrappers\EmployeeRole
+     */
+    public function searchByRoleName(string $string): EmployeeRole
+    {
+        $list = $this->index()->where("name", "=", $string);
+        return $list->firstOrFail();
     }
 
     /**
@@ -38,7 +47,9 @@ class HumanResourcesRolesController extends Endpoint
     {
         $response = $this->guzzle->request('POST', $this->endpoint, [
             'headers' => $this->getHeaders(),
-            'json' => $roleName,
+            'json' => [
+                'name' => $roleName,
+            ],
 
         ]);
 
