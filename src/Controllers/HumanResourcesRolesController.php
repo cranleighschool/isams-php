@@ -14,9 +14,10 @@ class HumanResourcesRolesController extends Endpoint
 {
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName().'hrRoles.index';
+        $key = $this->institution->getConfigName() . 'hrRoles.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
+
         return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
             return $this->wrapJson($response->getBody()->getContents(), 'roles', EmployeeRole::class);
         });
@@ -24,13 +25,14 @@ class HumanResourcesRolesController extends Endpoint
 
     /**
      * @param  string  $string
+     * @return \spkm\isams\Wrappers\EmployeeRole
      *
      * @throws \Illuminate\Support\ItemNotFoundException
-     * @return \spkm\isams\Wrappers\EmployeeRole
      */
     public function searchByRoleName(string $string): EmployeeRole
     {
-        $list = $this->index()->where("name", "=", $string);
+        $list = $this->index()->where('name', '=', $string);
+
         return $list->firstOrFail();
     }
 
