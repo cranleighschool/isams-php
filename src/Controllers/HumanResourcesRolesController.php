@@ -9,36 +9,19 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\EmployeeRole;
+use spkm\isams\Wrappers\Language;
 
 class HumanResourcesRolesController extends Endpoint
 {
     public function index(): Collection
     {
         $key = $this->institution->getConfigName().'hrRoles.index';
+        Cache::forget($key); // TODO: Remove
 
-        return Cache::remember($key, $this->getCacheDuration(), function () {
-            $decoded = json_decode($this->pageRequest($this->endpoint, 1));
-            $items = collect($decoded->roles)->map(function ($item) {
-                return new EmployeeRole($item);
-            });
+        $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
-            $totalCount = $decoded->totalCount;
-            $pageNumber = $decoded->page + 1;
-            while ($pageNumber <= $decoded->totalPages) {
-                $decoded = json_decode($this->pageRequest($this->endpoint, $pageNumber));
-
-                collect($decoded->employees)->map(function ($item) use ($items) {
-                    $items->push(new EmployeeRole($item));
-                });
-
-                $pageNumber++;
-            }
-
-            if ($totalCount !== $items->count()) {
-                throw new Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
-            }
-
-            $items;
+        return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
+            return $this->wrapJson($response->getBody()->getContents(), 'items', EmployeeRole::class);
         });
     }
 
