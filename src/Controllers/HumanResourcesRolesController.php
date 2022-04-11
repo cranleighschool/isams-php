@@ -38,7 +38,6 @@ class HumanResourcesRolesController extends Endpoint
      * Create a new resource.
      *
      * @param  string  $roleName
-     *
      * @return JsonResponse
      *
      * @throws GuzzleException
@@ -60,14 +59,13 @@ class HumanResourcesRolesController extends Endpoint
      * Show the specified resource.
      *
      * @param  int  $id
-     *
      * @return EmployeeRole
      *
      * @throws GuzzleException
      */
     public function show(int $id): EmployeeRole
     {
-        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, [
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
         ]);
 
@@ -85,6 +83,6 @@ class HumanResourcesRolesController extends Endpoint
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain().'/api/humanresources/roles';
+        $this->endpoint = $this->getDomain() . '/api/humanresources/roles';
     }
 }
