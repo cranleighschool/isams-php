@@ -33,7 +33,7 @@ class RewardAndConductRewardController extends Endpoint
      */
     public function index(string $schoolId): Collection
     {
-        $key = $this->institution->getConfigName() . 'rewardsAndConduct.index'.$schoolId;
+        $key = $this->institution->getConfigName() . 'rewardsAndConduct.index' . $schoolId;
 
         $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId . '/rewards', ['headers' => $this->getHeaders()]);
 

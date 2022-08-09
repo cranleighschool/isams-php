@@ -33,7 +33,7 @@ class RewardAndConductCategoryController extends Endpoint
      */
     public function index(int $moduleTypeId): Collection
     {
-        $key = $this->institution->getConfigName() . 'rewardsAndConductCategories.index'.$moduleTypeId;
+        $key = $this->institution->getConfigName() . 'rewardsAndConductCategories.index' . $moduleTypeId;
 
         $response = $this->guzzle->request('GET', $this->endpoint . '/' . $moduleTypeId . '/categories', ['headers' => $this->getHeaders()]);
 
