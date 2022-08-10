@@ -123,7 +123,7 @@ class Authentication
         }
 
         $this->clientId = config("isams.schools.$configName.client_id");
-        $this->authenticationUrl = config("isams.schools.$configName.domain") . '/main/auth/connect/token';
+        $this->authenticationUrl = config("isams.schools.$configName.domain") . '/auth/connect/token';
         $this->clientSecret = config("isams.schools.$configName.client_secret");
         $this->cacheKey = $configName . 'RestApiAccessToken';
     }
