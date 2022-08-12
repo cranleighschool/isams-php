@@ -5,10 +5,11 @@ namespace spkm\isams\Controllers;
 use spkm\isams\Endpoint;
 use spkm\isams\TimetableControllerTrait;
 
+
 /**
  * Class PupilTimetableController.
  */
-class PupilTimetableController extends Endpoint
+class TeacherTimetableController extends Endpoint
 {
     use TimetableControllerTrait;
 
@@ -21,6 +22,6 @@ class PupilTimetableController extends Endpoint
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/timetables/students';
+        $this->endpoint = $this->getDomain() . '/api/timetables/employees';
     }
 }

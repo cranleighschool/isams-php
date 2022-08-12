@@ -2,6 +2,8 @@
 
 namespace spkm\isams\Wrappers;
 
+use Illuminate\Support\Collection;
+use spkm\isams\Controllers\RoughAndReadyController;
 use spkm\isams\Wrapper;
 
 /**
@@ -16,9 +18,19 @@ class Lesson extends Wrapper
      */
     protected function handle(): void
     {
-        unset($this->employeeId);
-        $this->teacher = $this->employeeTitle . ' ' . $this->employeeSurname;
-        unset($this->employeeTitle);
-        unset($this->employeeSurname);
+        if (isset($this->employeeId)) {
+            unset($this->employeeId);
+            $this->teacher = $this->employeeTitle.' '.$this->employeeSurname;
+            unset($this->employeeTitle);
+            unset($this->employeeSurname);
+        } else {
+            // Must be a teacher...
+            $this->pupils = $this->getPupilsInSet($this->id);
+        }
+    }
+    private function getPupilsInSet(int $setId): Collection
+    {
+        $api = new RoughAndReadyController(\App\School::find(2));
+        return collect($api->get('teaching/sets/'.$setId.'/setList')->students)->pluck('schoolId');
     }
 }
