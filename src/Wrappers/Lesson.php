@@ -29,6 +29,12 @@ class Lesson extends Wrapper
         }
     }
 
+    /**
+     * @param  int  $setId
+     *
+     * @return \Illuminate\Support\Collection
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     private function getPupilsInSet(int $setId): Collection
     {
         $api = new RoughAndReadyController(\App\School::find(2));
