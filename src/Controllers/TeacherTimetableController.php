@@ -5,7 +5,6 @@ namespace spkm\isams\Controllers;
 use spkm\isams\Endpoint;
 use spkm\isams\TimetableControllerTrait;
 
-
 /**
  * Class PupilTimetableController.
  */
