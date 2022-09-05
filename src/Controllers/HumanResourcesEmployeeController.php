@@ -112,7 +112,7 @@ class HumanResourcesEmployeeController extends Endpoint
     {
         $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, [
             'headers' => $this->getHeaders(),
-            'expand' => 'customFields'
+            'expand' => 'customFields',
         ]);
 
         $decoded = json_decode($response->getBody()->getContents());
