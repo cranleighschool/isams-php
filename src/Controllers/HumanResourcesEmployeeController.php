@@ -110,7 +110,10 @@ class HumanResourcesEmployeeController extends Endpoint
      */
     public function show(int $id): Employee
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, [
+            'headers' => $this->getHeaders(),
+            'expand' => 'customFields'
+        ]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
