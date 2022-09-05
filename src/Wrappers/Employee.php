@@ -23,6 +23,11 @@ class Employee extends Wrapper
                 $this->$field = Carbon::parse($this->$field);
             }
         }
-        $this->customFields = collect($this->customFields);
+
+        if (isset($this->customFields)) {
+            $this->customFields = collect($this->customFields);
+        } else {
+            $this->customFields = collect();
+        }
     }
 }
