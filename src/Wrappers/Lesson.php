@@ -3,6 +3,7 @@
 namespace spkm\isams\Wrappers;
 
 use Illuminate\Support\Collection;
+use spkm\isams\Contracts\Institution;
 use spkm\isams\Controllers\RoughAndReadyController;
 use spkm\isams\Wrapper;
 
@@ -11,6 +12,16 @@ use spkm\isams\Wrapper;
  */
 class Lesson extends Wrapper
 {
+    /**
+     * @param $item
+     * @param  \spkm\isams\Contracts\Institution  $institution
+     */
+    public function __construct($item, Institution $institution)
+    {
+        $this->institution = $institution;
+        parent::__construct($item);
+    }
+
     /**
      * Handle the data.
      *
@@ -37,7 +48,7 @@ class Lesson extends Wrapper
      */
     private function getPupilsInSet(int $setId): Collection
     {
-        $api = new RoughAndReadyController(\App\School::find(2));
+        $api = new RoughAndReadyController($this->institution);
 
         return collect($api->get('teaching/sets/' . $setId . '/setList')->students)->pluck('schoolId');
     }
