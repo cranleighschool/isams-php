@@ -28,7 +28,7 @@ trait TimetableControllerTrait
                 $lesson = collect($timetable['sets'])->filter(function ($item) use ($period) {
                     return $item->periodId === $period->id;
                 })->map(function ($item) {
-                    return new Lesson($item);
+                    return new Lesson($item, $this->institution);
                 })->first();
 
                 if ($lesson) {
