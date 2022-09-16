@@ -24,7 +24,7 @@ class TeachingSetList extends Wrapper
     protected function handle(): void
     {
         $this->isHidden = (bool) optional($this->item)->hidden;
-        $this->item->students = collect($this->students)->map(function($item){
+        $this->item->students = collect($this->students)->map(function ($item) {
             return $item->schoolId;
         });
         unset($this->students);
