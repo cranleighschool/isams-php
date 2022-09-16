@@ -4,7 +4,6 @@ namespace spkm\isams\Controllers;
 
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use spkm\isams\Endpoint;
@@ -53,7 +52,7 @@ class TeachingSetController extends Endpoint
      */
     public function show(int $id): TeachingSetList
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id .'/setList', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/setList', ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
