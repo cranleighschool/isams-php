@@ -33,7 +33,7 @@ class TeachingSetController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'teachingSubjects.index';
+        $key = $this->institution->getConfigName() . 'teachingSets.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
