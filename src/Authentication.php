@@ -101,7 +101,7 @@ class Authentication
      */
     private function cache(string $accessToken, int $expiry): string
     {
-        $minutes = (int) ($expiry / 60) -5;
+        $minutes = (int) ($expiry / 60) - 5;
         Cache::store('file')->put($this->cacheKey, $accessToken, now()->addMinutes($minutes));
 
         return Cache::store('file')->get($this->cacheKey);
