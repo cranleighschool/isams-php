@@ -12,7 +12,7 @@ objects returned from the API into model instances.
 See https://developerdemo.isams.cloud/Main/swagger/ui/index for their API documentation & https://developer.isams.com/display/PRA/Getting+started+-+REST+API 
 
 ## Installation and usage
-This package requires PHP 8 & Laravel 8.0 or higher. See the `tests/` folder for documentation. 
+This package requires PHP 8.1 & Laravel 9.0 or higher. See the `tests/` folder for documentation. (We'd quite like someone to write some proper documentation) 
 
 ### Basic Installation:
 You can install this package via composer using:
@@ -73,6 +73,7 @@ If you discover any security related issues, please email spkm@cranleigh.org ins
 ## Credits
 
 - [Simon Mitchell](https://github.com/spkm)
+- [Fred Bradley](https://github.com/fredbradley)
 - [All Contributors](../../contributors)
 
 ## License
