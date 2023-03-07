@@ -15,12 +15,23 @@ abstract class Wrapper
      * @var mixed
      */
     protected $item;
+    protected array $attributes = [];
 
     public function __construct($item)
     {
         $this->item = $item;
-        $this->setPublicProperties();
+        $this->setAttributes();
         $this->handle();
+    }
+
+    public function __set(string $name, mixed $value)
+    {
+        $this->attributes[$name] = $value;
+    }
+
+    public function __get(string $name)
+    {
+        return $this->attributes[$name];
     }
 
     /**
@@ -35,7 +46,7 @@ abstract class Wrapper
      *
      * @return void
      */
-    protected function setPublicProperties(): void
+    protected function setAttributes(): void
     {
         if (is_array($this->item) || is_object($this->item)) {
             foreach ($this->item as $key => $value) {
