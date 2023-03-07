@@ -64,9 +64,10 @@ class RewardAndConductRewardController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param int $pupilId
-     * @param array $attributes
+     * @param  int  $pupilId
+     * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(int $pupilId, array $attributes): JsonResponse
@@ -78,7 +79,7 @@ class RewardAndConductRewardController extends Endpoint
             'TeacherId',
         ], $attributes);
 
-        $response = $this->guzzle->request('POST', $this->endpoint.'/'.$pupilId.'/rewards', [
+        $response = $this->guzzle->request('POST', $this->endpoint . '/' . $pupilId . '/rewards', [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
