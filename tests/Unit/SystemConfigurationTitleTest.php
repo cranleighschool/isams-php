@@ -60,7 +60,7 @@ class SystemConfigurationTitleTest extends TestCase
 
         //Find it
         $titles = (new TitleController($this->school))->index();
-        $toDelete = ($this->findTitleByName($newTitle, $titles->toArray()));
+        $toDelete = $this->findTitleByName($newTitle, $titles->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {
@@ -80,7 +80,7 @@ class SystemConfigurationTitleTest extends TestCase
 
         //Find it
         $titles = (new TitleController($this->school))->index();
-        $toUpdate = ($this->findTitleByName($newTitle, $titles->toArray()));
+        $toUpdate = $this->findTitleByName($newTitle, $titles->toArray());
 
         //Update it
         $renameTitle = 'MySpecialTitle';
@@ -89,7 +89,7 @@ class SystemConfigurationTitleTest extends TestCase
 
         //Find it again
         $titles = (new TitleController($this->school))->index();
-        $toDelete = ($this->findTitleByName($renameTitle, $titles->toArray()));
+        $toDelete = $this->findTitleByName($renameTitle, $titles->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {

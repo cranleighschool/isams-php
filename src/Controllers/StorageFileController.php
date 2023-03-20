@@ -62,6 +62,6 @@ class StorageFileController extends Endpoint
         header('Content-Disposition: ' . $response->getHeader('Content-Disposition')[0]);
         header('Content-Length: ' . $response->getHeader('Content-Length')[0]);
         echo $response->getBody()->getContents();
-        exit();
+        exit;
     }
 }

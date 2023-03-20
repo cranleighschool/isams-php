@@ -60,7 +60,7 @@ class SystemConfigurationCountiesTest extends TestCase
 
         //Find it
         $counties = (new CountyController($this->school))->index();
-        $toDelete = ($this->findCountyByName($newCounty, $counties->toArray()));
+        $toDelete = $this->findCountyByName($newCounty, $counties->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {
@@ -80,7 +80,7 @@ class SystemConfigurationCountiesTest extends TestCase
 
         //Find it
         $counties = (new CountyController($this->school))->index();
-        $toUpdate = ($this->findCountyByName($newCounty, $counties->toArray()));
+        $toUpdate = $this->findCountyByName($newCounty, $counties->toArray());
 
         //Update it
         $renameCounty = 'MySpecialCounty';
@@ -89,7 +89,7 @@ class SystemConfigurationCountiesTest extends TestCase
 
         //Find it again
         $counties = (new CountyController($this->school))->index();
-        $toDelete = ($this->findCountyByName($renameCounty, $counties->toArray()));
+        $toDelete = $this->findCountyByName($renameCounty, $counties->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {

@@ -60,7 +60,7 @@ class SystemConfigurationNationalityTest extends TestCase
 
         //Find it
         $nationalities = (new NationalityController($this->school))->index();
-        $toDelete = ($this->findNationalityByName($newNationality, $nationalities->toArray()));
+        $toDelete = $this->findNationalityByName($newNationality, $nationalities->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {
@@ -80,7 +80,7 @@ class SystemConfigurationNationalityTest extends TestCase
 
         //Find it
         $nationalities = (new NationalityController($this->school))->index();
-        $toUpdate = ($this->findNationalityByName($newNationality, $nationalities->toArray()));
+        $toUpdate = $this->findNationalityByName($newNationality, $nationalities->toArray());
 
         //Update it
         $renameNationality = 'MySpecialNationality';
@@ -89,7 +89,7 @@ class SystemConfigurationNationalityTest extends TestCase
 
         //Find it again
         $nationalities = (new NationalityController($this->school))->index();
-        $toDelete = ($this->findNationalityByName($renameNationality, $nationalities->toArray()));
+        $toDelete = $this->findNationalityByName($renameNationality, $nationalities->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {

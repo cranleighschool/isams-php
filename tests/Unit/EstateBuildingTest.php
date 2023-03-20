@@ -60,7 +60,7 @@ class EstateBuildingTest extends TestCase
 
         //Find it
         $buildings = (new EstateBuildingController($this->school))->index();
-        $toUpdate = ($this->findBuildingByName($newBuilding, $buildings->toArray()));
+        $toUpdate = $this->findBuildingByName($newBuilding, $buildings->toArray());
 
         //Update it
         $renameBuilding = 'MySpecialBuilding';
