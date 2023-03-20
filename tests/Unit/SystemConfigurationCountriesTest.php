@@ -60,7 +60,7 @@ class SystemConfigurationCountriesTest extends TestCase
 
         //Find it
         $countries = (new CountryController($this->school))->index();
-        $toDelete = ($this->findCountryByName($newCountry, $countries->toArray()));
+        $toDelete = $this->findCountryByName($newCountry, $countries->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {
@@ -80,7 +80,7 @@ class SystemConfigurationCountriesTest extends TestCase
 
         //Find it
         $countries = (new CountryController($this->school))->index();
-        $toUpdate = ($this->findCountryByName($newCountry, $countries->toArray()));
+        $toUpdate = $this->findCountryByName($newCountry, $countries->toArray());
 
         //Update it
         $renameCountry = 'MySpecialCountry';
@@ -89,7 +89,7 @@ class SystemConfigurationCountriesTest extends TestCase
 
         //Find it again
         $countries = (new CountryController($this->school))->index();
-        $toDelete = ($this->findCountryByName($renameCountry, $countries->toArray()));
+        $toDelete = $this->findCountryByName($renameCountry, $countries->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {
