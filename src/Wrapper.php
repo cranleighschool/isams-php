@@ -2,6 +2,7 @@
 
 namespace spkm\isams;
 
+#[\AllowDynamicProperties]
 abstract class Wrapper
 {
     /**
@@ -11,27 +12,10 @@ abstract class Wrapper
      */
     protected $hidden = [];
 
-    /**
-     * @var mixed
-     */
-    protected $item;
-    protected array $attributes = [];
-
     public function __construct($item)
     {
-        $this->item = $item;
-        $this->setAttributes();
+        $this->setAttributes($item);
         $this->handle();
-    }
-
-    public function __set(string $name, mixed $value)
-    {
-        $this->attributes[$name] = $value;
-    }
-
-    public function __get(string $name)
-    {
-        return $this->attributes[$name];
     }
 
     /**
@@ -46,13 +30,11 @@ abstract class Wrapper
      *
      * @return void
      */
-    protected function setAttributes(): void
+    protected function setAttributes(object|array $item): void
     {
-        if (is_array($this->item) || is_object($this->item)) {
-            foreach ($this->item as $key => $value) {
-                if (in_array($key, $this->hidden) === false && property_exists($this, $key) === false) {
-                    $this->{$key} = $value;
-                }
+        foreach ($item as $key => $value) {
+            if (in_array($key, $this->hidden) === false && property_exists($this, $key) === false) {
+                $this->{$key} = $value;
             }
         }
     }
