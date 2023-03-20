@@ -11,9 +11,11 @@ abstract class Wrapper
      * @array
      */
     protected $hidden = [];
+    protected $item;
 
     public function __construct($item)
     {
+        $this->item = $item;
         $this->setAttributes($item);
         $this->handle();
     }
