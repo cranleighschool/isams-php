@@ -64,9 +64,10 @@ class RewardAndConductRewardController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param string $pupilId
-     * @param array $attributes
+     * @param  string  $pupilId
+     * @param  array  $attributes
      * @return JsonResponse
+     *
      * @throws GuzzleException
      */
     public function store(string $pupilId, array $attributes): JsonResponse
