@@ -64,12 +64,12 @@ class RewardAndConductRewardController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param int $pupilId
+     * @param string $pupilId
      * @param array $attributes
      * @return JsonResponse
      * @throws GuzzleException
      */
-    public function store(int $pupilId, array $attributes): JsonResponse
+    public function store(string $pupilId, array $attributes): JsonResponse
     {
         $this->validate([
             'moduleTypeId',
