@@ -78,7 +78,7 @@ class RewardAndConductRewardController extends Endpoint
             'TeacherId',
         ], $attributes);
 
-        $response = $this->guzzle->request('POST', $this->endpoint.'/'.$pupilId.'/rewards', [
+        $response = $this->guzzle->request('POST', $this->endpoint . '/' . $pupilId . '/rewards', [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

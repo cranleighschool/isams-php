@@ -59,7 +59,7 @@ class AdmissionStatusTest extends TestCase
 
         //Find it
         $admissionStatuses = (new AdmissionStatusController($this->school))->index();
-        $toDelete = ($this->findAdmissionStatusByName($newAdmissionStatus, $admissionStatuses->toArray()));
+        $toDelete = $this->findAdmissionStatusByName($newAdmissionStatus, $admissionStatuses->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {
@@ -79,7 +79,7 @@ class AdmissionStatusTest extends TestCase
 
         //Find it
         $admissionStatuses = (new AdmissionStatusController($this->school))->index();
-        $toUpdate = ($this->findAdmissionStatusByName($newAdmissionStatus, $admissionStatuses->toArray()));
+        $toUpdate = $this->findAdmissionStatusByName($newAdmissionStatus, $admissionStatuses->toArray());
 
         //Update it
         $renameAdmissionStatus = 'MySpecialAdmissionStatus';
@@ -88,7 +88,7 @@ class AdmissionStatusTest extends TestCase
 
         //Find it again
         $admissionStatuses = (new AdmissionStatusController($this->school))->index();
-        $toDelete = ($this->findAdmissionStatusByName($renameAdmissionStatus, $admissionStatuses->toArray()));
+        $toDelete = $this->findAdmissionStatusByName($renameAdmissionStatus, $admissionStatuses->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {

@@ -60,7 +60,7 @@ class SystemConfigurationLanguageTest extends TestCase
 
         //Find it
         $languages = (new LanguageController($this->school))->index();
-        $toDelete = ($this->findLanguageByName($newLanguage, $languages->toArray()));
+        $toDelete = $this->findLanguageByName($newLanguage, $languages->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {
@@ -80,7 +80,7 @@ class SystemConfigurationLanguageTest extends TestCase
 
         //Find it
         $languages = (new LanguageController($this->school))->index();
-        $toUpdate = ($this->findLanguageByName($newLanguage, $languages->toArray()));
+        $toUpdate = $this->findLanguageByName($newLanguage, $languages->toArray());
 
         //Update it
         $renameLanguage = 'MySpecialLanguage';
@@ -89,7 +89,7 @@ class SystemConfigurationLanguageTest extends TestCase
 
         //Find it again
         $languages = (new LanguageController($this->school))->index();
-        $toDelete = ($this->findLanguageByName($renameLanguage, $languages->toArray()));
+        $toDelete = $this->findLanguageByName($renameLanguage, $languages->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {

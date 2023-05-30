@@ -61,7 +61,7 @@ class PupilBoardingStatusesTest extends TestCase
         //Find it
         $newBoardingStatuses = (new PupilBoardingStatusController($this->school))->index();
 
-        $toDelete = ($this->findBoardingStatusByName($newboardingStatus, $newBoardingStatuses->toArray()));
+        $toDelete = $this->findBoardingStatusByName($newboardingStatus, $newBoardingStatuses->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {
@@ -81,7 +81,7 @@ class PupilBoardingStatusesTest extends TestCase
 
         //Find it
         $counties = (new PupilBoardingStatusController($this->school))->index();
-        $toUpdate = ($this->findBoardingStatusByName($newboardingStatus, $counties->toArray()));
+        $toUpdate = $this->findBoardingStatusByName($newboardingStatus, $counties->toArray());
 
         //Update it
         $renameBoardingStatus = 'ImASpecialDayBoy';
@@ -90,7 +90,7 @@ class PupilBoardingStatusesTest extends TestCase
 
         //Find it again
         $counties = (new PupilBoardingStatusController($this->school))->index();
-        $toDelete = ($this->findBoardingStatusByName($renameBoardingStatus, $counties->toArray()));
+        $toDelete = $this->findBoardingStatusByName($renameBoardingStatus, $counties->toArray());
 
         //Delete it
         foreach ($toDelete as $idToDelete) {
