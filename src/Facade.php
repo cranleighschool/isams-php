@@ -2,9 +2,11 @@
 
 namespace spkm\isams;
 
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Str;
 use spkm\isams\Contracts\Institution;
 use spkm\isams\Exceptions\ControllerNotFound;
+use spkm\isams\Exceptions\IsamsInstanceNotFound;
 use spkm\isams\Exceptions\MethodNotFound;
 
 class Facade
@@ -80,18 +82,29 @@ class Facade
     }
 
     /**
-     * @param  string  $method
-     * @param  array  $args
+     * @param string $method
+     * @param array $args
      * @return false|mixed
      *
      * @throws MethodNotFound
+     * @throws IsamsInstanceNotFound
      */
     public function callMethod(string $method, array $args = [])
     {
         if (! method_exists($this->controller, $method)) {
             throw new MethodNotFound('Method ' . $method . ' not found on ' . get_class($this->controller));
         }
-
-        return call_user_func_array([$this->controller, $method], $args);
+        try {
+            return call_user_func_array([$this->controller, $method], $args);
+        } catch (ClientException $exception) {
+            if ($exception->getCode() === 404) {
+                throw new IsamsInstanceNotFound(
+                    'ISAMS returned a 404 Not Found.',
+                    404,
+                    $exception
+                );
+            }
+            throw $exception;
+        }
     }
 }
