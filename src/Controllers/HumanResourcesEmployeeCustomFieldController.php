@@ -7,7 +7,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use spkm\isams\Endpoint;
-use spkm\isams\Wrappers\Employee;
 use spkm\isams\Wrappers\EmployeeCustomField;
 use spkm\isams\Wrappers\EmployeeCustomFieldProperty;
 
