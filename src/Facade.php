@@ -82,8 +82,8 @@ class Facade
     }
 
     /**
-     * @param string $method
-     * @param array $args
+     * @param  string  $method
+     * @param  array  $args
      * @return false|mixed
      *
      * @throws MethodNotFound
