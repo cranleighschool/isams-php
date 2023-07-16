@@ -13,7 +13,7 @@ use spkm\isams\Wrapper;
 class Lesson extends Wrapper
 {
     /**
-     * @param $item
+     * @param  $item
      * @param  \spkm\isams\Contracts\Institution  $institution
      */
     public function __construct($item, Institution $institution)
