@@ -17,4 +17,9 @@ class TimetableDay extends Wrapper
     protected function handle(): void
     {
     }
+    public function all()
+    {
+        return $this->item;
+    }
+
 }
