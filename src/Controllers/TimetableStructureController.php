@@ -29,6 +29,7 @@ class TimetableStructureController extends Endpoint
      * @return Collection
      *
      * @throws GuzzleException
+     * @throws Exception
      */
     public function index(): Collection
     {
@@ -40,7 +41,13 @@ class TimetableStructureController extends Endpoint
 
         $decoded = json_decode($response->getBody()->getContents());
 
-        $week = collect($decoded)['timetableWeeks'][0];
+        $allWeeks = collect($decoded)['timetableWeeks'];
+
+        if (is_array($allWeeks) && count($allWeeks)) {
+            $week = $allWeeks[0];
+        } else {
+            throw new Exception('No timetable weeks found.', 400);
+        }
 
         $days = $week->timetableDays;
         $result = [];
