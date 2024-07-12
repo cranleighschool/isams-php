@@ -77,7 +77,7 @@ class Authentication
                 'grant_type' => 'client_credentials',
                 'client_id' => $this->clientId,
                 'client_secret' => $this->clientSecret,
-//                'scope' => 'api', // POST MERGER SEEMINGLY TAKE THIS OUT
+                //                'scope' => 'api', // POST MERGER SEEMINGLY TAKE THIS OUT
             ],
         ]);
 
