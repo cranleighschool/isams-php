@@ -25,6 +25,15 @@ class Employee extends Wrapper
                 }
             }
         }
+        /**
+         * Now we use just one ISAMS we need to rely on divisions to work out what school a staff member is in.
+         * NB: Isams makes 'divisions' null if empty, but our code in Pastoral Module expects an empty collection.
+         */
+        if (isset($this->divisions)) {
+            $this->divisions = collect($this->divisions);
+        } else {
+            $this->divisions = collect();
+        }
 
         if (isset($this->customFields)) {
             $this->customFields = collect($this->customFields);
