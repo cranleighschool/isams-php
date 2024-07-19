@@ -12,6 +12,7 @@ use spkm\isams\Exceptions\MethodNotFound;
 class Facade
 {
     private const CONTROLLER_NAMESPACE = 'spkm\\isams\\Controllers\\';
+
     /**
      * @var Institution
      */
@@ -23,7 +24,6 @@ class Facade
     protected $controller;
 
     /**
-     * @param  Institution  $institution
      * @return $this
      */
     public function institution(Institution $institution): self
@@ -37,7 +37,6 @@ class Facade
      * Because 'Institution' is such an awkwardly
      * long word to write when you're in a hurry!
      *
-     * @param  Institution  $institution
      * @return $this
      */
     public function school(Institution $institution): self
@@ -46,7 +45,6 @@ class Facade
     }
 
     /**
-     * @param  string  $controller
      * @return $this
      *
      * @throws ControllerNotFound
@@ -62,8 +60,6 @@ class Facade
     /**
      * Sanitizes the controller name for us, so people can use ::class notation if they wish.
      *
-     * @param  string  $controllerClassName
-     * @return string
      *
      * @throws ControllerNotFound
      */
@@ -73,17 +69,15 @@ class Facade
             return $controllerClassName;
         }
 
-        if (class_exists(self::CONTROLLER_NAMESPACE . $controllerClassName)) {
-            return self::CONTROLLER_NAMESPACE . $controllerClassName;
+        if (class_exists(self::CONTROLLER_NAMESPACE.$controllerClassName)) {
+            return self::CONTROLLER_NAMESPACE.$controllerClassName;
         }
 
-        throw new ControllerNotFound('Could not find Controller: ' . $controllerClassName,
+        throw new ControllerNotFound('Could not find Controller: '.$controllerClassName,
             500);
     }
 
     /**
-     * @param  string  $method
-     * @param  array  $args
      * @return false|mixed
      *
      * @throws MethodNotFound
@@ -92,7 +86,7 @@ class Facade
     public function callMethod(string $method, array $args = [])
     {
         if (! method_exists($this->controller, $method)) {
-            throw new MethodNotFound('Method ' . $method . ' not found on ' . get_class($this->controller));
+            throw new MethodNotFound('Method '.$method.' not found on '.get_class($this->controller));
         }
         try {
             return call_user_func_array([$this->controller, $method], $args);

@@ -14,25 +14,23 @@ class SchoolHouseController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/school/houses';
+        $this->endpoint = $this->getDomain().'/api/school/houses';
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'schoolHouses.index';
+        $key = $this->institution->getConfigName().'schoolHouses.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -44,14 +42,12 @@ class SchoolHouseController extends Endpoint
     /**
      * Show the resource.
      *
-     * @param  int  $id
-     * @return House
      *
      * @throws GuzzleException
      */
     public function show(int $id): House
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

@@ -50,6 +50,14 @@ class School extends Model implements \spkm\isams\Contracts\Institution
 
 
 ``` 
+In your `config/isams.php` file, add the following to the `schools` array:
+```php
+    'cranleighSandbox' => [
+        'api_key' => env('ISAMS_API_KEY'),
+        'api_secret' => env('ISAMS_API_SECRET'),
+        'api_url' => env('ISAMS_API_URL'),
+    ],
+```
 Otherwise implement the interface on your custom class (or copy the example `spkm\isams\School`)
 
 ### Testing

@@ -9,24 +9,19 @@ use spkm\isams\Endpoint;
 class RoughAndReadyController extends Endpoint
 {
     /**
-     * @param  string  $method
-     * @param  string  $endpoint
-     * @param  array  $query
      * @return mixed
      *
      * @throws GuzzleException
      */
     public function request(string $method, string $endpoint, array $query = [], array $json = [])
     {
-        $endpoint = $this->endpoint . $endpoint;
+        $endpoint = $this->endpoint.$endpoint;
         $response = $this->guzzle->request($method, $endpoint, ['query' => $query, 'headers' => $this->getHeaders(), 'json' => $json]);
 
         return json_decode($response->getBody()->getContents());
     }
 
     /**
-     * @param  string  $endpoint
-     * @param  array  $query
      * @return mixed
      *
      * @throws GuzzleException
@@ -41,6 +36,6 @@ class RoughAndReadyController extends Endpoint
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/';
+        $this->endpoint = $this->getDomain().'/api/';
     }
 }

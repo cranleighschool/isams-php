@@ -11,6 +11,7 @@ abstract class Wrapper
      * @array
      */
     protected $hidden = [];
+
     protected $item;
 
     public function __construct($item)
@@ -22,15 +23,11 @@ abstract class Wrapper
 
     /**
      * Handle the data.
-     *
-     * @return void
      */
     abstract protected function handle(): void;
 
     /**
      * Set the contents of $this->item to public properties. Use $this->handle() to unset/override if required.
-     *
-     * @return void
      */
     protected function setAttributes(object|array $item): void
     {
@@ -43,8 +40,6 @@ abstract class Wrapper
 
     /**
      * Get the item array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

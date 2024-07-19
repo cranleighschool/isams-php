@@ -47,17 +47,12 @@ abstract class Endpoint
 
     /**
      * Set the URL the request is made to.
-     *
-     * @return void
      */
     abstract protected function setEndpoint(): void;
 
     /**
      * Get a specific page from the api.
      *
-     * @param  string  $url
-     * @param  int  $page
-     * @param  array  $queryArgs
      * @return mixed
      *
      * @throws GuzzleException
@@ -82,7 +77,7 @@ abstract class Endpoint
     protected function getHeaders()
     {
         return [
-            'Authorization' => 'Bearer ' . $this->getAccessToken(),
+            'Authorization' => 'Bearer '.$this->getAccessToken(),
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
@@ -91,7 +86,6 @@ abstract class Endpoint
     /**
      * Get an access token for the specified Institution.
      *
-     * @return string
      *
      * @throws GuzzleException
      * @throws Exception
@@ -103,11 +97,6 @@ abstract class Endpoint
 
     /**
      * Wrap the json returned by the API.
-     *
-     * @param  string  $json
-     * @param  string  $property
-     * @param  string  $wrapper
-     * @return Collection
      */
     public function wrapJson(string $json, string $property, string $wrapper): Collection
     {
@@ -121,7 +110,6 @@ abstract class Endpoint
     /**
      * Get the domain of the specified Institution.
      *
-     * @return string
      *
      * @throws Exception
      */
@@ -138,8 +126,6 @@ abstract class Endpoint
 
     /**
      * Get the School to be queried.
-     *
-     * @return Institution
      */
     protected function getInstitution(): Institution
     {
@@ -149,9 +135,6 @@ abstract class Endpoint
     /**
      * Validate the attributes.
      *
-     * @param  array  $requiredAttributes
-     * @param  array  $attributes
-     * @return bool
      *
      * @throws Exception
      */
@@ -169,11 +152,8 @@ abstract class Endpoint
     /**
      * Generate the response.
      *
-     * @param  int  $expectedStatusCode
      * @param  mixed  $response
      * @param  mixed  $data
-     * @param  array  $errors
-     * @return JsonResponse
      */
     protected function response(int $expectedStatusCode, $response, $data, array $errors = []): JsonResponse
     {
@@ -200,9 +180,6 @@ abstract class Endpoint
         return response()->json($json, $response->getStatusCode());
     }
 
-    /**
-     * @return Carbon
-     */
     protected function getCacheDuration(): Carbon
     {
         return config('isams.cacheDuration', now()->addHours(12));

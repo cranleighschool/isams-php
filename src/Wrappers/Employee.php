@@ -12,8 +12,6 @@ class Employee extends Wrapper
 {
     /**
      * Handle the data.
-     *
-     * @return void
      */
     protected function handle(): void
     {

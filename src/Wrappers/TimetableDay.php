@@ -11,12 +11,8 @@ class TimetableDay extends Wrapper
 {
     /**
      * Handle the data.
-     *
-     * @return void
      */
-    protected function handle(): void
-    {
-    }
+    protected function handle(): void {}
 
     public function all()
     {

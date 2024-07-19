@@ -12,10 +12,6 @@ use spkm\isams\Wrapper;
  */
 class Lesson extends Wrapper
 {
-    /**
-     * @param  $item
-     * @param  \spkm\isams\Contracts\Institution  $institution
-     */
     public function __construct($item, Institution $institution)
     {
         $this->institution = $institution;
@@ -24,14 +20,12 @@ class Lesson extends Wrapper
 
     /**
      * Handle the data.
-     *
-     * @return void
      */
     protected function handle(): void
     {
         if (isset($this->employeeId)) {
             unset($this->employeeId);
-            $this->teacher = $this->employeeTitle . ' ' . $this->employeeSurname;
+            $this->teacher = $this->employeeTitle.' '.$this->employeeSurname;
             unset($this->employeeTitle);
             unset($this->employeeSurname);
         } else {
@@ -41,15 +35,12 @@ class Lesson extends Wrapper
     }
 
     /**
-     * @param  int  $setId
-     * @return \Illuminate\Support\Collection
-     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function getPupilsInSet(int $setId): Collection
     {
         $api = new RoughAndReadyController($this->institution);
 
-        return collect($api->get('teaching/sets/' . $setId . '/setList')->students)->pluck('schoolId');
+        return collect($api->get('teaching/sets/'.$setId.'/setList')->students)->pluck('schoolId');
     }
 }

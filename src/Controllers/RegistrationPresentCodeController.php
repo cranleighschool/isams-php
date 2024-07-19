@@ -14,12 +14,10 @@ class RegistrationPresentCodeController extends Endpoint
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/registration/presentcodes';
+        $this->endpoint = $this->getDomain().'/api/registration/presentcodes';
     }
 
     /**
-     * @return Collection
-     *
      * @throws GuzzleException
      */
     public function index(): Collection

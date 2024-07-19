@@ -19,19 +19,19 @@ return [
     */
     'schools' => [
         'cranleighSchool' => [
-            'client_id' => 'cranleigh',
+            'client_id' => env('CS_REST_API_CLIENT'),
             'domain' => 'https://isams.cranleigh.org',
             'client_secret' => env('CS_REST_API_SECRET'),
         ],
 
         'cranleighPreparatorySchool' => [
-            'client_id' => 'cranleighprep',
+            'client_id' => env('CPS_REST_API_CLIENT', 'cranleighprep'),
             'domain' => 'https://isams.cranprep.org',
             'client_secret' => env('CPS_REST_API_SECRET'),
         ],
 
         'cranleighSandbox' => [
-            'client_id' => 'cranleighprep',
+            'client_id' => env('DEV_REST_API_CLIENT'),
             'domain' => 'https://isamsdev.cranprep.org',
             'client_secret' => env('DEV_REST_API_SECRET'),
         ],

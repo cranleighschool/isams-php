@@ -14,25 +14,23 @@ class EstateRoomController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/estates/rooms';
+        $this->endpoint = $this->getDomain().'/api/estates/rooms';
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'estateRooms.index';
+        $key = $this->institution->getConfigName().'estateRooms.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 

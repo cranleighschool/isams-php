@@ -2,6 +2,4 @@
 
 namespace spkm\isams\Exceptions;
 
-class MethodNotFound extends \Exception
-{
-}
+class MethodNotFound extends \Exception {}

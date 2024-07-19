@@ -22,20 +22,18 @@ class SchoolDepartmentController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/school/departments';
+        $this->endpoint = $this->getDomain().'/api/school/departments';
     }
 
     /**
      * Display a listing of the resource.
      *
      * @param  string  $departmentType  Teaching|NonTeaching
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -47,9 +45,9 @@ class SchoolDepartmentController extends Endpoint
             ], 400);
         }
 
-        $key = $this->institution->getConfigName() . sprintf('schoolDepartments%s.index', $departmentType);
+        $key = $this->institution->getConfigName().sprintf('schoolDepartments%s.index', $departmentType);
 
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $departmentType, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$departmentType, ['headers' => $this->getHeaders()]);
 
         return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
             return $this->wrapJson($response->getBody()->getContents(), 'departments', SchoolDepartment::class);
@@ -59,8 +57,6 @@ class SchoolDepartmentController extends Endpoint
     /**
      * Show the resource.
      *
-     * @param  string  $departmentType
-     * @param  int  $departmentId
      * @return JsonResponse|SchoolDepartment
      *
      * @throws GuzzleException
@@ -73,7 +69,7 @@ class SchoolDepartmentController extends Endpoint
             ], 400);
         }
 
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $departmentType . '/' . $departmentId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$departmentType.'/'.$departmentId, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

@@ -15,28 +15,25 @@ class RewardAndConductRewardController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/rewardsAndConduct/students';
+        $this->endpoint = $this->getDomain().'/api/rewardsAndConduct/students';
     }
 
     /**
      * Retrieves all rewards associated with a student.
      *
-     * @param  string  $schoolId
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function index(string $schoolId): Collection
     {
-        $key = $this->institution->getConfigName() . 'rewardsAndConduct.index' . $schoolId;
+        $key = $this->institution->getConfigName().'rewardsAndConduct.index'.$schoolId;
 
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId . '/rewards', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$schoolId.'/rewards', ['headers' => $this->getHeaders()]);
 
         return Cache::remember($key, $this->getCacheDuration(), function () use ($response) {
             return $this->wrapJson($response->getBody()->getContents(), 'rewards', RewardAndConductReward::class);
@@ -46,15 +43,12 @@ class RewardAndConductRewardController extends Endpoint
     /**
      * Retrieves a students rewards.
      *
-     * @param  string  $schoolId
-     * @param  int  $rewardId
-     * @return RewardAndConductReward
      *
      * @throws GuzzleException
      */
     public function show(string $schoolId, int $rewardId): RewardAndConductReward
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId . '/rewards/' . $rewardId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$schoolId.'/rewards/'.$rewardId, ['headers' => $this->getHeaders()]);
 
         $data = json_decode($response->getBody()->getContents());
 
@@ -64,9 +58,6 @@ class RewardAndConductRewardController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param  string  $pupilId
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -79,7 +70,7 @@ class RewardAndConductRewardController extends Endpoint
             'TeacherId',
         ], $attributes);
 
-        $response = $this->guzzle->request('POST', $this->endpoint . '/' . $pupilId . '/rewards', [
+        $response = $this->guzzle->request('POST', $this->endpoint.'/'.$pupilId.'/rewards', [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

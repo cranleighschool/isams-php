@@ -2,6 +2,4 @@
 
 namespace spkm\isams\Exceptions;
 
-class ControllerNotFound extends \Exception
-{
-}
+class ControllerNotFound extends \Exception {}

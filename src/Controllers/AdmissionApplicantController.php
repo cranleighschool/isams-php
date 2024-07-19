@@ -15,25 +15,23 @@ class AdmissionApplicantController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/admissions/applicants';
+        $this->endpoint = $this->getDomain().'/api/admissions/applicants';
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'admissionApplicants.index';
+        $key = $this->institution->getConfigName().'admissionApplicants.index';
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->applicants)->map(function ($item) {
@@ -53,7 +51,7 @@ class AdmissionApplicantController extends Endpoint
         }
 
         if ($totalCount !== $items->count()) {
-            throw new Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
+            throw new Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
         }
 
         return Cache::remember($key, $this->getCacheDuration(), function () use ($items) {
@@ -64,8 +62,6 @@ class AdmissionApplicantController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -91,14 +87,12 @@ class AdmissionApplicantController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param  string  $schoolId
-     * @return Applicant
      *
      * @throws GuzzleException
      */
     public function show(string $schoolId): Applicant
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$schoolId, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -108,9 +102,6 @@ class AdmissionApplicantController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param  string  $schoolId
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -125,7 +116,7 @@ class AdmissionApplicantController extends Endpoint
             'gender',
         ], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $schoolId, [
+        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$schoolId, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

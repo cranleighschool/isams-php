@@ -14,25 +14,23 @@ class SchoolYearGroupController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/school/yeargroups';
+        $this->endpoint = $this->getDomain().'/api/school/yeargroups';
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'schoolYeargroups.index';
+        $key = $this->institution->getConfigName().'schoolYeargroups.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -44,14 +42,12 @@ class SchoolYearGroupController extends Endpoint
     /**
      * Show the resource.
      *
-     * @param  int  $id
-     * @return YearGroup
      *
      * @throws GuzzleException
      */
     public function show(int $id): YearGroup
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

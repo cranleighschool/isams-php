@@ -11,8 +11,6 @@ class EmployeeQualification extends Wrapper
 {
     /**
      * Handle the data.
-     *
-     * @return void
      */
     protected function handle(): void
     {

@@ -20,7 +20,7 @@ class CurrentPupilController extends Endpoint
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/students';
+        $this->endpoint = $this->getDomain().'/api/students';
     }
 
     /**
@@ -30,7 +30,7 @@ class CurrentPupilController extends Endpoint
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'currentPupils.index';
+        $key = $this->institution->getConfigName().'currentPupils.index';
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->students)->map(function ($item) {
@@ -50,7 +50,7 @@ class CurrentPupilController extends Endpoint
         }
 
         if ($totalCount !== $items->count()) {
-            throw new \Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
+            throw new \Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
         }
 
         return Cache::remember($key, $this->getCacheDuration(), function () use ($items) {
@@ -87,7 +87,7 @@ class CurrentPupilController extends Endpoint
      */
     public function show(string $schoolId): Pupil
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $schoolId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$schoolId, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -108,7 +108,7 @@ class CurrentPupilController extends Endpoint
             'yearGroup',
         ], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $schoolId, [
+        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$schoolId, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

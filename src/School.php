@@ -7,9 +7,6 @@ namespace spkm\isams;
  */
 class School implements \spkm\isams\Contracts\Institution
 {
-    /**
-     * @return string
-     */
     public function getConfigName(): string
     {
         return 'cranleighSandbox';

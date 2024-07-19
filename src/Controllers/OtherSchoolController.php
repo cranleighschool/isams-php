@@ -15,25 +15,23 @@ class OtherSchoolController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/otherschools';
+        $this->endpoint = $this->getDomain().'/api/otherschools';
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'otherSchools.index';
+        $key = $this->institution->getConfigName().'otherSchools.index';
 
         $decoded = json_decode($this->pageRequest($this->endpoint, 1));
         $items = collect($decoded->otherSchools)->map(function ($item) {
@@ -53,7 +51,7 @@ class OtherSchoolController extends Endpoint
         }
 
         if ($totalCount !== $items->count()) {
-            throw new Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
+            throw new Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
         }
 
         return Cache::remember($key, $this->getCacheDuration(), function () use ($items) {
@@ -64,8 +62,6 @@ class OtherSchoolController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -89,14 +85,12 @@ class OtherSchoolController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param  int  $id
-     * @return School
      *
      * @throws GuzzleException
      */
     public function show(int $id): School
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -106,9 +100,6 @@ class OtherSchoolController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param  int  $id
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -121,7 +112,7 @@ class OtherSchoolController extends Endpoint
             'postcode',
         ], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

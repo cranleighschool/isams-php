@@ -14,26 +14,24 @@ class TimetableStructureController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/timetables/structure';
+        $this->endpoint = $this->getDomain().'/api/timetables/structure';
     }
 
     /**
      * Get the timetable structure.
      *
-     * @return Collection
      *
      * @throws GuzzleException
      * @throws Exception
      */
     public function index(): Collection
     {
-        $this->endpoint = $this->endpoint . '/';
+        $this->endpoint = $this->endpoint.'/';
 
         $response = $this->guzzle->request('GET', $this->endpoint, [
             'headers' => $this->getHeaders(),

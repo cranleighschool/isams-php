@@ -22,21 +22,17 @@ class PupilContactController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/students';
+        $this->endpoint = $this->getDomain().'/api/students';
     }
 
     /**
      * Create a new resource.
      *
-     * @param  string  $schoolId
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -52,7 +48,7 @@ class PupilContactController extends Endpoint
             'country',
         ], $attributes);
 
-        $this->endpoint = $this->endpoint . '/' . $schoolId . '/tempcontacts';
+        $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts';
 
         $response = $this->guzzle->request('POST', $this->endpoint, [
             'headers' => $this->getHeaders(),
@@ -65,14 +61,12 @@ class PupilContactController extends Endpoint
     /**
      * Get all contacts for the specified pupil.
      *
-     * @param  string  $schoolId
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function show(string $schoolId): Collection
     {
-        $this->endpoint = $this->endpoint . '/' . $schoolId . '/tempcontacts';
+        $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -88,15 +82,12 @@ class PupilContactController extends Endpoint
     /**
      * Get a specific pupil contact.
      *
-     * @param  string  $schoolId
-     * @param  int  $contactId
-     * @return PupilContact
      *
      * @throws GuzzleException
      */
     public function showContact(string $schoolId, int $contactId): PupilContact
     {
-        $this->endpoint = $this->endpoint . '/' . $schoolId . '/tempcontacts/' . $contactId;
+        $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts/'.$contactId;
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -108,10 +99,6 @@ class PupilContactController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param  string  $schoolId
-     * @param  int  $contactId
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -127,7 +114,7 @@ class PupilContactController extends Endpoint
             'country',
         ], $attributes);
 
-        $this->endpoint = $this->endpoint . '/' . $schoolId . '/tempcontacts/' . $contactId;
+        $this->endpoint = $this->endpoint.'/'.$schoolId.'/tempcontacts/'.$contactId;
 
         $response = $this->guzzle->request('PUT', $this->endpoint, [
             'headers' => $this->getHeaders(),

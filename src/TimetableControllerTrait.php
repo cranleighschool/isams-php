@@ -14,9 +14,6 @@ use spkm\isams\Wrappers\TimetableDay;
 trait TimetableControllerTrait
 {
     /**
-     * @param  string  $schoolId
-     * @return Collection
-     *
      * @throws GuzzleException
      */
     public function getWeekCalendar(string $schoolId): Collection
@@ -48,14 +45,12 @@ trait TimetableControllerTrait
     /**
      * Get the timetable for the specified pupil.
      *
-     * @param  string  $schoolId
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function show(string $schoolId): Collection
     {
-        $this->endpoint = $this->endpoint . '/' . $schoolId;
+        $this->endpoint = $this->endpoint.'/'.$schoolId;
         $response = $this->guzzle->request(
             'GET',
             $this->endpoint,
@@ -67,12 +62,9 @@ trait TimetableControllerTrait
         return collect($decoded);
     }
 
-    /**
-     * @return Collection
-     */
     private function getTimetableStructure(): Collection
     {
-        $key = $this->institution->getConfigName() . 'timetableStructure.index';
+        $key = $this->institution->getConfigName().'timetableStructure.index';
 
         return Cache::remember($key, now()->addWeek(), function () {
             $schedule = new TimetableStructureController($this->institution);
@@ -82,9 +74,6 @@ trait TimetableControllerTrait
     }
 
     /**
-     * @param  int  $subjectId
-     * @return TeachingSubject
-     *
      * @throws GuzzleException
      */
     private function getSubject(int $subjectId): TeachingSubject

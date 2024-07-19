@@ -15,26 +15,23 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/humanresources/employees';
+        $this->endpoint = $this->getDomain().'/api/humanresources/employees';
     }
 
     /**
      * Retrieve all custom fields associated with an employee.
      *
-     * @param  int  $id
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function index(int $id): Collection
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/customFields', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id.'/customFields', ['headers' => $this->getHeaders()]);
 
         return $this->wrapJson($response->getBody()->getContents(), 'customFields', EmployeeCustomFieldProperty::class);
     }
@@ -42,15 +39,12 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
     /**
      * Retrieve a custom field associated with an employee.
      *
-     * @param  int  $id
-     * @param  int  $customFieldId
-     * @return EmployeeCustomField
      *
      * @throws GuzzleException
      */
     public function show(int $id, int $customFieldId): EmployeeCustomField
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/customFields/' . $customFieldId, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id.'/customFields/'.$customFieldId, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 
@@ -60,10 +54,6 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param  int  $id
-     * @param  int  $customFieldId
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -73,7 +63,7 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
             'value',
         ], $attributes);
 
-        $response = $this->guzzle->request('PATCH', $this->endpoint . '/' . $id . '/customFields/' . $customFieldId, [
+        $response = $this->guzzle->request('PATCH', $this->endpoint.'/'.$id.'/customFields/'.$customFieldId, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
@@ -84,9 +74,7 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param  int  $id
      * @param  array  $attributes  an array with one or more arrays within
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -99,7 +87,7 @@ class HumanResourcesEmployeeCustomFieldController extends Endpoint
             ], $attributeSubArray);
         }
 
-        $response = $this->guzzle->request('PATCH', $this->endpoint . '/' . $id . '/customFields', [
+        $response = $this->guzzle->request('PATCH', $this->endpoint.'/'.$id.'/customFields', [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);

@@ -22,25 +22,22 @@ class SchoolTermsController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/school/terms';
+        $this->endpoint = $this->getDomain().'/api/school/terms';
     }
 
     /**
      * Returns a Term, for the given Institution based on
      * the current date (albeit cached for a week).
-     *
-     * @return object
      */
     public function thisTerm(): object
     {
         try {
-            return Cache::remember('termDatesThisTerm_' . $this->institution->short_code, now()->addWeek(), function () {
+            return Cache::remember('termDatesThisTerm_'.$this->institution->short_code, now()->addWeek(), function () {
                 $currentTerm = $this->getCurrentTerm();
                 array_walk($currentTerm, function (&$item, $key) {
                     if ($key == 'startDate' || $key == 'finishDate') {
@@ -51,15 +48,13 @@ class SchoolTermsController extends Endpoint
                 return $currentTerm;
             });
         } catch (FailedtoFindNearestTerm $exception) {
-            Cache::forget('termDatesThisTerm_' . $this->institution->short_code);
+            Cache::forget('termDatesThisTerm_'.$this->institution->short_code);
 
             return $this->thisTerm();
         }
     }
 
     /**
-     * @return Collection
-     *
      * @throws GuzzleException
      */
     public function index(): Collection
@@ -79,8 +74,6 @@ class SchoolTermsController extends Endpoint
     }
 
     /**
-     * @return SchoolTerm
-     *
      * @throws GuzzleException|FailedtoFindNearestTerm
      */
     public function getCurrentTerm(): SchoolTerm
@@ -103,9 +96,6 @@ class SchoolTermsController extends Endpoint
     }
 
     /**
-     * @param  int  $year
-     * @return Collection
-     *
      * @throws GuzzleException
      */
     public function getYear(int $year): Collection
@@ -120,8 +110,6 @@ class SchoolTermsController extends Endpoint
     }
 
     /**
-     * @return SchoolTerm
-     *
      * @throws FailedtoFindNearestTerm
      * @throws GuzzleException
      */
@@ -161,9 +149,6 @@ class SchoolTermsController extends Endpoint
     }
 
     /**
-     * @param  CarbonInterface  $date
-     * @return bool
-     *
      * @throws GuzzleException
      */
     public function isDateInTermTime(CarbonInterface $date): bool

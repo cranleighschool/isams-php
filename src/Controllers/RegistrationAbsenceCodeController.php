@@ -14,12 +14,10 @@ class RegistrationAbsenceCodeController extends Endpoint
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/registration/absencecodes';
+        $this->endpoint = $this->getDomain().'/api/registration/absencecodes';
     }
 
     /**
-     * @return Collection
-     *
      * @throws GuzzleException
      */
     public function index(): Collection

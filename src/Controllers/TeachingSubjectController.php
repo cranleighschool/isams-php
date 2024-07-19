@@ -15,25 +15,23 @@ class TeachingSubjectController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/teaching/subjects';
+        $this->endpoint = $this->getDomain().'/api/teaching/subjects';
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'teachingSubjects.index';
+        $key = $this->institution->getConfigName().'teachingSubjects.index';
 
         $response = $this->guzzle->request('GET', $this->endpoint, ['headers' => $this->getHeaders()]);
 
@@ -45,8 +43,6 @@ class TeachingSubjectController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -72,8 +68,6 @@ class TeachingSubjectController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param  string  $subjectId
-     * @param  array  $attributes
      * @return void
      *
      * @throws GuzzleException
@@ -89,7 +83,7 @@ class TeachingSubjectController extends Endpoint
             'setSubject',
         ], $attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $subjectId, [
+        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$subjectId, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
@@ -100,14 +94,12 @@ class TeachingSubjectController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param  int  $id
-     * @return TeachingSubject
      *
      * @throws GuzzleException
      */
     public function show(int $id): TeachingSubject
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

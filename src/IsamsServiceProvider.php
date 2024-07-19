@@ -8,13 +8,11 @@ class IsamsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/Config/config.php' => config_path('isams.php'),
+            __DIR__.'/Config/config.php' => config_path('isams.php'),
         ], 'config');
     }
 

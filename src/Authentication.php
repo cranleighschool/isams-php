@@ -11,29 +11,15 @@ use spkm\isams\Contracts\Institution;
 
 class Authentication
 {
-    /**
-     * @var string
-     */
-    private $clientId;
+    private string $clientId;
+
+    private string $authenticationUrl;
+
+    private string $clientSecret;
+
+    private string $cacheKey;
 
     /**
-     * @var string
-     */
-    private $authenticationUrl;
-
-    /**
-     * @var string
-     */
-    private $clientSecret;
-
-    /**
-     * @var string
-     */
-    private $cacheKey;
-
-    /**
-     * @param  Institution  $institution
-     *
      * @throws Exception
      */
     public function __construct(Institution $institution)
@@ -44,7 +30,6 @@ class Authentication
     /**
      * Get an authentication token from the cache or request a new one.
      *
-     * @return string
      *
      * @throws GuzzleException|InvalidArgumentException
      */
@@ -60,9 +45,9 @@ class Authentication
     /**
      * Request a new authentication token.
      *
-     * @return string
      *
-     * @throws GuzzleException
+     * @throws GuzzleException|InvalidArgumentException
+     * @throws Exception
      */
     private function requestNewToken(): string
     {
@@ -77,7 +62,7 @@ class Authentication
                 'grant_type' => 'client_credentials',
                 'client_id' => $this->clientId,
                 'client_secret' => $this->clientSecret,
-//                'scope' => 'api', // POST MERGER SEEMINGLY TAKE THIS OUT
+                //                'scope' => 'api', // POST MERGER SEEMINGLY TAKE THIS OUT
             ],
         ]);
 
@@ -93,9 +78,6 @@ class Authentication
     /**
      * Save the access token to the cache & return it for use.
      *
-     * @param  string  $accessToken
-     * @param  int  $expiry
-     * @return string
      *
      * @throws InvalidArgumentException
      */
@@ -110,8 +92,6 @@ class Authentication
     /**
      * Set the client settings.
      *
-     * @param  Institution  $institution
-     * @return void
      *
      * @throws Exception
      */
@@ -123,8 +103,8 @@ class Authentication
         }
 
         $this->clientId = config("isams.schools.$configName.client_id");
-        $this->authenticationUrl = config("isams.schools.$configName.domain") . '/auth/connect/token';
+        $this->authenticationUrl = config("isams.schools.$configName.domain").'/auth/connect/token';
         $this->clientSecret = config("isams.schools.$configName.client_secret");
-        $this->cacheKey = $configName . 'RestApiAccessToken';
+        $this->cacheKey = $configName.'RestApiAccessToken';
     }
 }

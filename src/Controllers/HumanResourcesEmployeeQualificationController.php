@@ -13,21 +13,17 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/humanresources/employees';
+        $this->endpoint = $this->getDomain().'/api/humanresources/employees';
     }
 
     /**
      * Create a new resource.
      *
-     * @param  int  $id
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -38,7 +34,7 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
             'name',
         ], $attributes);
 
-        $response = $this->guzzle->request('POST', $this->endpoint . '/' . $id . '/qualifications', [
+        $response = $this->guzzle->request('POST', $this->endpoint.'/'.$id.'/qualifications', [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
@@ -49,14 +45,12 @@ class HumanResourcesEmployeeQualificationController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param  int  $id
-     * @return EmployeeQualification
      *
      * @throws GuzzleException
      */
     public function show(int $id): EmployeeQualification
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id . '/qualifications', ['headers' => $this->getHeaders()]);
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id.'/qualifications', ['headers' => $this->getHeaders()]);
 
         $decoded = json_decode($response->getBody()->getContents());
 

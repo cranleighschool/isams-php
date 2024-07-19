@@ -10,19 +10,17 @@ class HumanResourcesEmployeeHousesController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws \Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/humanresources/employees';
+        $this->endpoint = $this->getDomain().'/api/humanresources/employees';
     }
 
     /**
      * Show the specified resource.
      *
-     * @param  int  $id
      * @return \spkm\isams\Wrappers\Employee
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -33,7 +31,7 @@ class HumanResourcesEmployeeHousesController extends Endpoint
             ->guzzle
             ->request(
                 'GET',
-                $this->endpoint . '/' . $id . '/houses',
+                $this->endpoint.'/'.$id.'/houses',
                 [
                     'headers' => $this->getHeaders(),
                 ]

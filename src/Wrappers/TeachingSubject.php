@@ -16,8 +16,6 @@ class TeachingSubject extends Wrapper
 
     /**
      * Handle the data.
-     *
-     * @return void
      */
     protected function handle(): void
     {

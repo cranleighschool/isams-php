@@ -15,25 +15,23 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Set the URL the request is made to.
      *
-     * @return void
      *
      * @throws Exception
      */
     protected function setEndpoint(): void
     {
-        $this->endpoint = $this->getDomain() . '/api/humanresources/employees';
+        $this->endpoint = $this->getDomain().'/api/humanresources/employees';
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return Collection
      *
      * @throws GuzzleException
      */
     public function index(): Collection
     {
-        $key = $this->institution->getConfigName() . 'hrEmployees.index';
+        $key = $this->institution->getConfigName().'hrEmployees.index';
 
         return Cache::remember($key, $this->getCacheDuration(), function () {
             $decoded = json_decode($this->pageRequest($this->endpoint, 1, ['expand' => 'customFields']));
@@ -54,7 +52,7 @@ class HumanResourcesEmployeeController extends Endpoint
             }
 
             if ($totalCount !== $items->count()) {
-                throw new Exception($items->count() . ' items were returned instead of ' . $totalCount . ' as specified on page 1.');
+                throw new Exception($items->count().' items were returned instead of '.$totalCount.' as specified on page 1.');
             }
 
             return $this->sortBySurname($items);
@@ -63,9 +61,6 @@ class HumanResourcesEmployeeController extends Endpoint
 
     /**
      * Sort by collection of Employee objects by surname.
-     *
-     * @param  Collection  $collection
-     * @return Collection
      */
     private function sortBySurname(Collection $collection): Collection
     {
@@ -80,8 +75,6 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Create a new resource.
      *
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -103,14 +96,12 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @param  int  $id
-     * @return Employee
      *
      * @throws GuzzleException
      */
     public function show(int $id): Employee
     {
-        $response = $this->guzzle->request('GET', $this->endpoint . '/' . $id, [
+        $response = $this->guzzle->request('GET', $this->endpoint.'/'.$id, [
             'headers' => $this->getHeaders(),
             'expand' => 'customFields',
         ]);
@@ -123,9 +114,6 @@ class HumanResourcesEmployeeController extends Endpoint
     /**
      * Update the specified resource.
      *
-     * @param  int  $id
-     * @param  array  $attributes
-     * @return JsonResponse
      *
      * @throws GuzzleException
      */
@@ -144,7 +132,7 @@ class HumanResourcesEmployeeController extends Endpoint
 
         $attributes = $this->fixEmptyNationalitiesData($attributes);
 
-        $response = $this->guzzle->request('PUT', $this->endpoint . '/' . $id, [
+        $response = $this->guzzle->request('PUT', $this->endpoint.'/'.$id, [
             'headers' => $this->getHeaders(),
             'json' => $attributes,
         ]);
@@ -157,9 +145,6 @@ class HumanResourcesEmployeeController extends Endpoint
      * item inside. Which when we push back to ISAMS responds with: '' is not a known nationality.
      * So what we are doing here is working out if that is the case, and if so unsetting the
      * attribute.
-     *
-     * @param  array  $attributes
-     * @return array
      */
     private function fixEmptyNationalitiesData(array $attributes): array
     {
