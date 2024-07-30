@@ -16,23 +16,42 @@ abstract class Endpoint
     /**
      * @var Guzzle
      */
-    protected $guzzle;
+    protected Guzzle $guzzle;
 
     /**
      * @var Institution
      */
-    protected $institution;
+    protected Institution $institution;
 
     /**
      * @var string
      */
-    protected $endpoint;
+    protected string $endpoint;
 
-    public function __construct(Institution $institution)
+    /**
+     * @throws Exception
+     */
+    public function __construct(?Institution $institution = null)
     {
-        $this->institution = $institution;
+        $this->setInstitution($institution);
         $this->setGuzzle();
         $this->setEndpoint();
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function setInstitution(Institution $institution): void
+    {
+        $this->institution = $institution;
+
+        if ($this->institution === null) {
+            if (function_exists('defaultIsamsInstitution')) {
+                $this->institution = defaultIsamsInstitution();
+            } else {
+                throw new Exception('No Institution provided and no default Institution set.');
+            }
+        }
     }
 
     /**
