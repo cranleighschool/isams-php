@@ -76,7 +76,7 @@ trait TimetableControllerTrait
     /**
      * @throws GuzzleException
      */
-    private function getSubject(int $subjectId): TeachingSubject
+    protected function getSubject(int $subjectId): TeachingSubject
     {
         $subjects = new TeachingSubjectController($this->institution);
 
