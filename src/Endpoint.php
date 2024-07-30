@@ -13,19 +13,10 @@ use spkm\isams\Exceptions\ValidationException;
 
 abstract class Endpoint
 {
-    /**
-     * @var Guzzle
-     */
     protected Guzzle $guzzle;
 
-    /**
-     * @var Institution
-     */
-    protected Institution $institution;
+    protected ?Institution $institution;
 
-    /**
-     * @var string
-     */
     protected string $endpoint;
 
     /**
@@ -36,22 +27,6 @@ abstract class Endpoint
         $this->setInstitution($institution);
         $this->setGuzzle();
         $this->setEndpoint();
-    }
-
-    /**
-     * @throws Exception
-     */
-    protected function setInstitution(Institution $institution): void
-    {
-        $this->institution = $institution;
-
-        if ($this->institution === null) {
-            if (function_exists('defaultIsamsInstitution')) {
-                $this->institution = defaultIsamsInstitution();
-            } else {
-                throw new Exception('No Institution provided and no default Institution set.');
-            }
-        }
     }
 
     /**
@@ -96,7 +71,7 @@ abstract class Endpoint
     protected function getHeaders()
     {
         return [
-            'Authorization' => 'Bearer '.$this->getAccessToken(),
+            'Authorization' => 'Bearer ' . $this->getAccessToken(),
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
@@ -112,6 +87,30 @@ abstract class Endpoint
     protected function getAccessToken(): string
     {
         return (new Authentication($this->getInstitution()))->getToken();
+    }
+
+    /**
+     * Get the School to be queried.
+     */
+    protected function getInstitution(): Institution
+    {
+        return $this->institution;
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function setInstitution(?Institution $institution = null): void
+    {
+        $this->institution = $institution;
+
+        if ($this->institution === null) {
+            if (function_exists('defaultIsamsInstitution')) {
+                $this->institution = defaultIsamsInstitution();
+            } else {
+                throw new Exception('No Institution provided and no default Institution set.');
+            }
+        }
     }
 
     /**
@@ -144,14 +143,6 @@ abstract class Endpoint
     }
 
     /**
-     * Get the School to be queried.
-     */
-    protected function getInstitution(): Institution
-    {
-        return $this->institution;
-    }
-
-    /**
      * Validate the attributes.
      *
      *
@@ -171,8 +162,8 @@ abstract class Endpoint
     /**
      * Generate the response.
      *
-     * @param  mixed  $response
-     * @param  mixed  $data
+     * @param mixed $response
+     * @param mixed $data
      */
     protected function response(int $expectedStatusCode, $response, $data, array $errors = []): JsonResponse
     {
@@ -191,7 +182,7 @@ abstract class Endpoint
             $id = ltrim(str_replace($this->endpoint, '', $location), '\//');
 
             $json['location'] = $location;
-            if (! empty($id)) {
+            if (!empty($id)) {
                 $json['id'] = $id;
             }
         }
