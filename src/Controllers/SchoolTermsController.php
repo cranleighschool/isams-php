@@ -160,7 +160,7 @@ class SchoolTermsController extends Endpoint
         $whittledDownList = $list->where('schoolYear', '>=', $lastYear); // purpose here is to limit the foreach loop
 
         foreach ($whittledDownList as $term) {
-            if ($date > $term->startDate && $date < $term->finishDate->addDay()) {
+            if ($date >= $term->startDate && $date < $term->finishDate->addDay()) {
                 return true;
             }
         }
