@@ -52,7 +52,7 @@ class Authentication
     private function requestNewToken(): string
     {
         $guzzle = new Guzzle([
-            'verify' => config('isams.isams.verify'),
+            'verify' => config('isams.guzzle.verify'),
         ]);
 
         $response = $guzzle->request('POST', $this->authenticationUrl, [
