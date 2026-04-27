@@ -3,6 +3,7 @@
 namespace spkm\isams\Tests\Unit;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use spkm\isams\Controllers\OtherSchoolController;
 use spkm\isams\School;
 use spkm\isams\Tests\TestCase;
@@ -38,7 +39,7 @@ class OtherSchoolTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -53,14 +54,14 @@ class OtherSchoolTest extends TestCase
                 $this->assertTrue(array_key_exists($property, $school));
             }
         }
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionApplicants.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionApplicants.index'));
     }
 
     /** @test */
     public function it_creates_a_new_school_and_returns_its_id()
     {
         $response = (new OtherSchoolController($this->school))->store([
-            'schoolName' => 'test_' . \Illuminate\Support\Str::random(10),
+            'schoolName' => 'test_'.Str::random(10),
             'schoolCode' => 'SB',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -75,7 +76,7 @@ class OtherSchoolTest extends TestCase
     public function it_returns_the_specified_school()
     {
         $attributes = [
-            'schoolName' => 'test_' . \Illuminate\Support\Str::random(10),
+            'schoolName' => 'test_'.Str::random(10),
             'schoolCode' => 'SB',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -91,7 +92,7 @@ class OtherSchoolTest extends TestCase
         }
 
         foreach ($attributes as $key => $value) {
-            $this->assertTrue($school->$key == $value);
+            $this->assertTrue($value == $school->$key);
         }
     }
 
@@ -99,7 +100,7 @@ class OtherSchoolTest extends TestCase
     public function it_updates_the_specified_school()
     {
         $attributes = [
-            'schoolName' => 'test_' . \Illuminate\Support\Str::random(10),
+            'schoolName' => 'test_'.Str::random(10),
             'schoolCode' => 'SB',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -108,7 +109,7 @@ class OtherSchoolTest extends TestCase
         $id = json_decode($response->getContent())->id;
 
         $changedAttributes = [
-            'schoolName' => 'testAnother_' . \Illuminate\Support\Str::random(5),
+            'schoolName' => 'testAnother_'.Str::random(5),
             'schoolCode' => 'TEST',
             'schoolTelephone' => '01010101010',
             'postcode' => 'ZZ99 3WZ',
@@ -124,7 +125,7 @@ class OtherSchoolTest extends TestCase
         }
 
         foreach ($changedAttributes as $key => $value) {
-            $this->assertTrue($school->$key == $value);
+            $this->assertTrue($value == $school->$key);
         }
     }
 }

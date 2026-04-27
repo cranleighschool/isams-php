@@ -36,7 +36,7 @@ class SchoolYearGroupTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -51,7 +51,7 @@ class SchoolYearGroupTest extends TestCase
                 $this->assertTrue(array_key_exists($property, $yearGroup));
             }
         }
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'schoolYearGroups.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'schoolYearGroups.index'));
     }
 
     /** @test */

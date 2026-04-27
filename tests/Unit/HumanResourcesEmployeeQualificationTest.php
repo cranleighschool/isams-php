@@ -33,13 +33,13 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
     public function it_creates_a_new_qualification_for_the_specified_employee_and_returns_its_id()
     {
-        //Create Employee
+        // Create Employee
         $attributes = [
             'forename' => 'Jane',
             'surname' => 'Doe',
@@ -47,7 +47,7 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
         $response = (new HumanResourcesEmployeeController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-        //Create qualification
+        // Create qualification
         $response = (new HumanResourcesEmployeeQualificationController($this->school))->store($id, [
             'dateAwarded' => now()->toDateString(),
             'name' => 'BSc',
@@ -61,7 +61,7 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
     /** @test */
     public function it_returns_the_specified_employees_qualifications()
     {
-        //Create Employee
+        // Create Employee
         $attributes = [
             'forename' => 'Jane',
             'surname' => 'Doe',
@@ -69,7 +69,7 @@ class HumanResourcesEmployeeQualificationTest extends TestCase
         $response = (new HumanResourcesEmployeeController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-        //Create qualification
+        // Create qualification
         (new HumanResourcesEmployeeQualificationController($this->school))->store($id, [
             'dateAwarded' => now()->toDateString(),
             'name' => 'BSc',

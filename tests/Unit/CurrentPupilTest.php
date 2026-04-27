@@ -61,7 +61,7 @@ class CurrentPupilTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -76,7 +76,7 @@ class CurrentPupilTest extends TestCase
                 $this->assertTrue(array_key_exists($property, $pupil->toArray()));
             }
         }
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'currentPupils.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'currentPupils.index'));
     }
 
     /** @test */
@@ -114,7 +114,7 @@ class CurrentPupilTest extends TestCase
         }
 
         foreach ($attributes as $key => $value) {
-            $this->assertTrue($pupil->$key == $value);
+            $this->assertTrue($value == $pupil->$key);
         }
     }
 
@@ -147,7 +147,7 @@ class CurrentPupilTest extends TestCase
         }
 
         foreach ($changedAttributes as $key => $value) {
-            $this->assertTrue($pupil->$key == $value);
+            $this->assertTrue($value == $pupil->$key);
         }
     }
 }

@@ -32,7 +32,7 @@ class TeachingSubjectsTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -47,7 +47,7 @@ class TeachingSubjectsTest extends TestCase
                 $this->assertTrue(array_key_exists($property, $subject));
             }
         }
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'teachingSubjects.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'teachingSubjects.index'));
     }
 
     /** @test */

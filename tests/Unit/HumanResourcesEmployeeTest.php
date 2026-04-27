@@ -58,7 +58,7 @@ class HumanResourcesEmployeeTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -73,7 +73,7 @@ class HumanResourcesEmployeeTest extends TestCase
                 $this->assertTrue(array_key_exists($property, $employee));
             }
         }
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'hrEmployees.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'hrEmployees.index'));
     }
 
     /** @test */
@@ -107,7 +107,7 @@ class HumanResourcesEmployeeTest extends TestCase
         }
 
         foreach ($attributes as $key => $value) {
-            $this->assertTrue($employee->$key == $value);
+            $this->assertTrue($value == $employee->$key);
         }
     }
 
@@ -136,7 +136,7 @@ class HumanResourcesEmployeeTest extends TestCase
         }
 
         foreach ($changedAttributes as $key => $value) {
-            $this->assertTrue($employee->$key == $value);
+            $this->assertTrue($value == $employee->$key);
         }
     }
 }

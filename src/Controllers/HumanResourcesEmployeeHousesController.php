@@ -2,7 +2,9 @@
 
 namespace spkm\isams\Controllers;
 
+use GuzzleHttp\Exception\GuzzleException;
 use spkm\isams\Endpoint;
+use spkm\isams\Wrappers\Employee;
 use spkm\isams\Wrappers\EmployeeHouse;
 
 class HumanResourcesEmployeeHousesController extends Endpoint
@@ -21,9 +23,9 @@ class HumanResourcesEmployeeHousesController extends Endpoint
     /**
      * Show the specified resource.
      *
-     * @return \spkm\isams\Wrappers\Employee
+     * @return Employee
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function show(int $id)
     {

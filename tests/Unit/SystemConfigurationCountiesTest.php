@@ -19,7 +19,7 @@ class SystemConfigurationCountiesTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class SystemConfigurationCountiesTest extends TestCase
             }
         }
 
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'counties.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'counties.index'));
     }
 
     /** @test */
@@ -52,17 +52,17 @@ class SystemConfigurationCountiesTest extends TestCase
     /** @test */
     public function it_deletes_a_county()
     {
-        //Create it
+        // Create it
         $newCounty = 'MyNewCounty';
         (new CountyController($this->school))->store([
             'name' => $newCounty,
         ]);
 
-        //Find it
+        // Find it
         $counties = (new CountyController($this->school))->index();
         $toDelete = $this->findCountyByName($newCounty, $counties->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new CountyController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -72,26 +72,26 @@ class SystemConfigurationCountiesTest extends TestCase
     /** @test */
     public function it_updates_a_county()
     {
-        //Create it
+        // Create it
         $newCounty = 'MyNewCounty';
         (new CountyController($this->school))->store([
             'name' => $newCounty,
         ]);
 
-        //Find it
+        // Find it
         $counties = (new CountyController($this->school))->index();
         $toUpdate = $this->findCountyByName($newCounty, $counties->toArray());
 
-        //Update it
+        // Update it
         $renameCounty = 'MySpecialCounty';
         $response = (new CountyController($this->school))->update($toUpdate[0], ['name' => $renameCounty]);
         $this->assertEquals(200, $response->getStatusCode());
 
-        //Find it again
+        // Find it again
         $counties = (new CountyController($this->school))->index();
         $toDelete = $this->findCountyByName($renameCounty, $counties->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new CountyController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -101,8 +101,6 @@ class SystemConfigurationCountiesTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param  string  $name
-     * @param  array  $counties
      * @return array
      */
     private function findCountyByName(string $name, array $counties)

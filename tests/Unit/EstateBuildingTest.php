@@ -18,7 +18,7 @@ class EstateBuildingTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -34,7 +34,7 @@ class EstateBuildingTest extends TestCase
                 $this->assertTrue(array_key_exists($property, $building));
             }
         }
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'estateBuildings.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'estateBuildings.index'));
     }
 
     /** @test */
@@ -51,18 +51,18 @@ class EstateBuildingTest extends TestCase
     /** @test */
     public function it_updates_a_building()
     {
-        //Create it
+        // Create it
         $newBuilding = 'MyNewBuilding';
         (new EstateBuildingController($this->school))->store([
             'name' => $newBuilding,
             'initials' => 'mnb',
         ]);
 
-        //Find it
+        // Find it
         $buildings = (new EstateBuildingController($this->school))->index();
         $toUpdate = $this->findBuildingByName($newBuilding, $buildings->toArray());
 
-        //Update it
+        // Update it
         $renameBuilding = 'MySpecialBuilding';
         $response = (new EstateBuildingController($this->school))->update($toUpdate[0], [
             'name' => $renameBuilding,
@@ -74,8 +74,6 @@ class EstateBuildingTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param  string  $name
-     * @param  array  $buildings
      * @return array
      */
     private function findBuildingByName(string $name, array $buildings)

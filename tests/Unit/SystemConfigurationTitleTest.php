@@ -19,7 +19,7 @@ class SystemConfigurationTitleTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class SystemConfigurationTitleTest extends TestCase
             }
         }
 
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'titles.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'titles.index'));
     }
 
     /** @test */
@@ -52,17 +52,17 @@ class SystemConfigurationTitleTest extends TestCase
     /** @test */
     public function it_deletes_a_title()
     {
-        //Create it
+        // Create it
         $newTitle = 'MyNewTitle';
         (new TitleController($this->school))->store([
             'name' => $newTitle,
         ]);
 
-        //Find it
+        // Find it
         $titles = (new TitleController($this->school))->index();
         $toDelete = $this->findTitleByName($newTitle, $titles->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new TitleController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -72,26 +72,26 @@ class SystemConfigurationTitleTest extends TestCase
     /** @test */
     public function it_updates_a_title()
     {
-        //Create it
+        // Create it
         $newTitle = 'MyNewTitle';
         (new TitleController($this->school))->store([
             'name' => $newTitle,
         ]);
 
-        //Find it
+        // Find it
         $titles = (new TitleController($this->school))->index();
         $toUpdate = $this->findTitleByName($newTitle, $titles->toArray());
 
-        //Update it
+        // Update it
         $renameTitle = 'MySpecialTitle';
         $response = (new TitleController($this->school))->update($toUpdate[0], ['name' => $renameTitle]);
         $this->assertEquals(200, $response->getStatusCode());
 
-        //Find it again
+        // Find it again
         $titles = (new TitleController($this->school))->index();
         $toDelete = $this->findTitleByName($renameTitle, $titles->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new TitleController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -101,8 +101,6 @@ class SystemConfigurationTitleTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param  string  $name
-     * @param  array  $titles
      * @return array
      */
     private function findTitleByName(string $name, array $titles)

@@ -2,6 +2,7 @@
 
 namespace spkm\isams\Wrappers;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
 use spkm\isams\Contracts\Institution;
 use spkm\isams\Controllers\RoughAndReadyController;
@@ -35,7 +36,7 @@ class Lesson extends Wrapper
     }
 
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     private function getPupilsInSet(int $setId): Collection
     {

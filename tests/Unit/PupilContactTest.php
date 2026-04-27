@@ -42,7 +42,7 @@ class PupilContactTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -132,7 +132,7 @@ class PupilContactTest extends TestCase
         }
 
         foreach ($changedAttributes as $key => $value) {
-            $this->assertTrue($contact->$key == $value);
+            $this->assertTrue($value == $contact->$key);
         }
     }
 }

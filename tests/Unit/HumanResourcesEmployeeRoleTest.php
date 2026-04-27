@@ -27,13 +27,13 @@ class HumanResourcesEmployeeRoleTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
     public function it_associates_a_role_with_the_specified_employee_and_returns_its_id()
     {
-        //Create Employee
+        // Create Employee
         $attributes = [
             'forename' => 'Jane',
             'surname' => 'Doe',
@@ -41,8 +41,8 @@ class HumanResourcesEmployeeRoleTest extends TestCase
         $response = (new HumanResourcesEmployeeController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-        //Create role
-        $roleId = 11; //Teacher
+        // Create role
+        $roleId = 11; // Teacher
         $response = (new HumanResourcesEmployeeRoleController($this->school))->store($id, $roleId);
 
         $this->assertEquals(201, $response->getStatusCode());
@@ -53,7 +53,7 @@ class HumanResourcesEmployeeRoleTest extends TestCase
     /** @test */
     public function it_returns_the_specified_employees_roles()
     {
-        //Create Employee
+        // Create Employee
         $attributes = [
             'forename' => 'Jane',
             'surname' => 'Doe',
@@ -61,8 +61,8 @@ class HumanResourcesEmployeeRoleTest extends TestCase
         $response = (new HumanResourcesEmployeeController($this->school))->store($attributes);
         $id = json_decode($response->getContent())->id;
 
-        //Create role
-        $roleId = 11; //Teacher
+        // Create role
+        $roleId = 11; // Teacher
         (new HumanResourcesEmployeeRoleController($this->school))->store($id, $roleId);
 
         $employee = (new HumanResourcesEmployeeRoleController($this->school))->show($id);

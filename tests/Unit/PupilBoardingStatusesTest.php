@@ -19,7 +19,7 @@ class PupilBoardingStatusesTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class PupilBoardingStatusesTest extends TestCase
             }
         }
 
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'pupilBoardingStatuses.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'pupilBoardingStatuses.index'));
     }
 
     /** @test */
@@ -52,18 +52,18 @@ class PupilBoardingStatusesTest extends TestCase
     /** @test */
     public function it_deletes_a_boarding_status()
     {
-        //Create it
+        // Create it
         $newboardingStatus = 'BoardingPerhapsMaybeNot';
         (new PupilBoardingStatusController($this->school))->store([
             'name' => $newboardingStatus,
         ]);
 
-        //Find it
+        // Find it
         $newBoardingStatuses = (new PupilBoardingStatusController($this->school))->index();
 
         $toDelete = $this->findBoardingStatusByName($newboardingStatus, $newBoardingStatuses->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new PupilBoardingStatusController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -73,26 +73,26 @@ class PupilBoardingStatusesTest extends TestCase
     /** @test */
     public function it_updates_a_boarding_status()
     {
-        //Create it
+        // Create it
         $newboardingStatus = 'BoardingPerhapsMaybeNot';
         (new PupilBoardingStatusController($this->school))->store([
             'name' => $newboardingStatus,
         ]);
 
-        //Find it
+        // Find it
         $counties = (new PupilBoardingStatusController($this->school))->index();
         $toUpdate = $this->findBoardingStatusByName($newboardingStatus, $counties->toArray());
 
-        //Update it
+        // Update it
         $renameBoardingStatus = 'ImASpecialDayBoy';
         $response = (new PupilBoardingStatusController($this->school))->update($toUpdate[0], ['name' => $renameBoardingStatus]);
         $this->assertEquals(200, $response->getStatusCode());
 
-        //Find it again
+        // Find it again
         $counties = (new PupilBoardingStatusController($this->school))->index();
         $toDelete = $this->findBoardingStatusByName($renameBoardingStatus, $counties->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new PupilBoardingStatusController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -102,8 +102,6 @@ class PupilBoardingStatusesTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param  string  $name
-     * @param  array  $boardingStatuses
      * @return array
      */
     private function findBoardingStatusByName(string $name, array $boardingStatuses)

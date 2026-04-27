@@ -19,7 +19,7 @@ class SystemConfigurationCountriesTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class SystemConfigurationCountriesTest extends TestCase
             }
         }
 
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'countries.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'countries.index'));
     }
 
     /** @test */
@@ -52,17 +52,17 @@ class SystemConfigurationCountriesTest extends TestCase
     /** @test */
     public function it_deletes_a_country()
     {
-        //Create it
+        // Create it
         $newCountry = 'MyNewCountry';
         (new CountryController($this->school))->store([
             'name' => $newCountry,
         ]);
 
-        //Find it
+        // Find it
         $countries = (new CountryController($this->school))->index();
         $toDelete = $this->findCountryByName($newCountry, $countries->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new CountryController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -72,26 +72,26 @@ class SystemConfigurationCountriesTest extends TestCase
     /** @test */
     public function it_updates_a_country()
     {
-        //Create it
+        // Create it
         $newCountry = 'MyNewCountry';
         (new CountryController($this->school))->store([
             'name' => $newCountry,
         ]);
 
-        //Find it
+        // Find it
         $countries = (new CountryController($this->school))->index();
         $toUpdate = $this->findCountryByName($newCountry, $countries->toArray());
 
-        //Update it
+        // Update it
         $renameCountry = 'MySpecialCountry';
         $response = (new CountryController($this->school))->update($toUpdate[0], ['name' => $renameCountry]);
         $this->assertEquals(200, $response->getStatusCode());
 
-        //Find it again
+        // Find it again
         $countries = (new CountryController($this->school))->index();
         $toDelete = $this->findCountryByName($renameCountry, $countries->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new CountryController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -101,8 +101,6 @@ class SystemConfigurationCountriesTest extends TestCase
     /**
      * Find the country by name.
      *
-     * @param  string  $name
-     * @param  array  $countries
      * @return array
      */
     private function findCountryByName(string $name, array $countries)

@@ -16,8 +16,8 @@ class StorageFileController extends Endpoint
      */
     protected function setEndpoint(): void
     {
-        //Note: /api/storage/files does not work as of 2018/08/21 - iSAMS aware.
-        //Therefore using alternative below '/api/storage/files/download?'
+        // Note: /api/storage/files does not work as of 2018/08/21 - iSAMS aware.
+        // Therefore using alternative below '/api/storage/files/download?'
         $this->endpoint = $this->getDomain().'/api/storage/files/download';
     }
 

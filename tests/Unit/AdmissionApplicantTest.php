@@ -60,7 +60,7 @@ class AdmissionApplicantTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -75,7 +75,7 @@ class AdmissionApplicantTest extends TestCase
                 $this->assertTrue(array_key_exists($property, $applicant));
             }
         }
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionApplicants.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'admissionApplicants.index'));
     }
 
     /** @test */
@@ -117,7 +117,7 @@ class AdmissionApplicantTest extends TestCase
         }
 
         foreach ($attributes as $key => $value) {
-            $this->assertTrue($applicant->$key == $value);
+            $this->assertTrue($value == $applicant->$key);
         }
     }
 
@@ -154,7 +154,7 @@ class AdmissionApplicantTest extends TestCase
         }
 
         foreach ($changedAttributes as $key => $value) {
-            $this->assertTrue($applicant->$key == $value);
+            $this->assertTrue($value == $applicant->$key);
         }
     }
 }

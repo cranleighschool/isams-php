@@ -19,7 +19,7 @@ class SystemConfigurationLanguageTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class SystemConfigurationLanguageTest extends TestCase
             }
         }
 
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'languages.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'languages.index'));
     }
 
     /** @test */
@@ -52,17 +52,17 @@ class SystemConfigurationLanguageTest extends TestCase
     /** @test */
     public function it_deletes_a_language()
     {
-        //Create it
+        // Create it
         $newLanguage = 'MyNewLanguage';
         (new LanguageController($this->school))->store([
             'name' => $newLanguage,
         ]);
 
-        //Find it
+        // Find it
         $languages = (new LanguageController($this->school))->index();
         $toDelete = $this->findLanguageByName($newLanguage, $languages->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new LanguageController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -72,26 +72,26 @@ class SystemConfigurationLanguageTest extends TestCase
     /** @test */
     public function it_updates_a_language()
     {
-        //Create it
+        // Create it
         $newLanguage = 'MyNewLanguage';
         (new LanguageController($this->school))->store([
             'name' => $newLanguage,
         ]);
 
-        //Find it
+        // Find it
         $languages = (new LanguageController($this->school))->index();
         $toUpdate = $this->findLanguageByName($newLanguage, $languages->toArray());
 
-        //Update it
+        // Update it
         $renameLanguage = 'MySpecialLanguage';
         $response = (new LanguageController($this->school))->update($toUpdate[0], ['name' => $renameLanguage]);
         $this->assertEquals(200, $response->getStatusCode());
 
-        //Find it again
+        // Find it again
         $languages = (new LanguageController($this->school))->index();
         $toDelete = $this->findLanguageByName($renameLanguage, $languages->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new LanguageController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -101,8 +101,6 @@ class SystemConfigurationLanguageTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param  string  $name
-     * @param  array  $languages
      * @return array
      */
     private function findLanguageByName(string $name, array $languages)

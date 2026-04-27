@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\ItemNotFoundException;
 use spkm\isams\Endpoint;
 use spkm\isams\Wrappers\EmployeeRole;
 
@@ -24,7 +25,7 @@ class HumanResourcesRolesController extends Endpoint
     }
 
     /**
-     * @throws \Illuminate\Support\ItemNotFoundException
+     * @throws ItemNotFoundException
      */
     public function searchByRoleName(string $string): EmployeeRole
     {

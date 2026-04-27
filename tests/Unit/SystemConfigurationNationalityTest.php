@@ -19,7 +19,7 @@ class SystemConfigurationNationalityTest extends TestCase
     {
         parent::__construct();
 
-        $this->school = new School();
+        $this->school = new School;
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class SystemConfigurationNationalityTest extends TestCase
             }
         }
 
-        //$this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'nationalities.index'));
+        // $this->assertTrue(Cache::store('file')->has($this->school->getConfigName().'nationalities.index'));
     }
 
     /** @test */
@@ -52,17 +52,17 @@ class SystemConfigurationNationalityTest extends TestCase
     /** @test */
     public function it_deletes_a_nationality()
     {
-        //Create it
+        // Create it
         $newNationality = 'MyNewNationality';
         (new NationalityController($this->school))->store([
             'name' => $newNationality,
         ]);
 
-        //Find it
+        // Find it
         $nationalities = (new NationalityController($this->school))->index();
         $toDelete = $this->findNationalityByName($newNationality, $nationalities->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new NationalityController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -72,26 +72,26 @@ class SystemConfigurationNationalityTest extends TestCase
     /** @test */
     public function it_updates_a_nationality()
     {
-        //Create it
+        // Create it
         $newNationality = 'MyNewNationality';
         (new NationalityController($this->school))->store([
             'name' => $newNationality,
         ]);
 
-        //Find it
+        // Find it
         $nationalities = (new NationalityController($this->school))->index();
         $toUpdate = $this->findNationalityByName($newNationality, $nationalities->toArray());
 
-        //Update it
+        // Update it
         $renameNationality = 'MySpecialNationality';
         $response = (new NationalityController($this->school))->update($toUpdate[0], ['name' => $renameNationality]);
         $this->assertEquals(200, $response->getStatusCode());
 
-        //Find it again
+        // Find it again
         $nationalities = (new NationalityController($this->school))->index();
         $toDelete = $this->findNationalityByName($renameNationality, $nationalities->toArray());
 
-        //Delete it
+        // Delete it
         foreach ($toDelete as $idToDelete) {
             $response = (new NationalityController($this->school))->destroy($idToDelete);
             $this->assertEquals(200, $response->getStatusCode());
@@ -101,8 +101,6 @@ class SystemConfigurationNationalityTest extends TestCase
     /**
      * Find the elements by name.
      *
-     * @param  string  $name
-     * @param  array  $nationalities
      * @return array
      */
     private function findNationalityByName(string $name, array $nationalities)
