@@ -8,6 +8,7 @@ use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Psr\SimpleCache\InvalidArgumentException;
 use spkm\isams\Contracts\Institution;
 use spkm\isams\Exceptions\ValidationException;
 
@@ -31,12 +32,12 @@ abstract class Endpoint
 
     /**
      * Instantiate Guzzle.
-     *
-     * @return void
      */
-    protected function setGuzzle()
+    protected function setGuzzle(): void
     {
-        $this->guzzle = new Guzzle();
+        $this->guzzle = new Guzzle([
+            'verify' => config('isams.guzzle.verify'),
+        ]);
     }
 
     /**
@@ -64,14 +65,13 @@ abstract class Endpoint
     /**
      * Get the Guzzle headers for a request.
      *
-     * @return array
      *
      * @throws GuzzleException
      */
-    protected function getHeaders()
+    protected function getHeaders(): array
     {
         return [
-            'Authorization' => 'Bearer ' . $this->getAccessToken(),
+            'Authorization' => 'Bearer '.$this->getAccessToken(),
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
@@ -82,7 +82,7 @@ abstract class Endpoint
      *
      *
      * @throws GuzzleException
-     * @throws Exception
+     * @throws Exception|InvalidArgumentException
      */
     protected function getAccessToken(): string
     {
@@ -162,8 +162,8 @@ abstract class Endpoint
     /**
      * Generate the response.
      *
-     * @param mixed $response
-     * @param mixed $data
+     * @param  mixed  $response
+     * @param  mixed  $data
      */
     protected function response(int $expectedStatusCode, $response, $data, array $errors = []): JsonResponse
     {
@@ -182,7 +182,7 @@ abstract class Endpoint
             $id = ltrim(str_replace($this->endpoint, '', $location), '\//');
 
             $json['location'] = $location;
-            if (!empty($id)) {
+            if (! empty($id)) {
                 $json['id'] = $id;
             }
         }

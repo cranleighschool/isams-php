@@ -37,5 +37,9 @@ return [
         ],
     ],
 
+    'guzzle' => [
+        'verify' => env('ISAMS_VERIFY', true),
+    ],
+
     'cacheDuration' => now()->addHours(12),
 ];
