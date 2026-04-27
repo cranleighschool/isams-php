@@ -38,7 +38,7 @@ return [
     ],
 
     'guzzle' => [
-        'verify' => env('ISAMS_VERIFY', true),
+        'verify' => env('ISAMS_VERIFY', true), //on local development this can be set to a file path to a certificate file to verify against. On production this should be left blank to use the default CA bundle.
     ],
 
     'cacheDuration' => now()->addHours(12),
