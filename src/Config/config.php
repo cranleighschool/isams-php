@@ -41,5 +41,10 @@ return [
         'verify' => env('ISAMS_VERIFY', true), //on local development this can be set to a file path to a certificate file to verify against. On production this should be left blank to use the default CA bundle.
     ],
 
+    'image' => [
+        // Which Intervention Image driver to use: "gd", "imagick", or "auto" to use whichever extension is installed (preferring Imagick).
+        'driver' => env('ISAMS_IMAGE_DRIVER', 'auto'),
+    ],
+
     'cacheDuration' => now()->addHours(12),
 ];
