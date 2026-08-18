@@ -13,21 +13,4 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Bump version and push tag
-        id: tag_version
-        uses: anothrNick/github-tag-action@1.75.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-          WITH_V: true
-
-      - name: Create release
-        uses: softprops/action-gh-release@v3.0.2
-        with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
-          generate_release_notes: true
+      - uses: fredbradley/versionbump@v1
